@@ -1,12 +1,15 @@
 import React from "react";
 import Providers from "./components/common/Providers";
 import Router from "./router/Router";
+import { RecoilRoot } from "recoil";
 
 function App() {
   return (
-    <Providers>
-      <Router />
-    </Providers>
+    <RecoilRoot>
+      <Providers>
+        <Router />
+      </Providers>
+    </RecoilRoot>
   );
 }
 
