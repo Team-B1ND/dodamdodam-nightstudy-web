@@ -16,7 +16,7 @@ const useTheme = () => {
 
   const handleTheme = useCallback((): void => {
     const switchTheme: ThemeType = currentTheme === true ? false : true;
-    cookie.setCookie(THEME_KEY, String(currentTheme));
+    cookie.setCookie(THEME_KEY, String(switchTheme));
     setCurrentTheme(switchTheme);
   }, [currentTheme, setCurrentTheme]);
 
