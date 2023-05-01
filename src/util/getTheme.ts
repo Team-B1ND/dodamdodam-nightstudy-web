@@ -1,7 +1,12 @@
-import { ThemeType } from "../constants/theme/theme.constant";
+import { THEME_KEY, ThemeType } from "../constants/theme/theme.constant";
+import cookie from "../libs/cookie/cookie";
 
 export const getTheme = (): ThemeType => {
-  let themeMode = false;
+  let themeMode = undefined;
+
+  if (typeof window !== "undefined") {
+    themeMode = cookie.getCookie(THEME_KEY);
+  }
 
   if (typeof window !== "undefined" && themeMode === undefined) {
     const isDarkTheme: boolean = window.matchMedia(
@@ -9,9 +14,9 @@ export const getTheme = (): ThemeType => {
     ).matches;
 
     if (isDarkTheme) {
-      return true;
+      return "DARK";
     }
-    return false;
+    return "LIGHT";
   }
   return themeMode as ThemeType;
 };

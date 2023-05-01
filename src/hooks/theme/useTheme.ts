@@ -11,18 +11,19 @@ const useTheme = () => {
     useRecoilState<ThemeType>(themeModeAtom);
 
   const themeColor = useMemo((): DefaultTheme => {
-    return currentTheme === true ? darkTheme : lightTheme;
+    return currentTheme === "DARK" ? darkTheme : lightTheme;
   }, [currentTheme]);
 
   const handleTheme = useCallback((): void => {
-    const switchTheme: ThemeType = currentTheme === true ? false : true;
-    cookie.setCookie(THEME_KEY, String(switchTheme));
+    const switchTheme: ThemeType = currentTheme === "DARK" ? "LIGHT" : "DARK";
+    cookie.setCookie(THEME_KEY, switchTheme);
     setCurrentTheme(switchTheme);
   }, [currentTheme, setCurrentTheme]);
 
   return {
     themeColor,
     handleTheme,
+    currentTheme,
   };
 };
 
