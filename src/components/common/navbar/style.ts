@@ -1,65 +1,77 @@
 import styled from "styled-components";
 
 export const NavBarContainer = styled.div`
-  min-width: 340px;
+  min-width: 400px;
   height: 100%;
   z-index: 1;
-  padding: 40px 0px;
+  padding: 40px 43px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.backgroundColor2};
-  padding: 30px;
-  border: 1px solid ${({ theme }) => theme.borderColor};
-  border-top: 0px;
-  border-bottom: 0px;
+  border-left: 1px solid ${({ theme }) => theme.borderColor};
+  box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.05);
 `;
 
 export const NavBarLogo = styled.img`
-  height: 34px;
+  height: 58px;
   object-fit: scale-down;
   margin-bottom: 20px;
 `;
 
 export const NavBarTitle = styled.h1`
-  color: ${({ theme }) => theme.navBarColor};
+  color: ${({ theme }) => theme.logoColor};
+  font-size: 18px;
 `;
 
 export const NavBarTopWrap = styled.div`
   display: flex;
   align-items: center;
+
+  column-gap: 5px;
 `;
 
 export const NavBarProfileWrap = styled.div`
-  width: 100%;
+  width: 216px;
+  height: 120px;
+  position: relative;
+
+  background: linear-gradient(96.13deg, #2272ff 48.26%, #2460b9 100%);
+  border-radius: 19px;
+
   display: flex;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: ${({ theme }) => theme.navBarColor};
-  border-radius: 25px;
-  color: ${({ theme }) => theme.backgroundColor};
+  align-items: center;
+
+  margin-top: 70px;
+  margin-left: 97px;
+  padding-left: 63px;
 `;
 
 export const NavBarProfileImg = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 145px;
+  height: 145px;
   border-radius: 100%;
   object-fit: cover;
+
+  position: absolute;
+  left: -100px;
+  z-index: 1;
 `;
 
-export const NavBarMemberContainer = styled.div`
+export const NavBarMemberWrap = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+
+  row-gap: 5px;
+  color: #ffffff;
 `;
 
 export const NavBarName = styled.p`
-  font-size: 18px;
-  margin-top: 15px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 600;
 `;
 
 export const NavBarClassroom = styled.p`
   font-size: 16px;
-  margin-top: 8px;
+  font-weight: 400;
 `;

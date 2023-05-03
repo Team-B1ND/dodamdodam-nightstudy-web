@@ -1,7 +1,12 @@
-import { Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "../pages/homepage";
 
 const Router = () => {
-  return <Routes></Routes>;
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+    </Routes>
+  );
 };
 
 export default Router;

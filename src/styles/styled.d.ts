@@ -12,5 +12,7 @@ declare module "styled-components" {
     darkmodeButtonColor: string;
     navBarColor: string;
     iconColor: string;
+    inputColor: string;
+    logoColor: string;
   }
 }

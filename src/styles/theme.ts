@@ -12,10 +12,12 @@ export const lightTheme: DefaultTheme = {
   backgroundColor3: "#fafafc",
   backgroundColor4: "#ffffff",
   backgroundPointColor: "#f1edf4",
-  borderColor: "#f0eff2",
+  borderColor: "#F0EFF2",
   darkmodeButtonColor: "#efefef",
   navBarColor: "#607EAA",
   iconColor: "#FFDA15",
+  inputColor: "#D9D9D9",
+  logoColor: "#3A83F0 ",
 };
 
 export const darkTheme: DefaultTheme = {
@@ -31,4 +33,6 @@ export const darkTheme: DefaultTheme = {
   darkmodeButtonColor: "#efefef",
   navBarColor: "#607EAA",
   iconColor: "#000000",
+  inputColor: "#f0f0f0",
+  logoColor: "#3A83F0 ",
 };
