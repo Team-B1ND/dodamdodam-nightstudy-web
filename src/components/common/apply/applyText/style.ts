@@ -4,5 +4,5 @@ export const ApplyOptionLargeText = styled.p`
   font-weight: 500;
   font-size: 18px;
 
-  color: #252525;
+  color: ${({ theme }) => theme.contrast};
 `;

@@ -1,9 +1,5 @@
 import { DarkmodeButton } from "@b1nd/b1nd-dodam-common-ui";
-import {
-  PageTemplateContainer,
-  PageTemplateContentWrap,
-  PageTemplateWrap,
-} from "./style";
+import { PageTemplateContainer, PageTemplateContentWrap } from "./style";
 import useTheme from "../../../hooks/theme/useTheme";
 import { useRecoilValue } from "recoil";
 import { themeModeAtom } from "../../../store/theme/theme.store";
@@ -19,14 +15,12 @@ const PageTemplate = ({ children }: Props) => {
 
   return (
     <PageTemplateContainer>
-      <PageTemplateWrap>
-        <NavBar />
-        <PageTemplateContentWrap>{children}</PageTemplateContentWrap>
-        <DarkmodeButton
-          onClick={handleTheme}
-          isDark={isDark === "DARK" ? true : false}
-        />
-      </PageTemplateWrap>
+      <NavBar />
+      <PageTemplateContentWrap>{children}</PageTemplateContentWrap>
+      <DarkmodeButton
+        onClick={handleTheme}
+        isDark={isDark === "DARK" ? true : false}
+      />
     </PageTemplateContainer>
   );
 };

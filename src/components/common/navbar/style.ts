@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const NavBarContainer = styled.div`
   min-width: 400px;
-  height: 100%;
+  min-height: 100vh;
   z-index: 1;
   padding: 40px 43px;
   box-sizing: border-box;

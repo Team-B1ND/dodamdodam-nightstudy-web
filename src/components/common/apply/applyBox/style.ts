@@ -6,7 +6,7 @@ export const ApplyOptionBox = styled.div<{ size: SizeType }>`
   padding: 41px 44px;
   margin-top: 11px;
 
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.backgroundColor2};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
   ${({ size }) => SizeSet[size]}

@@ -1,16 +1,23 @@
 import React from "react";
 import { NavBarItemContainer, NavBarItemBox } from "./style";
 import { NAVBAR_ITEMS } from "../../../../constants/navbar/navbar.constant";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const NavBarItem = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   return (
     <NavBarItemContainer>
       {NAVBAR_ITEMS.map((item, idx) => {
         return (
           <>
-            <NavBarItemBox key={idx} onClick={() => navigate(item.link)}>
+            <NavBarItemBox
+              pathName={pathname}
+              linkName={item.link}
+              key={idx}
+              onClick={() => navigate(item.link)}
+            >
+              {pathname === item.link ? <span>•</span> : null}
               {item.title}
             </NavBarItemBox>
           </>

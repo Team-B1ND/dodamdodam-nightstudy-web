@@ -2,18 +2,11 @@ import styled from "styled-components";
 
 export const PageTemplateContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
   background-color: ${({ theme }) => theme.backgroundColor};
   position: relative;
-`;
-
-export const PageTemplateWrap = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
 `;
 
 export const PageTemplateContentWrap = styled.div`
