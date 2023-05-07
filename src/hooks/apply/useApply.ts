@@ -86,6 +86,14 @@ const useApply = () => {
       {
         onSuccess: () => {
           B1ndToast.showSuccess("제출되었습니다.");
+          setPostData({
+            content: "",
+            endAt: "",
+            isPhone: false,
+            placeId: 0,
+            reason: "",
+            startAt: "",
+          });
         },
         onError: () => {
           B1ndToast.showError("제출실패");
