@@ -1,4 +1,4 @@
-import { Response } from "../util/response";
+import { Response } from "../Util/response";
 
 export interface TokenResponse extends Response {
   data: string;

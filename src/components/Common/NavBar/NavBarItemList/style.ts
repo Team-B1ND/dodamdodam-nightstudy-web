@@ -9,12 +9,14 @@ export const NavBarItemContainer = styled.div`
   color: ${({ theme }) => theme.contrast};
 `;
 
-export const NavBarItemBox = styled.div`
+export const NavBarItemBox = styled.div<{ isMatch: boolean }>`
   width: 100%;
   height: 45px;
   cursor: pointer;
+  color: ${({ theme, isMatch }) => (isMatch ? theme.contrast : "#828282")};
+
   font-size: 20px;
-  padding: 0px 20px;
+  padding: 0px 30px;
   box-sizing: border-box;
   display: flex;
   align-items: center;

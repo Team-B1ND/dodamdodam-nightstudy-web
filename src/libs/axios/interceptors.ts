@@ -1,12 +1,12 @@
 import { AxiosError } from "axios";
-import cookie from "../cookie/cookie";
+import cookie from "../Cookie/cookie";
 import {
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,
   REQUEST_TOKEN_KEY,
-} from "../../constants/token/token.constant";
+} from "../../constants/Token/token.constant";
 import customAxios from "./customAxios";
-import tokenRepository from "../../repositories/token/token.repository";
+import tokenRepository from "../../repositories/Token/token.repository";
 
 export const customAxiosErrorInterceptor = async (config: AxiosError) => {
   const accessToken = cookie.getCookie(ACCESS_TOKEN_KEY);

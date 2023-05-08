@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TokenResponse } from "../../types/token/token.type";
+import { TokenResponse } from "../../types/Token/token.type";
 import CONFIG from "../../config/config.json";
 import { TokenParam } from "./token.param";
 

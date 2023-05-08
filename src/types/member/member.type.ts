@@ -1,4 +1,4 @@
-import { ClassRoom } from "../util/response";
+import { ClassRoom } from "../Util/response";
 
 export interface Member {
   email: string;
