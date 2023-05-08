@@ -1,8 +1,7 @@
-import React from "react";
 import { ApplyBoxProps } from "./types";
 import { ApplyOptionBox } from "./style";
 
-const ApplyBox = ({ children, size, style }: ApplyBoxProps) => {
+const Box = ({ children, size, style }: ApplyBoxProps) => {
   return (
     <ApplyOptionBox style={style} size={size}>
       {children}
@@ -10,4 +9,4 @@ const ApplyBox = ({ children, size, style }: ApplyBoxProps) => {
   );
 };
 
-export default ApplyBox;
+export default Box;

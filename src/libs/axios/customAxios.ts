@@ -3,8 +3,8 @@ import config from "../../config/config.json";
 import {
   ACCESS_TOKEN_KEY,
   REQUEST_TOKEN_KEY,
-} from "../../constants/token/token.constant";
-import cookie from "../cookie/cookie";
+} from "../../constants/Token/token.constant";
+import cookie from "../Cookie/cookie";
 import { customAxiosErrorInterceptor } from "./interceptors";
 
 const customAxios = axios.create({

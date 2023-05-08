@@ -1,9 +1,9 @@
 import { DarkmodeButton } from "@b1nd/b1nd-dodam-common-ui";
 import { PageTemplateContainer, PageTemplateContentWrap } from "./style";
-import useTheme from "../../../hooks/theme/useTheme";
+import useTheme from "../../../hooks/Theme/useTheme";
 import { useRecoilValue } from "recoil";
-import { themeModeAtom } from "../../../store/theme/theme.store";
-import NavBar from "../navbar";
+import { themeModeAtom } from "../../../store/Theme/theme.store";
+import NavBar from "../NavBar";
 
 interface Props {
   children: React.ReactNode;

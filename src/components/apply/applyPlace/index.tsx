@@ -1,10 +1,7 @@
-import { ChangeEvent, SetStateAction, useState } from "react";
-import { PLACE_ITEMS } from "../../../constants/place/place.constant";
-import placeRepository from "../../../repositories/place/place.repository";
-import ApplyBox from "../../common/apply/applyBox";
-import ApplyRequireText from "../../common/apply/applyRequireText";
-import ApplyLargeText from "../../common/apply/applyText";
-import ApplyTitle from "../../common/apply/applyTitle";
+import { ChangeEvent } from "react";
+import ApplyRequireText from "../../Common/RequireText";
+import ApplyLargeText from "../../Common/Apply/ApplyText";
+import ApplyTitle from "../../Common/Apply/applyTitle";
 import {
   ApplyPlaceBox,
   ApplyPlaceCheckBox,
@@ -16,8 +13,9 @@ import {
   ApplyStudyContentInput,
   ApplyStudyRoomBox,
 } from "./style";
-import { useGetPlaceQuery } from "../../../queries/place/place.query";
-import { Apply } from "../../../types/apply/apply.type";
+import { useGetPlaceQuery } from "../../../queries/Place/place.query";
+import { Apply } from "../../../types/Apply/apply.type";
+import Box from "../../Common/Apply/ApplyBox";
 
 interface Props {
   checkOnlyOne: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -31,7 +29,7 @@ const ApplyPlace = ({ checkOnlyOne, postData, onChangeContent }: Props) => {
   return (
     <ApplyPlaceContainer>
       <ApplyTitle>학습정보</ApplyTitle>
-      <ApplyBox
+      <Box
         size="large"
         style={{ display: "flex", flexDirection: "column", rowGap: "23px" }}
       >
@@ -72,7 +70,7 @@ const ApplyPlace = ({ checkOnlyOne, postData, onChangeContent }: Props) => {
             placeholder="학습 할 내용을 자세하고 구체적이게 적어주세요"
           />
         </ApplyStudyContentBox>
-      </ApplyBox>
+      </Box>
     </ApplyPlaceContainer>
   );
 };

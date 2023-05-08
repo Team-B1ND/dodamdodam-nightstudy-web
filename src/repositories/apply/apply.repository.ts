@@ -1,5 +1,5 @@
-import customAxios from "../../libs/axios/customAxios";
-import { Apply } from "../../types/apply/apply.type";
+import customAxios from "../../libs/Axios/customAxios";
+import { Apply } from "../../types/Apply/apply.type";
 
 class ApplyRepository {
   public async ApplyLatenight({

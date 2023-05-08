@@ -1,15 +1,14 @@
 import {
   ApplyBottomWrap,
-  ApplyButtonContainer,
   ApplyContainer,
   ApplyMidWrap,
   ApplyTopWrap,
 } from "./style";
-import ApplyDeadline from "./applyDeadline";
-import ApplyPhone from "./applyPhone";
-import ApplyPlace from "./applyPlace";
-import useApply from "../../hooks/apply/useApply";
-import Button from "../common/button";
+import ApplyDeadline from "./ApplyDeadline";
+import ApplyPhone from "./ApplyPhone";
+import ApplyPlace from "./ApplyPlace";
+import useApply from "../../hooks/Apply/useApply";
+import Button from "../Common/Button";
 
 const Apply = () => {
   const {

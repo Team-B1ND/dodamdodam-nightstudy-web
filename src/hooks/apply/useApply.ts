@@ -1,7 +1,6 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { useApplyLatenight } from "../../queries/apply/apply.query";
-import { Apply } from "../../types/apply/apply.type";
-import { useQueryClient } from "react-query";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { useApplyLatenight } from "../../queries/Apply/apply.query";
+import { Apply } from "../../types/Apply/apply.type";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 
 const useApply = () => {
@@ -25,6 +24,10 @@ const useApply = () => {
 
   const onChangeEndDate = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    if (postData.startAt === "") {
+      B1ndToast.showInfo("시작일을 먼저 선택해주세요");
+      return;
+    }
     setPostData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -73,6 +76,36 @@ const useApply = () => {
     const { content, endAt, isPhone, placeId, reason, startAt } = postData;
     const handleStartDate = startAt + "T00:00:00";
     const handleEndDate = endAt + "T23:59:59";
+
+    if (startAt === "") {
+      B1ndToast.showInfo("시작일을 작성해주세요");
+      return;
+    }
+
+    if (endAt === "") {
+      B1ndToast.showInfo("종료일을 작성해주세요");
+      return;
+    }
+
+    if (isPhone === null) {
+      B1ndToast.showInfo("핸드폰 사용 여부를 작성해주세요");
+      return;
+    }
+
+    if (reason === "") {
+      B1ndToast.showInfo("핸드폰 사용 이유를 작성해주세요");
+      return;
+    }
+
+    if (placeId === null) {
+      B1ndToast.showInfo("핸드폰 사용 여부를 작성해주세요");
+      return;
+    }
+
+    if (content === "") {
+      B1ndToast.showInfo("학습내용을 작성해주세요");
+      return;
+    }
 
     applyLatenightMutation.mutate(
       {

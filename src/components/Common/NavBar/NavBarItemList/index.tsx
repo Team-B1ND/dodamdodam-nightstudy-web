@@ -1,6 +1,5 @@
-import React from "react";
 import { NavBarItemContainer, NavBarItemBox } from "./style";
-import { NAVBAR_ITEMS } from "../../../../constants/navbar/navbar.constant";
+import { NAVBAR_ITEMS } from "../../../../constants/NavBar/navbar.constant";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const NavBarItem = () => {
@@ -12,8 +11,7 @@ const NavBarItem = () => {
         return (
           <>
             <NavBarItemBox
-              pathName={pathname}
-              linkName={item.link}
+              isMatch={pathname === item.link ? true : false}
               key={idx}
               onClick={() => navigate(item.link)}
             >

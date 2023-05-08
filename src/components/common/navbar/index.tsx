@@ -11,9 +11,9 @@ import {
 } from "./style";
 import logo from "../../../assets/logo/logo.svg";
 import { BsFillMoonFill } from "react-icons/bs";
-import { useGetMyMember } from "../../../queries/member/member.query";
+import { useGetMyMember } from "../../../queries/Member/member.query";
 import DefaultProfileImage from "../../../assets/common/defaultProfile.png";
-import NavBarItem from "./navbarItem";
+import NavBarItem from "./NavBarItemList";
 
 const NavBar = () => {
   const { data: MemberData } = useGetMyMember();

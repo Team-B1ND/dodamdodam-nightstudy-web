@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import placeRepository from "../../repositories/place/place.repository";
+import placeRepository from "../../repositories/Place/place.repository";
 
 export const useGetPlaceQuery = () =>
   useQuery("place/getPlaceQuery", () => placeRepository.getPlace(), {

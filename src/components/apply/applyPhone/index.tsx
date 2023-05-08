@@ -1,15 +1,15 @@
 import React, { ChangeEvent } from "react";
-import ApplyTitle from "../../common/apply/applyTitle";
+import ApplyTitle from "../../Common/Apply/applyTitle";
 import {
   ApplyPhoneCheckBox,
   ApplyPhoneCheckInput,
   ApplyPhoneContainer,
   ApplyPhoneFlex,
 } from "./style";
-import ApplyBox from "../../common/apply/applyBox";
-import ApplyLargeText from "../../common/apply/applyText";
-import ApplyRequireText from "../../common/apply/applyRequireText";
-import { Apply } from "../../../types/apply/apply.type";
+import ApplyLargeText from "../../Common/Apply/ApplyText";
+import ApplyRequireText from "../../Common/RequireText";
+import { Apply } from "../../../types/Apply/apply.type";
+import Box from "../../Common/Apply/ApplyBox";
 
 interface Props {
   postData: Apply;
@@ -25,7 +25,7 @@ const ApplyPhone = ({
   return (
     <ApplyPhoneContainer>
       <ApplyTitle>핸드폰 필요 여부</ApplyTitle>
-      <ApplyBox size="small">
+      <Box size="small">
         <ApplyPhoneFlex>
           <ApplyLargeText>핸드폰이 필요하신가요?</ApplyLargeText>
           <ApplyPhoneCheckBox
@@ -44,7 +44,7 @@ const ApplyPhone = ({
           value={postData.reason}
           onChange={onChangeReason}
         />
-      </ApplyBox>
+      </Box>
     </ApplyPhoneContainer>
   );
 };

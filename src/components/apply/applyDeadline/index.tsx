@@ -1,15 +1,15 @@
-import ApplyTitle from "../../common/apply/applyTitle";
+import ApplyTitle from "../../Common/Apply/applyTitle";
 import {
   ApplyDaedlineContainer,
   ApplyDeadlineBox,
   ApplyDeadlineFlex,
   ApplyDeadlineInput,
 } from "./style";
-import ApplyBox from "../../common/apply/applyBox";
-import ApplyLargeText from "../../common/apply/applyText";
-import ApplyRequireText from "../../common/apply/applyRequireText";
+import ApplyLargeText from "../../Common/Apply/ApplyText";
+import ApplyRequireText from "../../Common/RequireText";
 import { ChangeEvent } from "react";
-import { Apply } from "../../../types/apply/apply.type";
+import { Apply } from "../../../types/Apply/apply.type";
+import Box from "../../Common/Apply/ApplyBox";
 
 interface Props {
   minDate: string;
@@ -29,7 +29,7 @@ const ApplyDeadline = ({
   return (
     <ApplyDaedlineContainer>
       <ApplyTitle>신청기한</ApplyTitle>
-      <ApplyBox
+      <Box
         size="small"
         style={{ display: "flex", flexDirection: "column", rowGap: "20px" }}
       >
@@ -38,7 +38,7 @@ const ApplyDeadline = ({
             <ApplyRequireText>*</ApplyRequireText>
             <ApplyLargeText>시작일</ApplyLargeText>
             <ApplyRequireText>
-              *지나가지 않은 날짜를 선택해주세요
+              *현 시각 이후 날짜를 선택해주세요.
             </ApplyRequireText>
           </ApplyDeadlineFlex>
           <ApplyDeadlineInput
@@ -65,7 +65,7 @@ const ApplyDeadline = ({
             onChange={onChangeEndDate}
           />
         </ApplyDeadlineBox>
-      </ApplyBox>
+      </Box>
     </ApplyDaedlineContainer>
   );
 };

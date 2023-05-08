@@ -1,5 +1,5 @@
-import customAxios from "../../libs/axios/customAxios";
-import { PlacesResponse } from "../../types/place/place.type";
+import customAxios from "../../libs/Axios/customAxios";
+import { PlacesResponse } from "../../types/Place/place.type";
 
 class PlaceRepository {
   public async getPlace(): Promise<PlacesResponse> {

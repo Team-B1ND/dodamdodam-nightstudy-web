@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
-import applyRepository from "../../repositories/apply/apply.repository";
-import { Apply } from "../../types/apply/apply.type";
+import applyRepository from "../../repositories/Apply/apply.repository";
+import { Apply } from "../../types/Apply/apply.type";
 
 export const useApplyLatenight = () => {
   const mutation = useMutation(

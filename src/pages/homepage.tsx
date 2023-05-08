@@ -1,5 +1,5 @@
 import React from "react";
-import Apply from "../components/apply";
+import Apply from "../components/Apply";
 
 const HomePage = () => {
   return <Apply />;
