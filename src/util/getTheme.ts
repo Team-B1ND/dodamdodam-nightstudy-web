@@ -1,5 +1,5 @@
-import { THEME_KEY, ThemeType } from "../constants/Theme1/theme.constant";
-import cookie from "../libs/Cookie1/cookie";
+import { THEME_KEY, ThemeType } from "../constants/Theme/theme.constant";
+import cookie from "../libs/Cookie/cookie";
 
 export const getTheme = (): ThemeType => {
   let themeMode = undefined;
