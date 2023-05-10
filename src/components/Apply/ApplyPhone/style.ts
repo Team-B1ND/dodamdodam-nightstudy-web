@@ -28,6 +28,8 @@ export const ApplyPhoneCheckInput = styled.textarea`
   padding: 11px 13px;
 
   background: ${({ theme }) => theme.inputColor};
+  color: ${({ theme }) => theme.contrast};
+
   border-radius: 5px;
 
   outline: none;

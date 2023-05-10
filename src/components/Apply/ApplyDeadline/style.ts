@@ -25,6 +25,7 @@ export const ApplyDeadlineInput = styled.input`
   padding-left: 13px;
   padding-right: 13px;
 
+  color: ${({ theme }) => theme.contrast};
   background-color: ${({ theme }) => theme.inputColor};
   border: none;
   outline: none;

@@ -45,6 +45,10 @@ const useApply = () => {
 
   const onChangeReason = (e: ChangeEvent<HTMLTextAreaElement>) => {
     //휴대폰사용이유
+    if (postData.isPhone === false) {
+      B1ndToast.showInfo("사용 여부를 체크해주세요");
+      return;
+    }
     const { name, value } = e.target;
     setPostData((prev) => ({ ...prev, [name]: value }));
   };
@@ -87,21 +91,15 @@ const useApply = () => {
       return;
     }
 
-    if (isPhone === null) {
-      B1ndToast.showInfo("핸드폰 사용 여부를 작성해주세요");
-      return;
-    }
-
-    if (reason === "") {
-      B1ndToast.showInfo("핸드폰 사용 이유를 작성해주세요");
-      return;
-    }
-
     if (placeId === null) {
-      B1ndToast.showInfo("핸드폰 사용 여부를 작성해주세요");
+      B1ndToast.showInfo("학습 장소를 선택해주세요");
       return;
     }
 
+    if (isPhone === true && reason === "") {
+      B1ndToast.showInfo("휴대폰 사용 이유를 작성해주세요");
+      return;
+    }
     if (content === "") {
       B1ndToast.showInfo("학습내용을 작성해주세요");
       return;
@@ -122,7 +120,7 @@ const useApply = () => {
           setPostData({
             content: "",
             endAt: "",
-            isPhone: false,
+            isPhone: true,
             placeId: 0,
             reason: "",
             startAt: "",

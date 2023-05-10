@@ -39,6 +39,7 @@ export const ApplyStudyContentInput = styled.textarea`
 
   padding: 8px 13px;
   background: ${({ theme }) => theme.inputColor};
+  color: ${({ theme }) => theme.contrast};
   border-radius: 8px;
 
   outline: none;

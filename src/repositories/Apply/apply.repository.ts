@@ -10,7 +10,7 @@ class ApplyRepository {
     reason,
     startAt,
   }: Apply): Promise<void> {
-    await customAxios.post("/evening", {
+    await customAxios.post("/nightstudy", {
       content,
       endAt,
       isPhone,
