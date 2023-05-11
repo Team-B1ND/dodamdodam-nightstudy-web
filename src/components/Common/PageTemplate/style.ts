@@ -7,6 +7,8 @@ export const PageTemplateContainer = styled.div`
   justify-content: center;
   background-color: ${({ theme }) => theme.backgroundColor};
   position: relative;
+
+  overflow: hidden;
 `;
 
 export const PageTemplateContentWrap = styled.div`

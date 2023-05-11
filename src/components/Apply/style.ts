@@ -8,6 +8,8 @@ export const ApplyContainer = styled.form`
   border-radius: 20px;
 
   padding: 30px 80px;
+
+  overflow: hidden;
 `;
 
 export const ApplyTopWrap = styled.div`

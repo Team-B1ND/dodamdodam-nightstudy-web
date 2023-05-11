@@ -44,6 +44,7 @@ export const ApplyStudyContentInput = styled.textarea`
 
   outline: none;
   border: none;
+  resize: none;
 `;
 
 export const ApplyReasonInput = styled.input`

@@ -34,4 +34,5 @@ export const ApplyPhoneCheckInput = styled.textarea`
 
   outline: none;
   border: none;
+  resize: none;
 `;
