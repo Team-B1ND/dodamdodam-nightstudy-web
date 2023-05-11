@@ -4,7 +4,9 @@ import { Apply } from "../../types/Apply/apply.type";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 
 const useApply = () => {
-  const minDate = new Date().toISOString().split("T")[0];
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 1);
+  const minDate = currentDate.toISOString().split("T")[0];
   const [maxDate, setMaxDate] = useState("");
   const [postData, setPostData] = useState<Apply>({
     placeId: 0,
