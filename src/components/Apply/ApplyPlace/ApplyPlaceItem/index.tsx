@@ -18,8 +18,9 @@ const ApplyPlaceItem = ({ checkOnlyOne }: Props) => {
       {data?.data.map((item) => {
         return (
           <>
-            <ApplyStudyRoomBox>
+            <ApplyStudyRoomBox key={item.id}>
               <ApplyPlaceCheckBox
+                id="place"
                 name="placeId"
                 type="checkbox"
                 onChange={checkOnlyOne}

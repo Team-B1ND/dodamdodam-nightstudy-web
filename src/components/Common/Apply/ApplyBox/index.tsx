@@ -3,7 +3,7 @@ import { ApplyOptionBox } from "./style";
 
 const Box = ({ children, size, style }: ApplyBoxProps) => {
   return (
-    <ApplyOptionBox style={style} size={size}>
+    <ApplyOptionBox customStyle={style} size={size}>
       {children}
     </ApplyOptionBox>
   );

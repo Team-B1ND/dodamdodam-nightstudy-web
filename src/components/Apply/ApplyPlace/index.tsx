@@ -1,4 +1,4 @@
-import { ChangeEvent, Suspense } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, Suspense } from "react";
 import ApplyRequireText from "../../Common/RequireText";
 import ApplyLargeText from "../../Common/Apply/ApplyText";
 import ApplyTitle from "../../Common/Apply/ApplyTitle";
@@ -31,9 +31,11 @@ const ApplyPlace = ({ checkOnlyOne, postData, onChangeContent }: Props) => {
       >
         <ApplyPlaceBox>
           <ApplyPlaceFlex>
-            <ApplyRequireText>* </ApplyRequireText>
-            <ApplyLargeText>학습장소</ApplyLargeText>
-            <ApplyRequireText>*하나만 선택해주세요.</ApplyRequireText>
+            <ApplyRequireText htmlFor="place">* </ApplyRequireText>
+            <ApplyLargeText htmlFor="place">학습장소</ApplyLargeText>
+            <ApplyRequireText htmlFor="place">
+              *하나만 선택해주세요.
+            </ApplyRequireText>
           </ApplyPlaceFlex>
           <ErrorBoundary fallback={<>error</>}>
             <Suspense fallback={<CheckBoxFallBackLoader />}>
@@ -44,10 +46,11 @@ const ApplyPlace = ({ checkOnlyOne, postData, onChangeContent }: Props) => {
 
         <ApplyStudyContentBox>
           <ApplyPlaceFlex>
-            <ApplyRequireText>* </ApplyRequireText>
-            <ApplyLargeText>학습내용</ApplyLargeText>
+            <ApplyRequireText htmlFor="content">* </ApplyRequireText>
+            <ApplyLargeText htmlFor="content">학습내용</ApplyLargeText>
           </ApplyPlaceFlex>
           <ApplyStudyContentInput
+            id="content"
             name="content"
             value={postData.content}
             onChange={onChangeContent}

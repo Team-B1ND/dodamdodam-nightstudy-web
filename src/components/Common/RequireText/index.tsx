@@ -1,12 +1,21 @@
-import { CSSProperties } from "react";
 import { ApplyRequireTextBox } from "./style";
+import { CSSObject } from "styled-components";
 
 interface ApplyRequireTextProps {
   children: string;
-  style?: CSSProperties;
+  style?: CSSObject;
+  htmlFor?: string;
 }
 
-const ApplyRequireText = ({ children, style }: ApplyRequireTextProps) => {
-  return <ApplyRequireTextBox style={style}>{children}</ApplyRequireTextBox>;
+const ApplyRequireText = ({
+  children,
+  style,
+  htmlFor,
+}: ApplyRequireTextProps) => {
+  return (
+    <ApplyRequireTextBox htmlFor={htmlFor} customStyle={style}>
+      {children}
+    </ApplyRequireTextBox>
+  );
 };
 export default ApplyRequireText;
