@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useApplyLatenight } from "../../queries/Apply/apply.query";
 import { Apply } from "../../types/Apply/apply.type";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
+import * as Sentry from "@sentry/react";
 
 const useApply = () => {
   const currentDate = new Date();
@@ -128,8 +129,9 @@ const useApply = () => {
             startAt: "",
           });
         },
-        onError: () => {
-          B1ndToast.showError("제출실패");
+        onError: (err) => {
+          B1ndToast.showError("제출 실패");
+          Sentry.captureException(`${err}이유로 심자 신청 실패`);
         },
       }
     );
