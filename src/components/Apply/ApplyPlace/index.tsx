@@ -1,21 +1,19 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, Suspense } from "react";
 import ApplyRequireText from "../../Common/RequireText";
 import ApplyLargeText from "../../Common/Apply/ApplyText";
 import ApplyTitle from "../../Common/Apply/ApplyTitle";
 import {
   ApplyPlaceBox,
-  ApplyPlaceCheckBox,
   ApplyPlaceContainer,
   ApplyPlaceFlex,
-  ApplyPlaceName,
-  ApplyPlaceNameBox,
   ApplyStudyContentBox,
   ApplyStudyContentInput,
-  ApplyStudyRoomBox,
 } from "./style";
-import { useGetPlaceQuery } from "../../../queries/Place/place.query";
 import { Apply } from "../../../types/Apply/apply.type";
 import Box from "../../Common/Apply/ApplyBox";
+import ApplyPlaceItem from "./ApplyPlaceItem";
+import CheckBoxFallBackLoader from "../../Common/FallbackLoader/CheckBox";
+import { ErrorBoundary } from "react-error-boundary";
 
 interface Props {
   checkOnlyOne: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -24,8 +22,6 @@ interface Props {
 }
 
 const ApplyPlace = ({ checkOnlyOne, postData, onChangeContent }: Props) => {
-  const { data } = useGetPlaceQuery();
-
   return (
     <ApplyPlaceContainer>
       <ApplyTitle>학습정보</ApplyTitle>
@@ -35,35 +31,26 @@ const ApplyPlace = ({ checkOnlyOne, postData, onChangeContent }: Props) => {
       >
         <ApplyPlaceBox>
           <ApplyPlaceFlex>
-            <ApplyRequireText>* </ApplyRequireText>
-            <ApplyLargeText>학습장소</ApplyLargeText>
-            <ApplyRequireText>*하나만 선택해주세요.</ApplyRequireText>
+            <ApplyRequireText htmlFor="place">* </ApplyRequireText>
+            <ApplyLargeText htmlFor="place">학습장소</ApplyLargeText>
+            <ApplyRequireText htmlFor="place">
+              *하나만 선택해주세요.
+            </ApplyRequireText>
           </ApplyPlaceFlex>
-          <ApplyPlaceNameBox>
-            {data?.data.map((item) => {
-              return (
-                <>
-                  <ApplyStudyRoomBox>
-                    <ApplyPlaceCheckBox
-                      name="placeId"
-                      type="checkbox"
-                      onChange={checkOnlyOne}
-                      value={item.id}
-                    />
-                    <ApplyPlaceName>{item.name}</ApplyPlaceName>
-                  </ApplyStudyRoomBox>
-                </>
-              );
-            })}
-          </ApplyPlaceNameBox>
+          <ErrorBoundary fallback={<>error</>}>
+            <Suspense fallback={<CheckBoxFallBackLoader />}>
+              <ApplyPlaceItem checkOnlyOne={checkOnlyOne} />
+            </Suspense>
+          </ErrorBoundary>
         </ApplyPlaceBox>
 
         <ApplyStudyContentBox>
           <ApplyPlaceFlex>
-            <ApplyRequireText>* </ApplyRequireText>
-            <ApplyLargeText>학습내용</ApplyLargeText>
+            <ApplyRequireText htmlFor="content">* </ApplyRequireText>
+            <ApplyLargeText htmlFor="content">학습내용</ApplyLargeText>
           </ApplyPlaceFlex>
           <ApplyStudyContentInput
+            id="content"
             name="content"
             value={postData.content}
             onChange={onChangeContent}

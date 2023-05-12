@@ -22,7 +22,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <B1ndToastContainer />
+        <B1ndToastContainer autoClose={1000} limit={1} />
         <BrowserRouter basename="/latenight">
           <ThemeProviderContainer>
             <PageTemplate>

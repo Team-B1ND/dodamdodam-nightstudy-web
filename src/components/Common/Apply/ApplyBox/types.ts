@@ -1,8 +1,9 @@
-import { CSSProperties, ReactNode } from "react";
+import { ReactNode } from "react";
+import { CSSObject } from "styled-components";
 
 export interface ApplyBoxProps {
   children: ReactNode;
-  style?: CSSProperties;
+  style?: CSSObject;
   size: SizeType;
 }
 

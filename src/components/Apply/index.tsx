@@ -9,6 +9,7 @@ import ApplyPhone from "./ApplyPhone";
 import ApplyPlace from "./ApplyPlace";
 import useApply from "../../hooks/Apply/useApply";
 import Button from "../Common/Button";
+import useTokenCheck from "../../hooks/Util/useTokenCheck";
 
 const Apply = () => {
   const {
@@ -23,10 +24,11 @@ const Apply = () => {
     onChangeStartDate,
     onSubmitLatenight,
   } = useApply();
+  useTokenCheck();
   return (
     <ApplyContainer>
       <ApplyTopWrap>
-        2차 심자 신청 <span>| 22:40~23:50</span>
+        2차 심자 신청 <span>| 22:50~23:50</span>
       </ApplyTopWrap>
       <ApplyMidWrap>
         <ApplyDeadline

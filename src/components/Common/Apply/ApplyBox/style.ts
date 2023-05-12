@@ -1,7 +1,10 @@
-import styled, { css } from "styled-components";
+import styled, { CSSObject, css } from "styled-components";
 import { SizeType } from "./types";
 
-export const ApplyOptionBox = styled.div<{ size: SizeType }>`
+export const ApplyOptionBox = styled.div<{
+  size: SizeType;
+  customStyle?: CSSObject;
+}>`
   border-radius: 10px;
   padding: 41px 44px;
   margin-top: 11px;
@@ -10,6 +13,8 @@ export const ApplyOptionBox = styled.div<{ size: SizeType }>`
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
   ${({ size }) => SizeSet[size]}
+
+  ${({ customStyle }) => customStyle}
 `;
 
 const SizeSet = {

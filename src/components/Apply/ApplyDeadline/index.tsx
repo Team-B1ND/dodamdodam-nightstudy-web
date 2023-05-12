@@ -36,12 +36,13 @@ const ApplyDeadline = ({
         <ApplyDeadlineBox>
           <ApplyDeadlineFlex>
             <ApplyRequireText>*</ApplyRequireText>
-            <ApplyLargeText>시작일</ApplyLargeText>
-            <ApplyRequireText>
+            <ApplyLargeText htmlFor="startDate">시작일</ApplyLargeText>
+            <ApplyRequireText htmlFor="startDate">
               *현 시각 이후 날짜를 선택해주세요.
             </ApplyRequireText>
           </ApplyDeadlineFlex>
           <ApplyDeadlineInput
+            id="startDate"
             type="date"
             name="startAt"
             value={postData.startAt}
@@ -52,12 +53,13 @@ const ApplyDeadline = ({
         <ApplyDeadlineBox>
           <ApplyDeadlineFlex style={{ marginTop: "10px" }}>
             <ApplyRequireText>*</ApplyRequireText>
-            <ApplyLargeText>종료일</ApplyLargeText>
-            <ApplyRequireText>
+            <ApplyLargeText htmlFor="endDate">종료일</ApplyLargeText>
+            <ApplyRequireText htmlFor="endDate">
               *2차 심자 신청 기한은 최대 2주입니다.
             </ApplyRequireText>
           </ApplyDeadlineFlex>
           <ApplyDeadlineInput
+            id="endDate"
             type="date"
             name="endAt"
             value={postData.endAt}
