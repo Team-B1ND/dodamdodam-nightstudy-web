@@ -22,7 +22,7 @@ export const LateNightItemBox = styled.div`
   align-items: center;
   padding-left: 25px;
 
-  background: #ffffff;
+  background: ${({ theme }) => theme.backgroundColor2};
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
 `;
@@ -57,7 +57,7 @@ export const LateNightName = styled.p`
   font-weight: 600;
   font-size: 16px;
 
-  color: #252525;
+  color: ${({ theme }) => theme.contrast};
 `;
 
 export const LateNightUserGrade = styled.p`
@@ -80,10 +80,11 @@ export const LateNightDate = styled.p`
 `;
 
 export const LateNightAllow = styled.p<{
-  status: boolean;
+  status: string;
 }>`
   font-weight: 700;
   font-size: 16px;
 
-  color: ${({ status }) => (status === true ? "#07C303" : "#FFA740")};
+  color: ${({ status, theme }) =>
+    status === "ALLOWED" ? "#07C303" : status === "DENIED" ? "red" : "#FFA740"};
 `;
