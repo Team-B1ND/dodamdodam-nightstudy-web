@@ -1,5 +1,6 @@
 import customAxios from "../../libs/Axios/customAxios";
 import { Apply } from "../../types/Apply/apply.type";
+import { LateNightResponse } from "../../types/LateNight/LateNight.type";
 
 class ApplyRepository {
   public async ApplyLatenight({
@@ -18,6 +19,11 @@ class ApplyRepository {
       reason,
       startAt,
     });
+  }
+
+  public async MyLateNights(): Promise<LateNightResponse> {
+    const { data } = await customAxios.get("/nightstudy/my");
+    return data;
   }
 }
 
