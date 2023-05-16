@@ -1,6 +1,7 @@
 import customAxios from "../../libs/Axios/customAxios";
 import { Apply } from "../../types/Apply/apply.type";
 import { LateNightResponse } from "../../types/LateNight/LateNight.type";
+import { Response } from "../../types/Util/response";
 
 class ApplyRepository {
   public async ApplyLatenight({
@@ -10,8 +11,8 @@ class ApplyRepository {
     placeId,
     reason,
     startAt,
-  }: Apply): Promise<void> {
-    await customAxios.post("/nightstudy", {
+  }: Apply): Promise<Response> {
+    const { data } = await customAxios.post("/nightstudy", {
       content,
       endAt,
       isPhone,
@@ -19,6 +20,7 @@ class ApplyRepository {
       reason,
       startAt,
     });
+    return data;
   }
 
   public async MyLateNights(): Promise<LateNightResponse> {

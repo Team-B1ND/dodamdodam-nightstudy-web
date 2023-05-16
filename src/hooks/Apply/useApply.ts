@@ -3,11 +3,14 @@ import { useApplyLatenight } from "../../queries/Apply/apply.query";
 import { Apply } from "../../types/Apply/apply.type";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import * as Sentry from "@sentry/react";
+import { useQueryClient } from "react-query";
 
 const useApply = () => {
+  const queryClient = useQueryClient();
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
   const minDate = currentDate.toISOString().split("T")[0];
+
   const [maxDate, setMaxDate] = useState("");
   const [postData, setPostData] = useState<Apply>({
     placeId: 0,
@@ -120,6 +123,7 @@ const useApply = () => {
       {
         onSuccess: () => {
           B1ndToast.showSuccess("제출되었습니다.");
+          queryClient.invalidateQueries("myLateNight/getMyLateNight");
           setPostData({
             content: "",
             endAt: "",
