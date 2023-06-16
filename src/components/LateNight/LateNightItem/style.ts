@@ -15,6 +15,7 @@ export const LateNightItemContainer = styled.div`
 `;
 
 export const LateNightItemBox = styled.div`
+  position: relative;
   width: 500px;
   height: 81px;
 
@@ -87,4 +88,21 @@ export const LateNightAllow = styled.p<{
 
   color: ${({ status, theme }) =>
     status === "ALLOWED" ? "#07C303" : status === "DENIED" ? "red" : "#FFA740"};
+`;
+
+export const LateNightDelBtn = styled.div`
+  width: 30px;
+  height: 30px;
+
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: ${({ theme }) => theme.borderColor};
+  color: ${({ theme }) => theme.contrast};
+
+  cursor: pointer;
 `;

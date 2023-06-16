@@ -9,7 +9,7 @@ export const ApplyContainer = styled.form`
 
   padding: 30px 80px;
 
-  overflow: hidden;
+  overflow-y: hidden;
 `;
 
 export const ApplyTopWrap = styled.div`

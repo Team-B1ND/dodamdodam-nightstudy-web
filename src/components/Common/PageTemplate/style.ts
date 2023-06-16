@@ -8,7 +8,8 @@ export const PageTemplateContainer = styled.div`
   background-color: ${({ theme }) => theme.backgroundColor};
   position: relative;
 
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
 `;
 
 export const PageTemplateContentWrap = styled.div`
@@ -19,5 +20,6 @@ export const PageTemplateContentWrap = styled.div`
   z-index: 0;
   padding: 30px 0px;
   box-sizing: border-box;
-  overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-y: hidden;
 `;
