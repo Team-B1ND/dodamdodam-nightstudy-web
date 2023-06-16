@@ -6,3 +6,7 @@ export interface ApplyPram {
   startAt: string;
   endAt: string;
 }
+
+export interface DeleteByIdParam {
+  id: number;
+}

@@ -3,6 +3,7 @@ import {
   LateNightAllow,
   LateNightContainer,
   LateNightDate,
+  LateNightDelBtn,
   LateNightInfoBox,
   LateNightItemBox,
   LateNightName,
@@ -11,10 +12,11 @@ import {
   LateNightUserInfoBox,
 } from "./style";
 import DefaultProfileImage from "../../../assets/common/defaultProfile.png";
+import useDeleteAppy from "../../../hooks/Apply/useDeleteApply";
 
 const MyLateNightItem = () => {
   const { data } = useGetMyLateNights({ suspense: true });
-
+  const { onDeletePost } = useDeleteAppy();
   return (
     <LateNightContainer>
       {data?.data.map((data) => {
@@ -46,6 +48,9 @@ const MyLateNightItem = () => {
                   ? "승인 거절"
                   : "승인대기"}
               </LateNightAllow>
+              <LateNightDelBtn onClick={() => onDeletePost({ id: data.id })}>
+                X
+              </LateNightDelBtn>
             </LateNightItemBox>
           </>
         );
