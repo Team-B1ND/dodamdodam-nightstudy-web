@@ -7,7 +7,7 @@ import {
 import ApplyDeadline from "./ApplyDeadline";
 import ApplyPhone from "./ApplyPhone";
 import ApplyPlace from "./ApplyPlace";
-import useApply from "../../hooks/Apply/useApply";
+import useApply from "../../hooks/LateNight/useApplyLateNight";
 import Button from "../Common/Button";
 import useTokenCheck from "../../hooks/Util/useTokenCheck";
 

@@ -1,18 +1,20 @@
 import customAxios from "../../libs/Axios/customAxios";
-import { Apply } from "../../types/Apply/apply.type";
 import { LateNightResponse } from "../../types/LateNight/LateNight.type";
 import { Response } from "../../types/Util/response";
-import { DeleteByIdParam } from "./apply.param";
+import {
+  DeleteLateNightByIdParam,
+  ApplyLateNightPram,
+} from "./latenight.param";
 
-class ApplyRepository {
-  public async ApplyLatenight({
+class LateNightRepository {
+  public async applyLatenight({
     content,
     endAt,
     isPhone,
     placeId,
     reason,
     startAt,
-  }: Apply): Promise<Response> {
+  }: ApplyLateNightPram): Promise<Response> {
     const { data } = await customAxios.post("/nightstudy", {
       content,
       endAt,
@@ -24,15 +26,17 @@ class ApplyRepository {
     return data;
   }
 
-  public async MyLateNights(): Promise<LateNightResponse> {
+  public async getMyLateNights(): Promise<LateNightResponse> {
     const { data } = await customAxios.get("/nightstudy/my");
     return data;
   }
 
-  public async DeleteLatenight({ id }: DeleteByIdParam): Promise<Response> {
+  public async deleteLatenight({
+    id,
+  }: DeleteLateNightByIdParam): Promise<Response> {
     const { data } = await customAxios.delete(`/nightstudy/${id}`);
     return data;
   }
 }
 
-export default new ApplyRepository();
+export default new LateNightRepository();

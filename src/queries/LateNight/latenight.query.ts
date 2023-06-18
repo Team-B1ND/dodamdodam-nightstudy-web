@@ -1,9 +1,13 @@
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
-import applyRepository from "../../repositories/Apply/apply.repository";
+import applyRepository from "../../repositories/LateNight/latenight.repository";
 import { LateNightResponse } from "../../types/LateNight/LateNight.type";
 import { AxiosError } from "axios";
-import { DeleteByIdParam } from "../../repositories/Apply/apply.param";
-export const useGetMyLateNights = (
+import {
+  ApplyLateNightPram,
+  DeleteLateNightByIdParam,
+} from "../../repositories/LateNight/latenight.param";
+
+export const useGetMyLateNightsQuery = (
   options?: UseQueryOptions<
     LateNightResponse,
     AxiosError,
@@ -11,15 +15,41 @@ export const useGetMyLateNights = (
     "myLateNight/getMyLateNight"
   >
 ) =>
-  useQuery("myLateNight/getMyLateNight", () => applyRepository.MyLateNights(), {
-    ...options,
-    staleTime: 1000 * 60 * 60,
-    cacheTime: 1000 * 60 * 60,
-  });
+  useQuery(
+    "myLateNight/getMyLateNight",
+    () => applyRepository.getMyLateNights(),
+    {
+      ...options,
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+    }
+  );
 
 export const useDeleteMyLateNightsQuery = () => {
-  const mutation = useMutation(({ id }: DeleteByIdParam) =>
-    applyRepository.DeleteLatenight({ id })
+  const mutation = useMutation(({ id }: DeleteLateNightByIdParam) =>
+    applyRepository.deleteLatenight({ id })
+  );
+  return mutation;
+};
+
+export const useApplyLatenightMutation = () => {
+  const mutation = useMutation(
+    ({
+      content,
+      endAt,
+      isPhone,
+      placeId,
+      reason,
+      startAt,
+    }: ApplyLateNightPram) =>
+      applyRepository.applyLatenight({
+        content,
+        endAt,
+        isPhone,
+        placeId,
+        reason,
+        startAt,
+      })
   );
   return mutation;
 };

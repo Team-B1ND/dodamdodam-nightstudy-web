@@ -1,4 +1,3 @@
-import { useGetMyLateNights } from "../../../queries/LateNight/latenight.query";
 import {
   LateNightAllow,
   LateNightContainer,
@@ -12,11 +11,12 @@ import {
   LateNightUserInfoBox,
 } from "./style";
 import DefaultProfileImage from "../../../assets/common/defaultProfile.png";
-import useDeleteAppy from "../../../hooks/Apply/useDeleteApply";
+import useDeleteLateNight from "../../../hooks/LateNight/useDeleteLateNight";
+import { useGetMyLateNightsQuery } from "../../../queries/LateNight/latenight.query";
 
 const MyLateNightItem = () => {
-  const { data } = useGetMyLateNights({ suspense: true });
-  const { onDeletePost } = useDeleteAppy();
+  const { data } = useGetMyLateNightsQuery({ suspense: true });
+  const { onDeletePost } = useDeleteLateNight();
   return (
     <LateNightContainer>
       {data?.data.map((data) => {

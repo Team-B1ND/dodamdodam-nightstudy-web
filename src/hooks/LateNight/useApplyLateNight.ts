@@ -1,11 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useApplyLatenight } from "../../queries/Apply/apply.query";
 import { Apply } from "../../types/Apply/apply.type";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import * as Sentry from "@sentry/react";
 import { useQueryClient } from "react-query";
+import { useApplyLatenightMutation } from "../../queries/LateNight/latenight.query";
 
-const useApply = () => {
+const useApplyLateNight = () => {
   const queryClient = useQueryClient();
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate() + 1);
@@ -20,7 +20,7 @@ const useApply = () => {
     reason: "",
     startAt: "",
   });
-  const applyLatenightMutation = useApplyLatenight();
+  const applyLatenightMutation = useApplyLatenightMutation();
 
   const onChangeStartDate = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -155,4 +155,4 @@ const useApply = () => {
   };
 };
 
-export default useApply;
+export default useApplyLateNight;

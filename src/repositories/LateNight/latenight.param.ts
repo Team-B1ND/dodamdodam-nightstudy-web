@@ -1,4 +1,4 @@
-export interface ApplyPram {
+export interface ApplyLateNightPram {
   placeId: number;
   content: string;
   isPhone: boolean;
@@ -7,6 +7,6 @@ export interface ApplyPram {
   endAt: string;
 }
 
-export interface DeleteByIdParam {
+export interface DeleteLateNightByIdParam {
   id: number;
 }

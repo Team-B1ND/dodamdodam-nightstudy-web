@@ -6,7 +6,7 @@ interface Props {
   id: number;
 }
 
-const useDeleteAppy = () => {
+const useDeleteLateNight = () => {
   const queryClient = useQueryClient();
 
   const useDeleteMyLateNight = useDeleteMyLateNightsQuery();
@@ -36,4 +36,4 @@ const useDeleteAppy = () => {
   return { onDeletePost };
 };
 
-export default useDeleteAppy;
+export default useDeleteLateNight;
