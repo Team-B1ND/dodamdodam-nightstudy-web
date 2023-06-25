@@ -18,16 +18,23 @@ export const ApplyDeadlineBox = styled.div`
   row-gap: 5px;
 `;
 
-export const ApplyDeadlineInput = styled.input`
+export const ApplyDeadlineInput = styled.input<{ placeholderColor: string }>`
   width: 315px;
   height: 35px;
 
   padding-left: 13px;
   padding-right: 13px;
 
-  color: ${({ theme }) => theme.contrast};
+  color: ${({ placeholderColor, theme }) =>
+    placeholderColor ? theme.contrast : "#929292"};
+
   background-color: ${({ theme }) => theme.inputColor};
   border: none;
   outline: none;
   border-radius: 8px;
+
+  &::before {
+    content: attr(placeholder);
+    width: 100%;
+  }
 `;

@@ -44,10 +44,14 @@ const ApplyDeadline = ({
           <ApplyDeadlineInput
             id="startDate"
             type="date"
+            placeholder={
+              postData.startAt ? postData.startAt : "시작일을 선택해주세요"
+            }
             name="startAt"
             value={postData.startAt}
             min={minDate}
             onChange={onChangeStartDate}
+            placeholderColor={postData.startAt}
           />
         </ApplyDeadlineBox>
         <ApplyDeadlineBox>
@@ -61,10 +65,14 @@ const ApplyDeadline = ({
           <ApplyDeadlineInput
             id="endDate"
             type="date"
+            placeholder={
+              postData.endAt ? postData.endAt : "종료일을 선택해주세요"
+            }
             name="endAt"
             value={postData.endAt}
             max={maxDate}
             onChange={onChangeEndDate}
+            placeholderColor={postData.endAt}
           />
         </ApplyDeadlineBox>
       </Box>
