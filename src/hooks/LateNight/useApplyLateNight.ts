@@ -4,6 +4,7 @@ import { B1ndToast } from "@b1nd/b1nd-toastify";
 import * as Sentry from "@sentry/react";
 import { useQueryClient } from "react-query";
 import { useApplyLatenightMutation } from "../../queries/LateNight/latenight.query";
+import errorHandler from "../../util/errorHandler";
 
 const useApplyLateNight = () => {
   const queryClient = useQueryClient();
@@ -133,8 +134,9 @@ const useApplyLateNight = () => {
             startAt: "",
           });
         },
-        onError: (err) => {
+        onError: (err: any) => {
           B1ndToast.showError("제출 실패");
+          errorHandler(err.response.data.status);
           Sentry.captureException(`${err}이유로 심자 신청 실패`);
         },
       }
