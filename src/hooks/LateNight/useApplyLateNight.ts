@@ -9,7 +9,7 @@ import errorHandler from "../../util/errorHandler";
 const useApplyLateNight = () => {
   const queryClient = useQueryClient();
   const currentDate = new Date();
-  currentDate.setDate(currentDate.getDate() + 1);
+  currentDate.setDate(currentDate.getDate());
   const minDate = currentDate.toISOString().split("T")[0];
 
   const [maxDate, setMaxDate] = useState("");
