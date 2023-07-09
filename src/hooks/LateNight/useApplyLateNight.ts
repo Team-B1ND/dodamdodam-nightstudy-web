@@ -21,6 +21,7 @@ const useApplyLateNight = () => {
     reason: "",
     startAt: "",
   });
+
   const applyLatenightMutation = useApplyLatenightMutation();
 
   const onChangeStartDate = (e: ChangeEvent<HTMLInputElement>) => {
@@ -134,10 +135,9 @@ const useApplyLateNight = () => {
             startAt: "",
           });
         },
-        onError: (err: any) => {
-          B1ndToast.showError("제출 실패");
-          errorHandler(err.response.data.status);
-          Sentry.captureException(`${err}이유로 심자 신청 실패`);
+        onError: (error: any) => {
+          B1ndToast.showError("심자 신청 실패");
+          Sentry.captureException(`${error}이유로 심자 신청 실패`);
         },
       }
     );
