@@ -4,7 +4,6 @@ import { B1ndToast } from "@b1nd/b1nd-toastify";
 import * as Sentry from "@sentry/react";
 import { useQueryClient } from "react-query";
 import { useApplyLatenightMutation } from "../../queries/LateNight/latenight.query";
-import errorHandler from "../../util/errorHandler";
 
 const useApplyLateNight = () => {
   const queryClient = useQueryClient();
@@ -41,7 +40,7 @@ const useApplyLateNight = () => {
 
   const addTwoWeeks = (date: string) => {
     const startDateObj = new Date(date);
-    const newDate = new Date(startDateObj.getTime() + 12096e5);
+    const newDate = new Date(startDateObj.getTime() + 11232e5);
     setMaxDate(newDate.toISOString().slice(0, 10));
   };
 
@@ -136,6 +135,8 @@ const useApplyLateNight = () => {
           });
         },
         onError: (error: any) => {
+          console.log(error);
+
           B1ndToast.showError("심자 신청 실패");
           Sentry.captureException(`${error}이유로 심자 신청 실패`);
         },
