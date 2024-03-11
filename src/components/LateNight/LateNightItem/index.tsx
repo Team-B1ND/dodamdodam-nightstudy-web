@@ -35,16 +35,16 @@ const MyLateNightItem = () => {
               </LateNightInfoBox>
               <LateNightAllow
                 status={
-                  data.allowCheck === "ALLOWED"
+                  data.status === "ALLOWED"
                     ? "ALLOWED"
-                    : data.allowCheck === "DENIED"
+                    : data.status === "DENIED"
                     ? "DENIED"
                     : "PENDING"
                 }
               >
-                {data.allowCheck === "ALLOWED"
+                {data.status === "ALLOWED"
                   ? "승인 완료"
-                  : data.allowCheck === "DENIED"
+                  : data.status === "DENIED"
                   ? "승인 거절"
                   : "승인대기"}
               </LateNightAllow>

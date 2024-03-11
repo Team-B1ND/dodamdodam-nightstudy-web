@@ -12,18 +12,14 @@ export const useGetMyLateNightsQuery = (
     LateNightResponse,
     AxiosError,
     LateNightResponse,
-    "myLateNight/getMyLateNight"
+    "/night-study/my"
   >
 ) =>
-  useQuery(
-    "myLateNight/getMyLateNight",
-    () => applyRepository.getMyLateNights(),
-    {
-      ...options,
-      staleTime: 1000 * 60 * 60,
-      cacheTime: 1000 * 60 * 60,
-    }
-  );
+  useQuery("/night-study/my", () => applyRepository.getMyLateNights(), {
+    ...options,
+    staleTime: 1000 * 60 * 60,
+    cacheTime: 1000 * 60 * 60,
+  });
 
 export const useDeleteMyLateNightsQuery = () => {
   const mutation = useMutation(({ id }: DeleteLateNightByIdParam) =>
@@ -37,17 +33,17 @@ export const useApplyLatenightMutation = () => {
     ({
       content,
       endAt,
-      isPhone,
-      placeId,
-      reason,
+      doNeedPhone,
+      place,
+      reasonForPhone,
       startAt,
     }: ApplyLateNightPram) =>
       applyRepository.applyLatenight({
         content,
         endAt,
-        isPhone,
-        placeId,
-        reason,
+        doNeedPhone,
+        place,
+        reasonForPhone,
         startAt,
       })
   );

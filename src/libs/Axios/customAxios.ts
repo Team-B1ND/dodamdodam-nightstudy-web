@@ -7,7 +7,7 @@ import {
 import cookie from "../Cookie/cookie";
 import { customAxiosErrorInterceptor } from "./interceptors";
 
-const customAxios = axios.create({
+export const customAxios = axios.create({
   baseURL: config.SERVER,
   headers: {
     "Access-Control-Allow-Origin": "*",
@@ -15,9 +15,17 @@ const customAxios = axios.create({
   },
 });
 
-customAxios.interceptors.response.use(
+export const dodamTestAxios = axios.create({
+  baseURL: config.DODAM_TEST_SERVER,
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    [REQUEST_TOKEN_KEY]: `Bearer ${cookie.getCookie(ACCESS_TOKEN_KEY)!}`,
+  },
+});
+
+dodamTestAxios.interceptors.response.use(
   (res) => res,
   customAxiosErrorInterceptor
 );
 
-export default customAxios;
+// export default dodamTestAxios;

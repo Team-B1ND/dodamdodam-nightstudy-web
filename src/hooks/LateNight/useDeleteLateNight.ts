@@ -24,7 +24,7 @@ const useDeleteLateNight = () => {
       {
         onSuccess: () => {
           B1ndToast.showSuccess("심자가 삭제되었습니다");
-          queryClient.invalidateQueries("myLateNight/getMyLateNight");
+          queryClient.invalidateQueries("/night-study/my");
         },
         onError: () => {
           B1ndToast.showSuccess("심자 삭제를 실패하였습니다잇!");

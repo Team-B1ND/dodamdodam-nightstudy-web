@@ -5,7 +5,7 @@ import {
   REFRESH_TOKEN_KEY,
   REQUEST_TOKEN_KEY,
 } from "../../constants/Token/token.constant";
-import customAxios from "./customAxios";
+import { customAxios, dodamTestAxios } from "./customAxios";
 import tokenRepository from "../../repositories/Token/token.repository";
 
 export const customAxiosErrorInterceptor = async (config: AxiosError) => {
@@ -17,7 +17,7 @@ export const customAxiosErrorInterceptor = async (config: AxiosError) => {
       const { data } = await tokenRepository.getRefreshToken({ refreshToken });
 
       cookie.setCookie(ACCESS_TOKEN_KEY, data);
-      customAxios.defaults.headers.common[REQUEST_TOKEN_KEY] = data;
+      dodamTestAxios.defaults.headers.common[REQUEST_TOKEN_KEY] = data;
     } catch (error) {
       window.alert("세션만료");
       cookie.removeCookie(ACCESS_TOKEN_KEY);

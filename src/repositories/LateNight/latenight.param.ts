@@ -1,8 +1,17 @@
+// export interface ApplyLateNightPram {
+//   placeId: number;
+//   content: string;
+//   isPhone: boolean;
+//   reason: string;
+//   startAt: string;
+//   endAt: string;
+// }
+
 export interface ApplyLateNightPram {
-  placeId: number;
+  place: string;
   content: string;
-  isPhone: boolean;
-  reason: string;
+  doNeedPhone: boolean;
+  reasonForPhone: string;
   startAt: string;
   endAt: string;
 }

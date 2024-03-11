@@ -7,10 +7,10 @@ export const useGetMyMember = (
     MyMemberResponse,
     AxiosError,
     MyMemberResponse,
-    "member/getMyMember"
+    "members/my"
   >
 ) =>
-  useQuery("member/getMyMember", () => memberRepository.getMyMember(), {
+  useQuery("members/my", () => memberRepository.getMyMember(), {
     ...options,
     staleTime: 1000 * 60 * 60,
     cacheTime: 1000 * 60 * 60,

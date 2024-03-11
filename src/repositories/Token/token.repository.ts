@@ -8,7 +8,7 @@ class TokenRepository {
     refreshToken,
   }: TokenParam): Promise<TokenResponse> {
     const { data } = await axios.post(
-      `${CONFIG.SERVER}/token/refresh`,
+      `${CONFIG.DODAM_TEST_SERVER}/token/reissue`,
       refreshToken
     );
     return data;

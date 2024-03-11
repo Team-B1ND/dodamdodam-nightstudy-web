@@ -6,6 +6,6 @@ export interface Response {
 export interface ClassRoom {
   readonly grade: number;
   readonly id: number;
-  readonly placeId: number;
+  readonly place: number;
   readonly room: number;
 }

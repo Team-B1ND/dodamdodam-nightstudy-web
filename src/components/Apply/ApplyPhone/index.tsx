@@ -27,14 +27,14 @@ const ApplyPhone = ({
       <ApplyTitle>핸드폰 필요 여부</ApplyTitle>
       <Box size="small">
         <ApplyPhoneFlex>
-          <ApplyLargeText htmlFor="isPhone">
+          <ApplyLargeText htmlFor="doNeedPhone">
             핸드폰이 필요하신가요?
           </ApplyLargeText>
           <ApplyPhoneCheckBox
-            id="isPhone"
-            name="isPhone"
+            id="doNeedPhone"
+            name="doNeedPhone"
             type="checkbox"
-            value="isPhone"
+            value="isPdoNeedPhonehone"
             onChange={onChangePhoneCheck}
           />
         </ApplyPhoneFlex>
@@ -42,10 +42,10 @@ const ApplyPhone = ({
           *체크하셨다면 사유를 필수로 적어주세요.
         </ApplyRequireText>
         <ApplyPhoneCheckInput
-          id="reason"
+          id="reasonForPhone"
           placeholder="핸드폰이 필요한 사유를 적어주세요"
-          name="reason"
-          value={postData.reason}
+          name="reasonForPhone"
+          value={postData.reasonForPhone}
           onChange={onChangeReason}
         />
       </Box>

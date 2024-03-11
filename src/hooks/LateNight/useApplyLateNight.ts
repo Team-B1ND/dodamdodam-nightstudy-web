@@ -4,6 +4,7 @@ import { B1ndToast } from "@b1nd/b1nd-toastify";
 import * as Sentry from "@sentry/react";
 import { useQueryClient } from "react-query";
 import { useApplyLatenightMutation } from "../../queries/LateNight/latenight.query";
+import { tr } from "date-fns/locale";
 
 const useApplyLateNight = () => {
   const queryClient = useQueryClient();
@@ -13,13 +14,15 @@ const useApplyLateNight = () => {
 
   const [maxDate, setMaxDate] = useState("");
   const [postData, setPostData] = useState<Apply>({
-    placeId: 0,
+    place: "",
     content: "",
+    doNeedPhone: false,
+    reasonForPhone: "",
     endAt: "",
-    isPhone: false,
-    reason: "",
     startAt: "",
   });
+
+  console.log(postData.place);
 
   const applyLatenightMutation = useApplyLatenightMutation();
 
@@ -52,7 +55,7 @@ const useApplyLateNight = () => {
 
   const onChangeReason = (e: ChangeEvent<HTMLTextAreaElement>) => {
     //휴대폰사용이유
-    if (postData.isPhone === false) {
+    if (postData.doNeedPhone === false) {
       B1ndToast.showInfo("사용 여부를 체크해주세요");
       return;
     }
@@ -63,7 +66,7 @@ const useApplyLateNight = () => {
   const checkOnlyOne = (e: ChangeEvent<HTMLInputElement>) => {
     //다중 체크박스 제어
     const { name, value } = e.target;
-    let checkItem = document.getElementsByName("placeId");
+    let checkItem = document.getElementsByName("place");
     Array.prototype.forEach.call(checkItem, function (el) {
       el.checked = false;
     });
@@ -84,9 +87,11 @@ const useApplyLateNight = () => {
   const onSubmitLatenight = (e: FormEvent) => {
     e.preventDefault();
 
-    const { content, endAt, isPhone, placeId, reason, startAt } = postData;
-    const handleStartDate = startAt + "T00:00:00";
-    const handleEndDate = endAt + "T23:59:59";
+    const { content, endAt, doNeedPhone, place, reasonForPhone, startAt } =
+      postData;
+
+    const handleStartDate = startAt;
+    const handleEndDate = endAt;
 
     if (startAt === "") {
       B1ndToast.showInfo("시작일을 작성해주세요");
@@ -98,12 +103,12 @@ const useApplyLateNight = () => {
       return;
     }
 
-    if (placeId === null) {
+    if (place === null) {
       B1ndToast.showInfo("학습 장소를 선택해주세요");
       return;
     }
 
-    if (isPhone === true && reason === "") {
+    if (doNeedPhone === true && reasonForPhone === "") {
       B1ndToast.showInfo("휴대폰 사용 이유를 작성해주세요");
       return;
     }
@@ -116,21 +121,21 @@ const useApplyLateNight = () => {
       {
         content,
         startAt: handleStartDate,
-        isPhone,
-        placeId,
-        reason,
+        doNeedPhone,
+        place,
+        reasonForPhone,
         endAt: handleEndDate,
       },
       {
         onSuccess: () => {
           B1ndToast.showSuccess("제출되었습니다.");
-          queryClient.invalidateQueries("myLateNight/getMyLateNight");
+          queryClient.invalidateQueries("/night-study/my");
           setPostData({
             content: "",
             endAt: "",
-            isPhone: true,
-            placeId: 0,
-            reason: "",
+            doNeedPhone: true,
+            place: "",
+            reasonForPhone: "",
             startAt: "",
           });
         },

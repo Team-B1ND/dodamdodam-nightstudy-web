@@ -1,4 +1,4 @@
-import customAxios from "../../libs/Axios/customAxios";
+import { customAxios, dodamTestAxios } from "../../libs/Axios/customAxios";
 import { LateNightResponse } from "../../types/LateNight/LateNight.type";
 import { Response } from "../../types/Util/response";
 import {
@@ -10,31 +10,31 @@ class LateNightRepository {
   public async applyLatenight({
     content,
     endAt,
-    isPhone,
-    placeId,
-    reason,
+    doNeedPhone,
+    place,
+    reasonForPhone,
     startAt,
   }: ApplyLateNightPram): Promise<Response> {
-    const { data } = await customAxios.post("/nightstudy", {
+    const { data } = await dodamTestAxios.post("/night-study", {
       content,
       endAt,
-      isPhone,
-      placeId,
-      reason,
+      doNeedPhone,
+      place,
+      reasonForPhone,
       startAt,
     });
     return data;
   }
 
   public async getMyLateNights(): Promise<LateNightResponse> {
-    const { data } = await customAxios.get("/nightstudy/my");
+    const { data } = await dodamTestAxios.get("/night-study/my");
     return data;
   }
 
   public async deleteLatenight({
     id,
   }: DeleteLateNightByIdParam): Promise<Response> {
-    const { data } = await customAxios.delete(`/nightstudy/${id}`);
+    const { data } = await dodamTestAxios.delete(`/night-study/${id}`);
     return data;
   }
 }
