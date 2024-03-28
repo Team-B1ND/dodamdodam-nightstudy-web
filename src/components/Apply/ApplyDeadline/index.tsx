@@ -45,7 +45,9 @@ const ApplyDeadline = ({
             id="startDate"
             type="date"
             placeholder={
-              postData.startAt ? postData.startAt : "시작일을 선택해주세요"
+              postData.startAt === ""
+                ? postData.startAt
+                : "시작일을 선택해주세요"
             }
             name="startAt"
             value={postData.startAt}
@@ -66,7 +68,7 @@ const ApplyDeadline = ({
             id="endDate"
             type="date"
             placeholder={
-              postData.endAt ? postData.endAt : "종료일을 선택해주세요"
+              postData.startAt === "" ? postData.endAt : "종료일을 선택해주세요"
             }
             name="endAt"
             value={postData.endAt}
