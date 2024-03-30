@@ -9,16 +9,13 @@ const NavBarItem = () => {
     <NavBarItemContainer>
       {NAVBAR_ITEMS.map((item, idx) => {
         return (
-          <>
-            <NavBarItemBox
-              isMatch={pathname === item.link ? true : false}
-              key={idx}
-              onClick={() => navigate(item.link)}
-            >
-              {pathname === item.link ? <span>•</span> : null}
-              {item.title}
-            </NavBarItemBox>
-          </>
+          <NavBarItemBox
+            isMatch={pathname === item.link ? true : false}
+            key={idx}
+            onClick={() => navigate(item.link)}
+          >
+            {item.title}
+          </NavBarItemBox>
         );
       })}
     </NavBarItemContainer>

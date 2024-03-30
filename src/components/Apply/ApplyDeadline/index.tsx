@@ -44,18 +44,15 @@ const ApplyDeadline = ({
           <ApplyDeadlineInput
             id="startDate"
             type="date"
-            placeholder={
-              postData.startAt === ""
-                ? "시작일을 선택해주세요"
-                : postData.startAt
-            }
             name="startAt"
             value={postData.startAt}
             min={minDate}
             onChange={onChangeStartDate}
             placeholderColor={postData.startAt}
+            placeholder={postData.startAt || "시작일을 선택해주세요"}
           />
         </ApplyDeadlineBox>
+
         <ApplyDeadlineBox>
           <ApplyDeadlineFlex style={{ marginTop: "10px" }}>
             <ApplyRequireText>*</ApplyRequireText>
@@ -67,14 +64,16 @@ const ApplyDeadline = ({
           <ApplyDeadlineInput
             id="endDate"
             type="date"
-            placeholder={
-              postData.startAt === "" ? "종료일을 선택해주세요" : postData.endAt
-            }
             name="endAt"
             value={postData.endAt}
+            min={postData.startAt}
             max={maxDate}
             onChange={onChangeEndDate}
             placeholderColor={postData.endAt}
+            onClick={() =>
+              !postData.startAt && window.alert("시작일을 먼저 선택해주세요")
+            }
+            placeholder={postData.endAt || "종료일을 선택해주세요"}
           />
         </ApplyDeadlineBox>
       </Box>

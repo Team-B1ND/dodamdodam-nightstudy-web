@@ -3,10 +3,10 @@ import { Apply } from "../../types/Apply/apply.type";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import * as Sentry from "@sentry/react";
 import { useQueryClient } from "react-query";
-import { useApplyLatenightMutation } from "../../queries/LateNight/latenight.query";
-import { tr } from "date-fns/locale";
+import { useApplyNightStudyMutation } from "../../queries/NightStudy/nightstudy.query";
+import dayjs from "dayjs";
 
-const useApplyLateNight = () => {
+const useApplyNightStudy = () => {
   const queryClient = useQueryClient();
   const currentDate = new Date();
   currentDate.setDate(currentDate.getDate());
@@ -22,9 +22,9 @@ const useApplyLateNight = () => {
     startAt: "",
   });
 
-  console.log(postData.place);
+  const [prevReasonForPhone, setPrevReasonForPhone] = useState("");
 
-  const applyLatenightMutation = useApplyLatenightMutation();
+  const applyNightStudyMutation = useApplyNightStudyMutation();
 
   const onChangeStartDate = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -54,11 +54,6 @@ const useApplyLateNight = () => {
   };
 
   const onChangeReason = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //휴대폰사용이유
-    if (postData.doNeedPhone === false) {
-      B1ndToast.showInfo("사용 여부를 체크해주세요");
-      return;
-    }
     const { name, value } = e.target;
     setPostData((prev) => ({ ...prev, [name]: value }));
   };
@@ -78,13 +73,18 @@ const useApplyLateNight = () => {
     //휴대폰 필요여부 체크
     const { name, checked } = e.target;
     if (checked) {
-      setPostData((prev) => ({ ...prev, [name]: true }));
+      setPostData((prev) => ({
+        ...prev,
+        reasonForPhone: prevReasonForPhone,
+        [name]: true,
+      }));
     } else {
-      setPostData((prev) => ({ ...prev, [name]: false }));
+      setPrevReasonForPhone(postData.reasonForPhone);
+      setPostData((prev) => ({ ...prev, reasonForPhone: "", [name]: false }));
     }
   };
 
-  const onSubmitLatenight = (e: FormEvent) => {
+  const onSubmitNightStudy = (e: FormEvent) => {
     e.preventDefault();
 
     const { content, endAt, doNeedPhone, place, reasonForPhone, startAt } =
@@ -103,21 +103,35 @@ const useApplyLateNight = () => {
       return;
     }
 
-    if (place === null) {
+    if (dayjs(startAt).isAfter(endAt)) {
+      B1ndToast.showInfo("시작일을 종료일보다 작아야합니다");
+      return;
+    }
+
+    if (place === "") {
       B1ndToast.showInfo("학습 장소를 선택해주세요");
       return;
     }
 
-    if (doNeedPhone === true && reasonForPhone === "") {
+    if (doNeedPhone === true && reasonForPhone.trim() === "") {
       B1ndToast.showInfo("휴대폰 사용 이유를 작성해주세요");
       return;
     }
-    if (content === "") {
+
+    if (content.trim() === "") {
       B1ndToast.showInfo("학습내용을 작성해주세요");
       return;
     }
 
-    applyLatenightMutation.mutate(
+    if (content.length < 10) {
+      return B1ndToast.showInfo("학습 내용을 10자 이상 작성하세요");
+    }
+
+    if (content.length > 25) {
+      return B1ndToast.showInfo("학습 내용을 25자 내로 작성하세요");
+    }
+
+    applyNightStudyMutation.mutate(
       {
         content,
         startAt: handleStartDate,
@@ -139,9 +153,7 @@ const useApplyLateNight = () => {
             startAt: "",
           });
         },
-        onError: (error: any) => {
-          console.log(error);
-
+        onError: (error) => {
           B1ndToast.showError("심자 신청 실패");
           Sentry.captureException(`${error}이유로 심자 신청 실패`);
         },
@@ -159,8 +171,8 @@ const useApplyLateNight = () => {
     onChangeContent,
     onChangeReason,
     onChangePhoneCheck,
-    onSubmitLatenight,
+    onSubmitNightStudy,
   };
 };
 
-export default useApplyLateNight;
+export default useApplyNightStudy;

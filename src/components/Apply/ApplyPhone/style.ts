@@ -17,6 +17,7 @@ export const ApplyPhoneCheckBox = styled.input`
 
   background-color: #f0f0f0;
   border-radius: 4px;
+  cursor: pointer;
 `;
 
 export const ApplyPhoneCheckInput = styled.textarea`

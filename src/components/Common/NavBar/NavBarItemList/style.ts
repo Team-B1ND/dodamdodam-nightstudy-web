@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NavBarItemContainer = styled.div`
+export const NavBarItemContainer = styled.ul`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -20,5 +20,4 @@ export const NavBarItemBox = styled.div<{ isMatch: boolean }>`
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  border-radius: 20px;
 `;

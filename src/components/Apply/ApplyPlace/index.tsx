@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, Suspense } from "react";
+import { ChangeEvent, Suspense } from "react";
 import ApplyRequireText from "../../Common/RequireText";
 import ApplyLargeText from "../../Common/Apply/ApplyText";
 import ApplyTitle from "../../Common/Apply/ApplyTitle";
@@ -57,7 +57,7 @@ const ApplyPlace = ({ checkOnlyOne, postData, onChangeContent }: Props) => {
             name="content"
             value={postData.content}
             onChange={onChangeContent}
-            placeholder="학습 할 내용을 자세하고 구체적이게 적어주세요"
+            placeholder="학습 할 내용을 작성해주세요"
           />
         </ApplyStudyContentBox>
       </Box>

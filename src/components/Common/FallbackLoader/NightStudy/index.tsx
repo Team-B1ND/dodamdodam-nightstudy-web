@@ -1,7 +1,7 @@
 import { skeletonAnimtaion } from "@b1nd/b1nd-styled-components-util";
 import styled from "styled-components";
 
-const LateNightFallBackLoader = () => {
+const NightStudyFallBackLoader = () => {
   return (
     <Container>
       {Array.from({ length: 6 }).map((_, idx) => (
@@ -11,7 +11,7 @@ const LateNightFallBackLoader = () => {
   );
 };
 
-export default LateNightFallBackLoader;
+export default NightStudyFallBackLoader;
 
 const Container = styled.div`
   width: 100%;

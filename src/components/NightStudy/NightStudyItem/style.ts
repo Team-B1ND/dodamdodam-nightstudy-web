@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LateNightContainer = styled.div`
+export const NightStudyContainer = styled.div`
   width: 100%;
 
   display: flex;
@@ -10,11 +10,11 @@ export const LateNightContainer = styled.div`
   margin-top: 61px;
 `;
 
-export const LateNightItemContainer = styled.div`
+export const NightStudyItemContainer = styled.div`
   display: flex;
 `;
 
-export const LateNightItemBox = styled.div`
+export const NightStudyItemBox = styled.div`
   position: relative;
   width: 500px;
   height: 81px;
@@ -28,7 +28,7 @@ export const LateNightItemBox = styled.div`
   border-radius: 10px;
 `;
 
-export const LateNightProfile = styled.img`
+export const NightStudyProfile = styled.img`
   width: 45px;
   height: 45px;
 
@@ -36,7 +36,7 @@ export const LateNightProfile = styled.img`
   object-fit: cover;
 `;
 
-export const LateNightInfoBox = styled.div`
+export const NightStudyInfoBox = styled.div`
   width: 271px;
   height: 37px;
 
@@ -48,20 +48,20 @@ export const LateNightInfoBox = styled.div`
   margin-left: 23px;
 `;
 
-export const LateNightUserInfoBox = styled.div`
+export const NightStudyUserInfoBox = styled.div`
   display: flex;
 
   column-gap: 6px;
 `;
 
-export const LateNightName = styled.p`
+export const NightStudyName = styled.p`
   font-weight: 600;
   font-size: 16px;
 
   color: ${({ theme }) => theme.contrast};
 `;
 
-export const LateNightUserGrade = styled.p`
+export const NightStudyUserGrade = styled.p`
   font-weight: 500;
   font-size: 12px;
 
@@ -73,14 +73,14 @@ export const LateNightUserGrade = styled.p`
   margin-top: 4px;
 `;
 
-export const LateNightDate = styled.p`
+export const NightStudyDate = styled.p`
   font-weight: 400;
   font-size: 12px;
 
   color: #6d6d6d;
 `;
 
-export const LateNightAllow = styled.p<{
+export const NightStudyAllow = styled.p<{
   status: string;
 }>`
   font-weight: 700;
@@ -90,7 +90,7 @@ export const LateNightAllow = styled.p<{
     status === "ALLOWED" ? "#07C303" : status === "DENIED" ? "red" : "#FFA740"};
 `;
 
-export const LateNightDelBtn = styled.div`
+export const NightStudyDelBtn = styled.div`
   width: 30px;
   height: 30px;
 

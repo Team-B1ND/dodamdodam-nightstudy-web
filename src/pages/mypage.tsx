@@ -1,7 +1,7 @@
-import LateNight from "../components/LateNight";
+import NightStudy from "../components/NightStudy";
 
 const MyPage = () => {
-  return <LateNight />;
+  return <NightStudy />;
 };
 
 export default MyPage;

@@ -29,15 +29,14 @@ export const ApplyResonBox = styled.div`
 export const ApplyStudyContentBox = styled.div`
   display: flex;
   flex-direction: column;
-
-  row-gap: 5px;
+  row-gap: 10px;
 `;
 
 export const ApplyStudyContentInput = styled.textarea`
   width: 788px;
   height: 150px;
 
-  padding: 8px 13px;
+  padding: 11px 13px;
   background: ${({ theme }) => theme.inputColor};
   color: ${({ theme }) => theme.contrast};
   border-radius: 8px;
@@ -87,6 +86,7 @@ export const ApplyPlaceCheckBox = styled.input`
 
   background: ${({ theme }) => theme.inputColor};
   border-radius: 4px;
+  cursor: pointer;
 `;
 
 export const ApplyPlaceName = styled.label`
