@@ -1,20 +1,20 @@
 import { ErrorBoundary } from "react-error-boundary";
 import { ApplyContainer, ApplyTopWrap } from "../Apply/style";
-import MyLateNightItem from "./LateNightItem";
+import MyNightStudyItem from "./NightStudyItem";
 import { Suspense } from "react";
-import LateNightFallBackLoader from "../Common/FallbackLoader/LateNight";
+import NightStudyFallBackLoader from "../Common/FallbackLoader/NightStudy";
 
-const LateNight = () => {
+const NightStudy = () => {
   return (
     <ApplyContainer>
       <ApplyTopWrap>My 신청</ApplyTopWrap>
       <ErrorBoundary fallback={<>error...</>}>
-        <Suspense fallback={<LateNightFallBackLoader />}>
-          <MyLateNightItem />
+        <Suspense fallback={<NightStudyFallBackLoader />}>
+          <MyNightStudyItem />
         </Suspense>
       </ErrorBoundary>
     </ApplyContainer>
   );
 };
 
-export default LateNight;
+export default NightStudy;

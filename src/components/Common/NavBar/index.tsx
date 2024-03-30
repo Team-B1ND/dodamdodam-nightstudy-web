@@ -21,7 +21,7 @@ const NavBar = () => {
           onClick={() => (window.location.href = "http://dodam.b1nd.com/")}
           alt={"header/headerLogo"}
         />
-        <NavBarTitle>Late Night</NavBarTitle>
+        <NavBarTitle>Night Study</NavBarTitle>
         <BsFillMoonFill
           style={{
             marginLeft: "4px",

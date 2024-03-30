@@ -13,6 +13,9 @@ export const ButtonContainer = styled.button`
 
   font-weight: 700;
   font-size: 14px;
+  cursor: pointer;
 
   color: #ffffff;
+
+  transition: all 0.2s ease-in-out;
 `;

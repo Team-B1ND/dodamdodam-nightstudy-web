@@ -7,7 +7,7 @@ import {
 import ApplyDeadline from "./ApplyDeadline";
 import ApplyPhone from "./ApplyPhone";
 import ApplyPlace from "./ApplyPlace";
-import useApply from "../../hooks/LateNight/useApplyLateNight";
+import useApply from "../../hooks/NightStudy/useApplyNightStudy";
 import Button from "../Common/Button";
 import useTokenCheck from "../../hooks/Util/useTokenCheck";
 
@@ -22,7 +22,7 @@ const Apply = () => {
     onChangeContent,
     onChangeEndDate,
     onChangeStartDate,
-    onSubmitLatenight,
+    onSubmitNightStudy,
   } = useApply();
   useTokenCheck();
   return (
@@ -51,7 +51,7 @@ const Apply = () => {
           postData={postData}
         />
       </ApplyBottomWrap>
-      <Button onClick={onSubmitLatenight}>제출</Button>
+      <Button onClick={onSubmitNightStudy}>제출</Button>
     </ApplyContainer>
   );
 };

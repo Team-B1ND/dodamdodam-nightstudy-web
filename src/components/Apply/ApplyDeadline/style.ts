@@ -22,8 +22,7 @@ export const ApplyDeadlineInput = styled.input<{ placeholderColor: string }>`
   width: 315px;
   height: 35px;
 
-  padding-left: 13px;
-  padding-right: 13px;
+  padding: 0 13px 0 13px;
 
   color: ${({ placeholderColor, theme }) =>
     placeholderColor ? theme.contrast : "#929292"};
@@ -33,8 +32,28 @@ export const ApplyDeadlineInput = styled.input<{ placeholderColor: string }>`
   outline: none;
   border-radius: 8px;
 
+  display: flex;
+  align-items: center;
+
   &::before {
     content: attr(placeholder);
     width: 100%;
+  }
+
+  &::-webkit-datetime-edit-text {
+    -webkit-appearance: none;
+    display: none;
+  }
+  &::-webkit-datetime-edit-month-field {
+    -webkit-appearance: none;
+    display: none;
+  }
+  &::-webkit-datetime-edit-day-field {
+    -webkit-appearance: none;
+    display: none;
+  }
+  &::-webkit-datetime-edit-year-field {
+    -webkit-appearance: none;
+    display: none;
   }
 `;

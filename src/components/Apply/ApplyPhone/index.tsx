@@ -43,10 +43,15 @@ const ApplyPhone = ({
         </ApplyRequireText>
         <ApplyPhoneCheckInput
           id="reasonForPhone"
-          placeholder="핸드폰이 필요한 사유를 적어주세요"
+          placeholder={
+            postData.doNeedPhone
+              ? "핸드폰이 필요한 사유를 적어주세요"
+              : "핸드폰 사용 여부를 먼저 체크해주세요"
+          }
           name="reasonForPhone"
           value={postData.reasonForPhone}
           onChange={onChangeReason}
+          disabled={!postData.doNeedPhone}
         />
       </Box>
     </ApplyPhoneContainer>
