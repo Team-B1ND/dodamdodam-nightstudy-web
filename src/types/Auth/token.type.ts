@@ -1,5 +1,5 @@
 import { Response } from "../Util/response";
 
-export interface TokenResponse extends Response {
+export interface AuthResponse extends Response {
   data: string;
 }
