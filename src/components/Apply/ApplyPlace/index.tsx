@@ -49,7 +49,7 @@ const ApplyPlace = ({ checkOnlyOne, postData, onChangeContent }: Props) => {
             <ApplyRequireText htmlFor="content">* </ApplyRequireText>
             <ApplyLargeText htmlFor="content">학습내용</ApplyLargeText>
             <ApplyRequireText htmlFor="content">
-              *10글자 이상 작성해주세요.
+              *10 ~ 250자 이상 작성해주세요.
             </ApplyRequireText>
           </ApplyPlaceFlex>
           <ApplyStudyContentInput
