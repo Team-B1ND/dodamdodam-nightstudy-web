@@ -123,6 +123,14 @@ const useApplyNightStudy = () => {
       return;
     }
 
+    if (content.length < 10) {
+      return B1ndToast.showInfo("학습 내용을 10자 이상 작성하세요");
+    }
+
+    if (content.length > 250) {
+      return B1ndToast.showInfo("학습 내용을 250자 내로 작성하세요");
+    }
+
     applyNightStudyMutation.mutate(
       {
         content,
