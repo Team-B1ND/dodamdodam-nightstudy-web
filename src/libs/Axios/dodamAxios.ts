@@ -17,4 +17,6 @@ export const dodamAxios = axios.create({
 
 dodamAxios.interceptors.response.use((res) => res, dodamAxiosErrorInterceptor);
 
-// export default dodamTestAxios;
+export const injectCustomAxiosAccessToken = (token: string) => {
+  dodamAxios.defaults.headers.common[REQUEST_TOKEN_KEY] = token;
+};

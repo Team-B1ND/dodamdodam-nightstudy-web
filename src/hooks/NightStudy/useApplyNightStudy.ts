@@ -5,6 +5,7 @@ import * as Sentry from "@sentry/react";
 import { useQueryClient } from "react-query";
 import { useApplyNightStudyMutation } from "../../queries/NightStudy/nightstudy.query";
 import dayjs from "dayjs";
+import { AxiosError } from "axios";
 
 const useApplyNightStudy = () => {
   const queryClient = useQueryClient();
@@ -62,10 +63,13 @@ const useApplyNightStudy = () => {
     //다중 체크박스 제어
     const { name, value } = e.target;
     let checkItem = document.getElementsByName("place");
+
     Array.prototype.forEach.call(checkItem, function (el) {
       el.checked = false;
     });
+
     e.target.checked = true;
+
     setPostData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -142,7 +146,7 @@ const useApplyNightStudy = () => {
       },
       {
         onSuccess: () => {
-          B1ndToast.showSuccess("제출되었습니다.");
+          B1ndToast.showSuccess("심야자습을 신청하였습니다.");
           queryClient.invalidateQueries("/night-study/my");
           setPostData({
             content: "",
@@ -154,7 +158,13 @@ const useApplyNightStudy = () => {
           });
         },
         onError: (error) => {
-          B1ndToast.showError("심자 신청 실패");
+          const errorStatus = error as AxiosError;
+
+          if (errorStatus.response?.status === 403) {
+            return B1ndToast.showError("심야자습 신청 기간이 아닙니다!");
+          }
+
+          B1ndToast.showError("심야자습 신청을 실패했습니다.");
           Sentry.captureException(`${error}이유로 심자 신청 실패`);
         },
       }

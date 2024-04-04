@@ -23,6 +23,7 @@ class NightStudyRepository {
       reasonForPhone,
       startAt,
     });
+
     return data;
   }
 
