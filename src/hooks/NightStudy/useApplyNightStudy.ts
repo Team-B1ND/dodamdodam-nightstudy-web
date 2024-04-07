@@ -161,7 +161,7 @@ const useApplyNightStudy = () => {
           const errorStatus = error as AxiosError;
 
           if (errorStatus.response?.status === 403) {
-            return B1ndToast.showError("심야자습 신청 기간이 아닙니다!");
+            return B1ndToast.showError("심야자습 신청 시간이 아닙니다!");
           }
 
           B1ndToast.showError("심야자습 신청을 실패했습니다.");
