@@ -163,6 +163,9 @@ const useApplyNightStudy = () => {
           if (errorStatus.response?.status === 403) {
             return B1ndToast.showError("심야자습 신청 시간이 아닙니다!");
           }
+          else if (errorStatus.response?.status === 409) {
+            return B1ndToast.showError("이미 신청한 심자가 있습니다");
+          }
 
           B1ndToast.showError("심야자습 신청을 실패했습니다.");
           Sentry.captureException(`${error}이유로 심자 신청 실패`);
