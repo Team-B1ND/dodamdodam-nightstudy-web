@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Apply } from "../../types/Apply/apply.type";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
-import * as Sentry from "@sentry/react";
+// import * as Sentry from "@sentry/react";
 import { useQueryClient } from "react-query";
 import { useApplyNightStudyMutation } from "../../queries/NightStudy/nightstudy.query";
 import dayjs from "dayjs";
@@ -168,7 +168,7 @@ const useApplyNightStudy = () => {
           }
 
           B1ndToast.showError("심야자습 신청을 실패했습니다.");
-          Sentry.captureException(`${error}이유로 심자 신청 실패`);
+          // Sentry.captureException(`${error}이유로 심자 신청 실패`);
         },
       }
     );
