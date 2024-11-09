@@ -18,5 +18,5 @@ class Token {
     cookie.removeCookie(REFRESH_TOKEN_KEY);
   }
 }
-
-export default new Token();
+const token = new Token();
+export default token;
