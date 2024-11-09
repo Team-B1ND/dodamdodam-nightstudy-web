@@ -40,4 +40,6 @@ class NightStudyRepository {
   }
 }
 
-export default new NightStudyRepository();
+
+const nightStudyRepository = new NightStudyRepository();
+export default nightStudyRepository;
