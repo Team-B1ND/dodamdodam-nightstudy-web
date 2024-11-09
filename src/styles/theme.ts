@@ -1,7 +1,6 @@
 import { DefaultTheme } from "styled-components";
-import { b1ndPalette, createPalette } from "@b1nd/b1nd-design-core";
+import { b1ndPalette } from "@b1nd/b1nd-design-core";
 
-const palette = createPalette({ mainColor: "#607EAA" });
 
 export const lightTheme: DefaultTheme = {
   ...b1ndPalette,
