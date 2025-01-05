@@ -18,7 +18,6 @@ const Apply = () => {
     postData,
     onChangePhoneCheck,
     onChangeReason,
-    checkOnlyOne,
     onChangeContent,
     onChangeEndDate,
     onChangeStartDate,
@@ -46,7 +45,6 @@ const Apply = () => {
       </ApplyMidWrap>
       <ApplyBottomWrap>
         <ApplyPlace
-          checkOnlyOne={checkOnlyOne}
           onChangeContent={onChangeContent}
           postData={postData}
         />

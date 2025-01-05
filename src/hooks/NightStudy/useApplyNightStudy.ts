@@ -59,19 +59,6 @@ const useApplyNightStudy = () => {
     setPostData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const checkOnlyOne = (e: ChangeEvent<HTMLInputElement>) => {
-    //다중 체크박스 제어
-    const { name, value } = e.target;
-    let checkItem = document.getElementsByName("place");
-
-    Array.prototype.forEach.call(checkItem, function (el) {
-      el.checked = false;
-    });
-
-    e.target.checked = true;
-
-    setPostData((prev) => ({ ...prev, [name]: value }));
-  };
 
   const onChangePhoneCheck = (e: ChangeEvent<HTMLInputElement>) => {
     //휴대폰 필요여부 체크
@@ -180,7 +167,6 @@ const useApplyNightStudy = () => {
     maxDate,
     onChangeStartDate,
     onChangeEndDate,
-    checkOnlyOne,
     onChangeContent,
     onChangeReason,
     onChangePhoneCheck,
