@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const ButtonContainer = styled.button`
-  margin-top: 45px;
-  margin-bottom: 30px;
+  margin-top: 20px;
   width: 110px;
   height: 35px;
 

@@ -33,7 +33,7 @@ export const ApplyStudyContentBox = styled.div`
 `;
 
 export const ApplyStudyContentInput = styled.textarea`
-  width: 788px;
+  width: 100%;
   height: 150px;
 
   padding: 11px 13px;

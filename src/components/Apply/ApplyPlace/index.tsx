@@ -13,12 +13,11 @@ import Box from "../../Common/Apply/ApplyBox";
 
 
 interface Props {
-  checkOnlyOne: (e: ChangeEvent<HTMLInputElement>) => void;
   postData: Apply;
   onChangeContent: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const ApplyPlace = ({ checkOnlyOne, postData, onChangeContent }: Props) => {
+const ApplyPlace = ({ postData, onChangeContent }: Props) => {
   return (
     <ApplyPlaceContainer>
       <ApplyTitle>학습정보</ApplyTitle>
