@@ -1,8 +1,6 @@
-import { ThemeProvider } from "styled-components";
-import useTheme from "../../../hooks/Theme/useTheme";
 import { ReactNode } from "react";
-
-import GlobalStyle from "../../../styles/GlobalStyles";
+import useTheme from "../../../hooks/Theme/useTheme";
+import { DodamThemeProvider, DodamGlobalStyles } from "@b1nd/dds-web";
 
 interface Props {
   children: ReactNode;
@@ -10,11 +8,12 @@ interface Props {
 
 const ThemeProviderContainer = ({ children }: Props) => {
   const { themeColor } = useTheme();
+
   return (
-    <ThemeProvider theme={themeColor}>
-      <GlobalStyle />
+    <DodamThemeProvider theme={themeColor}>
+      <DodamGlobalStyles />
       {children}
-    </ThemeProvider>
+    </DodamThemeProvider>
   );
 };
 export default ThemeProviderContainer;

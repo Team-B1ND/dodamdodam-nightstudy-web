@@ -8,6 +8,7 @@
     "@b1nd/b1nd-react-util": "^1.0.2",
     "@b1nd/b1nd-styled-components-util": "^1.0.4",
     "@b1nd/b1nd-toastify": "^2.0.0",
+    "@b1nd/dds-web": "^0.1.45",
     "@craco/craco": "^7.1.0",
     "@sentry/react": "^7.51.2",
     "@testing-library/jest-dom": "^5.16.5",

@@ -1,22 +1,20 @@
 import { useCallback, useMemo } from "react";
 import { useRecoilState } from "recoil";
-import { DefaultTheme } from "styled-components";
-import { THEME_KEY, ThemeType } from "../../constants/Theme/theme.constant";
-import { darkTheme, lightTheme } from "../../styles/theme";
+import { THEME_KEY } from "../../constants/Theme/theme.constant";
+import { ETheme } from "../../enum/Theme/theme.enum";
 import { themeModeAtom } from "../../store/Theme/theme.store";
-import cookie from "../../libs/Cookie/cookie";
 
 const useTheme = () => {
-  const [currentTheme, setCurrentTheme] =
-    useRecoilState<ThemeType>(themeModeAtom);
+  const [currentTheme, setCurrentTheme] = useRecoilState<ETheme>(themeModeAtom);
 
-  const themeColor = useMemo((): DefaultTheme => {
-    return currentTheme === "DARK" ? darkTheme : lightTheme;
+  const themeColor = useMemo((): ETheme => {
+    return currentTheme === "DARK" ? ETheme.DARK : ETheme.LIGHT;
   }, [currentTheme]);
 
   const handleTheme = useCallback((): void => {
-    const switchTheme: ThemeType = currentTheme === "DARK" ? "LIGHT" : "DARK";
-    cookie.setCookie(THEME_KEY, switchTheme);
+    const switchTheme: ETheme =
+      currentTheme === "DARK" ? ETheme.LIGHT : ETheme.DARK;
+    window.localStorage.setItem(THEME_KEY, switchTheme);
     setCurrentTheme(switchTheme);
   }, [currentTheme, setCurrentTheme]);
 
