@@ -1,5 +1,11 @@
+import { useTheme } from "styled-components";
+import * as S from "./style";
+
 const HomePage = () => {
-  return <div></div>;
+  const theme = useTheme();
+  console.log(theme);
+
+  return <S.Container></S.Container>;
 };
 
 export default HomePage;
