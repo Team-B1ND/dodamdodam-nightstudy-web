@@ -2,14 +2,19 @@ import styled from "styled-components";
 
 export const ApplyContainer = styled.form`
   width: 100%;
-  min-height: 100%;
   display: flex;
   flex-direction: column;
   border-radius: 20px;
-
-  padding: 30px 80px;
-
-  overflow-y: hidden;
+ 
+  padding: 10px 50px;
+  @media screen and (max-width: 1000px) {
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+    display: none;
+  }
+    
+  }
+  
 `;
 
 export const ApplyTopWrap = styled.div`
@@ -26,7 +31,11 @@ export const ApplyTopWrap = styled.div`
 
 export const ApplyMidWrap = styled.div`
   display: flex;
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+  }
   column-gap: 70px;
+  row-gap: 50px;
   margin-top: 50px;
 `;
 
@@ -36,7 +45,7 @@ export const ApplyBottomWrap = styled.div`
 `;
 
 export const ApplyButtonContainer = styled.div`
-  min-width: 876px;
+  width: 876px;
   max-width: 876px;
   display: flex;
   justify-content: flex-end;

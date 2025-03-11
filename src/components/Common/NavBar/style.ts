@@ -32,7 +32,7 @@ export const NavBarTopWrap = styled.div`
 `;
 
 export const NavBarProfileWrap = styled.div`
-  width: 216px;
+  width: 70%;
   height: 120px;
   position: relative;
 

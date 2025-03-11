@@ -8,7 +8,7 @@
 // }
 
 export interface Apply {
-  place: string;
+  // place: string;
   content: string;
   doNeedPhone: boolean;
   reasonForPhone: string;

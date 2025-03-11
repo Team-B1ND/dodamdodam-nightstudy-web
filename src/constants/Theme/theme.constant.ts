@@ -1,3 +1,7 @@
-export const THEME_KEY = "theme" as const;
+export const THEME_KEY = "Dodam_theme" as const;
 
-export type ThemeType = "LIGHT" | "DARK";
+
+export enum ETheme {
+    LIGHT = "LIGHT",
+    DARK = "DARK",
+  }
