@@ -11,7 +11,6 @@ class NightStudyRepository {
     content,
     endAt,
     doNeedPhone,
-    place,
     reasonForPhone,
     startAt,
   }: ApplyNightStudyPram): Promise<Response> {
@@ -19,7 +18,6 @@ class NightStudyRepository {
       content,
       endAt,
       doNeedPhone,
-      place,
       reasonForPhone,
       startAt,
     });

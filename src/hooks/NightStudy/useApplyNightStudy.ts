@@ -15,7 +15,7 @@ const useApplyNightStudy = () => {
 
   const [maxDate, setMaxDate] = useState("");
   const [postData, setPostData] = useState<Apply>({
-    place: "",
+    
     content: "",
     doNeedPhone: false,
     reasonForPhone: "",
@@ -78,7 +78,7 @@ const useApplyNightStudy = () => {
   const onSubmitNightStudy = (e: FormEvent) => {
     e.preventDefault();
 
-    const { content, endAt, doNeedPhone, place, reasonForPhone, startAt } =
+    const { content, endAt, doNeedPhone, reasonForPhone, startAt } =
       postData;
 
     const handleStartDate = startAt;
@@ -99,10 +99,10 @@ const useApplyNightStudy = () => {
       return;
     }
 
-    if (place === "") {
-      B1ndToast.showInfo("학습 장소를 선택해주세요");
-      return;
-    }
+    // if (place === "") {
+    //   B1ndToast.showInfo("학습 장소를 선택해주세요");
+    //   return;
+    // }
 
     if (doNeedPhone === true && reasonForPhone.trim() === "") {
       B1ndToast.showInfo("휴대폰 사용 이유를 작성해주세요");
@@ -127,7 +127,6 @@ const useApplyNightStudy = () => {
         content,
         startAt: handleStartDate,
         doNeedPhone,
-        place,
         reasonForPhone,
         endAt: handleEndDate,
       },
@@ -139,7 +138,6 @@ const useApplyNightStudy = () => {
             content: "",
             endAt: "",
             doNeedPhone: true,
-            place: "",
             reasonForPhone: "",
             startAt: "",
           });

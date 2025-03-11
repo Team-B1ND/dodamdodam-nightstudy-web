@@ -1,5 +1,4 @@
 export interface ApplyNightStudyPram {
-  place: string;
   content: string;
   doNeedPhone: boolean;
   reasonForPhone: string;

@@ -34,7 +34,6 @@ export const useApplyNightStudyMutation = () => {
       content,
       endAt,
       doNeedPhone,
-      place,
       reasonForPhone,
       startAt,
     }: ApplyNightStudyPram) =>
@@ -42,7 +41,6 @@ export const useApplyNightStudyMutation = () => {
         content,
         endAt,
         doNeedPhone,
-        place,
         reasonForPhone,
         startAt,
       })
