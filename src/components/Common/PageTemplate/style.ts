@@ -19,5 +19,5 @@ export const PageTemplateContentWrap = styled.div`
   z-index: 0;
   padding: 30px 0px;
   box-sizing: border-box;
-  overflow-y: scroll;
+  
 `;

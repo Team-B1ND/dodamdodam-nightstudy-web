@@ -7,7 +7,13 @@ export const ApplyContainer = styled.form`
   border-radius: 20px;
  
   padding: 10px 50px;
-
+  @media screen and (max-width: 1000px) {
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+    display: none;
+  }
+    
+  }
   
 `;
 

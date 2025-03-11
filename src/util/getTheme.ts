@@ -1,22 +1,24 @@
-import { THEME_KEY, ThemeType } from "../constants/Theme/theme.constant";
-import cookie from "../libs/Cookie/cookie";
+import { THEME_KEY, ETheme } from "../constants/Theme/theme.constant";
 
-export const getTheme = (): ThemeType => {
-  let themeMode = undefined;
+export const getTheme = (): ETheme => {
+  const themeMode = window.localStorage.getItem(THEME_KEY);
 
-  if (typeof window !== "undefined") {
-    themeMode = cookie.getCookie(THEME_KEY);
-  }
-
-  if (typeof window !== "undefined" && themeMode === undefined) {
+  if (typeof window !== "undefined" && !themeMode) {
     const isDarkTheme: boolean = window.matchMedia(
       `(prefers-color-scheme: dark)`
     ).matches;
 
     if (isDarkTheme) {
-      return "DARK";
+      return ETheme.DARK;
     }
-    return "LIGHT";
+    return ETheme.LIGHT;
   }
-  return themeMode as ThemeType;
+
+  const theme: ETheme = themeMode as ETheme;
+
+  if (theme === ETheme.DARK) {
+    return ETheme.DARK;
+  }
+
+  return ETheme.LIGHT;
 };
