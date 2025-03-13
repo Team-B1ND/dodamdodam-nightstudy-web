@@ -5,4 +5,18 @@ export const Container = styled.div`
   height: 100%;
 
   display: flex;
+
+  gap: 32px;
+  padding: 58px 32px 59px 0;
+
+  @media (max-width: 1068px) {
+    padding: 58px 32px 59px;
+  }
+
+  @media (max-width: 797px) {
+    display: flex;
+    flex-direction: column;
+
+    padding: 58px 32px 59px;
+  }
 `;

@@ -1,4 +1,4 @@
-import Router from "./components/Router/Router";
+import Router from "./components/Router/router";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { B1ndToastContainer } from "@b1nd/b1nd-toastify";
@@ -21,7 +21,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <B1ndToastContainer autoClose={1000} limit={1} />
+        <B1ndToastContainer autoClose={3000} limit={1} />
         <BrowserRouter basename="/nightstudy">
           <ThemeProviderContainer>
             <Router />

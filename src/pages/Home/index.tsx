@@ -1,11 +1,14 @@
-import { useTheme } from "styled-components";
+import Main from "../../components/Home/Main";
+import Sidebar from "../../components/Home/Sidebar";
 import * as S from "./style";
 
 const HomePage = () => {
-  const theme = useTheme();
-  console.log(theme);
-
-  return <S.Container></S.Container>;
+  return (
+    <S.Container>
+      <Main />
+      <Sidebar />
+    </S.Container>
+  );
 };
 
 export default HomePage;
