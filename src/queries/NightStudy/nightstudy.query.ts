@@ -21,31 +21,16 @@ export const useGetMyNightStudyQuery = (
     cacheTime: 1000 * 60 * 60,
   });
 
-export const useDeleteMyNightStudyMutation = () => {
-  const mutation = useMutation(({ id }: DeleteNightStudyByIdParam) =>
-    nightstudyRepository.deleteNightStudy({ id })
+export const useApplyNightStudyMutation = () => {
+  const mutation = useMutation((params: ApplyNightStudyPram) =>
+    nightstudyRepository.applyNightStudy(params)
   );
   return mutation;
 };
 
-export const useApplyNightStudyMutation = () => {
-  const mutation = useMutation(
-    ({
-      content,
-      endAt,
-      doNeedPhone,
-      place,
-      reasonForPhone,
-      startAt,
-    }: ApplyNightStudyPram) =>
-      nightstudyRepository.applyNightStudy({
-        content,
-        endAt,
-        doNeedPhone,
-        place,
-        reasonForPhone,
-        startAt,
-      })
+export const useDeleteMyNightStudyMutation = () => {
+  const mutation = useMutation(({ id }: DeleteNightStudyByIdParam) =>
+    nightstudyRepository.deleteNightStudy({ id })
   );
   return mutation;
 };

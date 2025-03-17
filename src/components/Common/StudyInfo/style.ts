@@ -53,12 +53,14 @@ export const PlaceWrap = styled.div`
 
 export const Place = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
 
   gap: 20px;
 `;
 
 export const PlaceName = styled.p`
+  flex: 1;
   color: ${({ theme }) => theme.labelNormal};
   ${DodamTypography.Caption1.Bold};
 `;
@@ -74,8 +76,9 @@ export const StudyContent = styled.div`
 
 export const StudyContentTextArea = styled.textarea`
   width: 100%;
-  max-width: 300px;
+  max-width: 415px;
   min-width: 250px;
+  max-height: 150px;
   min-height: 100px;
   aspect-ratio: 16 / 6;
 

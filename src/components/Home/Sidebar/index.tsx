@@ -1,8 +1,8 @@
 import * as S from "./style";
 import { useState } from "react";
 import { DodamSegmentedButton } from "@b1nd/dds-web";
-import ApproveNightStudy from "../../Common/NightStudy/Approve";
-import PenddingNightStudy from "../../Common/NightStudy/Pendding";
+import ApproveMyNightStudy from "../../Common/MyNightStudy/Approve";
+import PenddingMyNightStudy from "../../Common/MyNightStudy/Pendding";
 
 interface PageDataType {
   text: string;
@@ -32,9 +32,9 @@ const Sidebar = () => {
           onClick={handleClickPage}
         />
         {pageData.some((item) => item.text === "대기중" && item.isAtv) ? (
-          <PenddingNightStudy />
+          <PenddingMyNightStudy />
         ) : (
-          <ApproveNightStudy />
+          <ApproveMyNightStudy />
         )}
       </S.Wrap>
     </S.Container>

@@ -1,7 +1,24 @@
 import * as S from "./style";
+import { ChangeEvent } from "react";
 import { DodamCheckBox, DodamFilledButton } from "@b1nd/dds-web";
+import { Place } from "../../../types/Place/place.type";
 
-const StudyInfo = () => {
+interface Props {
+  placeData: Place[];
+  handleChangePlace: (type: "place" | "doNeedPhone", placeName: string) => void;
+  handleChangeContent: (
+    e: ChangeEvent<HTMLTextAreaElement>,
+    type: "content" | "reasonForPhone"
+  ) => void;
+  handleSubmitNightStudy: () => void;
+}
+
+const StudyInfo = ({
+  placeData,
+  handleChangePlace,
+  handleChangeContent,
+  handleSubmitNightStudy,
+}: Props) => {
   return (
     <S.Container>
       <S.Title>학습 정보</S.Title>
@@ -10,12 +27,12 @@ const StudyInfo = () => {
           <S.ContentTitle>학습 장소</S.ContentTitle>
           <S.ContentDescription>한곳만 선택해주세요.</S.ContentDescription>
           <S.PlaceWrap>
-            {Array.from({ length: 5 }).map((_, idx) => (
-              <S.Place key={idx}>
-                <S.PlaceName>프로젝트 5실</S.PlaceName>
+            {placeData.map((item) => (
+              <S.Place key={item.id}>
+                <S.PlaceName>{item.name}</S.PlaceName>
                 <DodamCheckBox
-                  isDisabled={false}
-                  onClick={() => console.log("체크박스 클릭")}
+                  isDisabled={item.isAtv}
+                  onClick={() => handleChangePlace("place", item.name)}
                 />
               </S.Place>
             ))}
@@ -26,7 +43,11 @@ const StudyInfo = () => {
           <S.ContentDescription>
             10 ~ 250 이내로 작성해주세요.
           </S.ContentDescription>
-          <S.StudyContentTextArea placeholder="학습 내용을 입력해주세요."></S.StudyContentTextArea>
+          <S.StudyContentTextArea
+            placeholder="학습 내용을 입력해주세요."
+            onChange={(e) =>
+              handleChangeContent(e, "content")
+            }></S.StudyContentTextArea>
         </S.StudyContent>
       </S.InfoWrap>
       <S.ButtonWrap>
@@ -36,6 +57,7 @@ const StudyInfo = () => {
           width={107}
           textTheme="staticWhite"
           typography={["Body1", "Bold"]}
+          onClick={handleSubmitNightStudy}
         />
       </S.ButtonWrap>
     </S.Container>

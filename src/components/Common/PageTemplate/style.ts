@@ -10,7 +10,7 @@ export const PageTemplateContainer = styled.div`
 
   user-select: none;
 
-  @media (max-width: 797px) {
+  @media (max-width: 1068px) {
     height: min-content;
   }
 `;

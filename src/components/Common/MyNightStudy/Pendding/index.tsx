@@ -1,7 +1,10 @@
 import { DodamDivider, DodamTag, Trash } from "@b1nd/dds-web";
 import * as S from "../style";
+import { useTheme } from "styled-components";
 
-const ApproveNightStudy = () => {
+const PenddingMyNightStudy = () => {
+  const theme = useTheme();
+
   return (
     <S.Container>
       {Array.from({ length: 3 }).map((_, idx) => (
@@ -9,9 +12,13 @@ const ApproveNightStudy = () => {
           <S.InfoWrap>
             <S.TitleWrap>
               <DodamTag
-                text="승인됨"
-                color="blue"
-                customStyle={{ height: "32px" }}
+                text="대기중"
+                color="default"
+                customStyle={{
+                  height: "32px",
+                  color: theme.staticWhite,
+                  backgroundColor: theme.lineNormal,
+                }}
               />
               <S.IconWrap onClick={() => console.log("삭제")}>
                 <Trash />
@@ -34,4 +41,4 @@ const ApproveNightStudy = () => {
   );
 };
 
-export default ApproveNightStudy;
+export default PenddingMyNightStudy;

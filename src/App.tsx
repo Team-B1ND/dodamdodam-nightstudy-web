@@ -1,9 +1,9 @@
-import Router from "./components/Router/router";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { B1ndToastContainer } from "@b1nd/b1nd-toastify";
 import { BrowserRouter } from "react-router-dom";
 import ThemeProviderContainer from "./components/Common/ThemeProviderContainer";
+import Router from "./components/Router/router";
 
 function App() {
   const queryClient = new QueryClient({

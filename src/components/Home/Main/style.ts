@@ -7,8 +7,13 @@ export const Container = styled.div`
 
   display: flex;
 
+  @media (max-width: 1068px) {
+    margin-bottom: 24px;
+  }
+
   @media (max-width: 797px) {
     width: 100%;
+    margin-bottom: 0;
   }
 `;
 

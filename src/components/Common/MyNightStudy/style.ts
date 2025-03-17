@@ -9,8 +9,11 @@ export const Container = styled.div`
   flex-direction: column;
 
   overflow-y: auto;
-
   gap: 10px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const Wrap = styled.div`

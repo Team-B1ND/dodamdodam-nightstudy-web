@@ -1,7 +1,13 @@
 import * as S from "./style";
-import { Calender, DodamDivider } from "@b1nd/dds-web";
+import { DodamDatePicker, DodamDivider } from "@b1nd/dds-web";
+import { ApplyNightStudyPram } from "../../../repositories/NightStudy/nightstudy.param";
 
-const ApplyPeriod = () => {
+interface Props {
+  applyNightStudyData: ApplyNightStudyPram;
+  handleChangeDate: (e: Date, scope: "start" | "end") => void;
+}
+
+const ApplyPeriod = ({ applyNightStudyData, handleChangeDate }: Props) => {
   return (
     <S.Container>
       <S.Wrap>
@@ -10,21 +16,27 @@ const ApplyPeriod = () => {
           <S.DateInfoWrap>
             <S.DateInfoBox>
               <S.DateInfoTitle>시작 날짜</S.DateInfoTitle>
-              <S.DateWrap>
-                <S.Date>7월 18일</S.Date>
-                <S.DateIcon>
-                  <Calender color="primaryNormal" size={24} />
-                </S.DateIcon>
-              </S.DateWrap>
+              <DodamDatePicker
+                itemKey="startDate"
+                title="시작 날짜"
+                color="primaryNormal"
+                dateType="MonthDay"
+                value={applyNightStudyData.startAt}
+                customStyle={{ border: "none" }}
+                onChange={(e: Date) => handleChangeDate(e, "start")}
+              />
             </S.DateInfoBox>
             <S.DateInfoBox>
               <S.DateInfoTitle>종료 날짜</S.DateInfoTitle>
-              <S.DateWrap>
-                <S.Date>7월 18일</S.Date>
-                <S.DateIcon>
-                  <Calender color="primaryNormal" size={24} />
-                </S.DateIcon>
-              </S.DateWrap>
+              <DodamDatePicker
+                itemKey="endDate"
+                title="종료 날짜"
+                color="primaryNormal"
+                dateType="MonthDay"
+                value={applyNightStudyData.endAt}
+                customStyle={{ border: "none" }}
+                onChange={(e: Date) => handleChangeDate(e, "end")}
+              />
             </S.DateInfoBox>
           </S.DateInfoWrap>
         </S.Box>

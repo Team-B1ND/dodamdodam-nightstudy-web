@@ -7,22 +7,8 @@ import {
 } from "./nightstudy.param";
 
 class NightStudyRepository {
-  public async applyNightStudy({
-    content,
-    endAt,
-    doNeedPhone,
-    place,
-    reasonForPhone,
-    startAt,
-  }: ApplyNightStudyPram): Promise<Response> {
-    const { data } = await dodamAxios.post("/night-study", {
-      content,
-      endAt,
-      doNeedPhone,
-      place,
-      reasonForPhone,
-      startAt,
-    });
+  public async applyNightStudy(params: ApplyNightStudyPram): Promise<Response> {
+    const { data } = await dodamAxios.post("/night-study", params);
 
     return data;
   }
@@ -39,7 +25,6 @@ class NightStudyRepository {
     return data;
   }
 }
-
 
 const nightStudyRepository = new NightStudyRepository();
 export default nightStudyRepository;

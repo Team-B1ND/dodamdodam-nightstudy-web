@@ -59,6 +59,7 @@ export const DateInfoBox = styled.div`
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   padding: 8px 0;
 `;
@@ -66,23 +67,4 @@ export const DateInfoBox = styled.div`
 export const DateInfoTitle = styled.p`
   color: ${({ theme }) => theme.labelAlternative};
   ${DodamTypography.Headline.Medium}
-`;
-
-export const DateWrap = styled.div`
-  display: flex;
-
-  gap: 12px;
-`;
-
-export const Date = styled.p`
-  color: ${({ theme }) => theme.primaryNormal};
-  ${DodamTypography.Headline.Regular}
-`;
-
-export const DateIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  cursor: pointer;
 `;
