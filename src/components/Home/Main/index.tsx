@@ -24,6 +24,7 @@ const Main = () => {
         </S.ApplyInfo>
         <DodamDivider type="Small" />
         <StudyInfo
+          enabled={applyNightStudy.enabled}
           placeData={applyNightStudy.placeData}
           handleChangePlace={applyNightStudy.handleChangeCheckBox}
           handleChangeContent={applyNightStudy.handleChangeTextArea}

@@ -4,6 +4,7 @@ import { DodamCheckBox, DodamFilledButton } from "@b1nd/dds-web";
 import { Place } from "../../../types/Place/place.type";
 
 interface Props {
+  enabled: boolean;
   placeData: Place[];
   handleChangePlace: (type: "place" | "doNeedPhone", placeName: string) => void;
   handleChangeContent: (
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const StudyInfo = ({
+  enabled,
   placeData,
   handleChangePlace,
   handleChangeContent,
@@ -56,6 +58,7 @@ const StudyInfo = ({
           size="Large"
           text="제출"
           width={107}
+          enabled={enabled}
           textTheme="staticWhite"
           typography={["Body1", "Bold"]}
           onClick={handleSubmitNightStudy}

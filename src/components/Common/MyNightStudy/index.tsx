@@ -3,6 +3,7 @@ import * as S from "./style";
 import { useTheme } from "styled-components";
 import { NightStudy } from "../../../types/NightStudy/nightstudy.type";
 import dateTransform from "../../../utils/Transform/dateTransform";
+import useDeleteMyNightStudy from "../../../hooks/NightStudy/useDeleteMyNightStudy";
 
 interface Props {
   type: "Pending" | "Allow";
@@ -11,6 +12,7 @@ interface Props {
 
 const MyNightStudy = ({ type, myNightStudyData }: Props) => {
   const theme = useTheme();
+  const { handleClickDelete } = useDeleteMyNightStudy();
 
   return (
     <S.Container>
@@ -29,7 +31,7 @@ const MyNightStudy = ({ type, myNightStudyData }: Props) => {
                     backgroundColor: type === "Pending" && theme.lineNormal,
                   }}
                 />
-                <S.IconWrap onClick={() => console.log("삭제")}>
+                <S.IconWrap onClick={() => handleClickDelete(item.id)}>
                   <Trash color="lineNormal" />
                 </S.IconWrap>
               </S.TitleWrap>

@@ -99,6 +99,7 @@ export const useApplyNightStudy = () => {
   };
 
   return {
+    enabled,
     placeData,
     applyNightStudyData,
     handleChangeDate,

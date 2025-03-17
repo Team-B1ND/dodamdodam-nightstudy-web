@@ -2,10 +2,7 @@ import { UseQueryOptions, useMutation, useQuery } from "react-query";
 import { NightStudyResponse } from "../../types/NightStudy/nightstudy.type";
 import { AxiosError } from "axios";
 import nightstudyRepository from "../../repositories/NightStudy/nightstudy.repository";
-import {
-  ApplyNightStudyPram,
-  DeleteNightStudyByIdParam,
-} from "../../repositories/NightStudy/nightstudy.param";
+import { ApplyNightStudyPram } from "../../repositories/NightStudy/nightstudy.param";
 
 export const useGetMyNightStudyQuery = (
   options?: UseQueryOptions<
@@ -29,8 +26,8 @@ export const useApplyNightStudyMutation = () => {
 };
 
 export const useDeleteMyNightStudyMutation = () => {
-  const mutation = useMutation(({ id }: DeleteNightStudyByIdParam) =>
-    nightstudyRepository.deleteNightStudy({ id })
+  const mutation = useMutation((id: number) =>
+    nightstudyRepository.deleteNightStudy(id)
   );
   return mutation;
 };

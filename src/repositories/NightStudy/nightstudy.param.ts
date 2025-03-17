@@ -6,7 +6,3 @@ export interface ApplyNightStudyPram {
   startAt: string;
   endAt: string;
 }
-
-export interface DeleteNightStudyByIdParam {
-  id: number;
-}
