@@ -40,7 +40,7 @@ const MyNightStudy = ({ type, myNightStudyData }: Props) => {
       ) : (
         myNightStudyData.map((item) => (
           <S.Wrap key={item.id}>
-            <S.InfoWrap>
+            <S.InfoWrap isNarrow={isNarrow}>
               <S.TitleWrap>
                 <DodamTag
                   text={type === "Pending" ? "대기중" : "승인됨"}

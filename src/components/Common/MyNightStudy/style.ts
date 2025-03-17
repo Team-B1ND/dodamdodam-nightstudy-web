@@ -32,14 +32,14 @@ export const Wrap = styled.div`
   }
 `;
 
-export const InfoWrap = styled.div`
+export const InfoWrap = styled.div<{ isNarrow: boolean }>`
   width: 100%;
 
   display: flex;
   flex-direction: column;
 
   gap: 12px;
-  padding: 16px 12px;
+  padding: ${({ isNarrow }) => isNarrow ? "16px 12px 0" : "16px 12px"};
 `;
 
 export const TitleWrap = styled.div`
