@@ -27,6 +27,7 @@ const Main = () => {
           placeData={applyNightStudy.placeData}
           handleChangePlace={applyNightStudy.handleChangeCheckBox}
           handleChangeContent={applyNightStudy.handleChangeTextArea}
+          handleKeyDown={applyNightStudy.handleKeyDown}
           handleSubmitNightStudy={applyNightStudy.handleSubmitNightStudy}
         />
       </S.Wrap>

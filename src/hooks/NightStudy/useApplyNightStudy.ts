@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState, ChangeEvent, KeyboardEvent } from "react";
 import dateTransform from "../../utils/Transform/dateTransform";
 import { PLACE_ITEMS } from "../../constants/NightStudy/nightStudy.constant";
 import { ApplyNightStudyPram } from "../../repositories/NightStudy/nightstudy.param";
@@ -68,15 +68,22 @@ export const useApplyNightStudy = () => {
     }));
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmitNightStudy();
+    }
+  };
+
   const handleSubmitNightStudy = () => {
     if (!enabled) return;
-    setEnabled(false);
 
     const content = applyNightStudyData.content;
     if (content.length < 10 || content.length > 250) {
       B1ndToast.showError("학습 내용은 10자 이상 250자 이하여야 합니다.");
       return;
     }
+    setEnabled(false);
 
     applyNightStudyMutation.mutate(applyNightStudyData, {
       onSuccess: () => {
@@ -97,6 +104,7 @@ export const useApplyNightStudy = () => {
     handleChangeDate,
     handleChangeCheckBox,
     handleChangeTextArea,
+    handleKeyDown,
     handleSubmitNightStudy,
   };
 };

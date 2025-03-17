@@ -1,5 +1,5 @@
 import * as S from "./style";
-import { ChangeEvent } from "react";
+import { ChangeEvent, KeyboardEventHandler } from "react";
 import { DodamCheckBox, DodamFilledButton } from "@b1nd/dds-web";
 import { Place } from "../../../types/Place/place.type";
 
@@ -10,6 +10,7 @@ interface Props {
     e: ChangeEvent<HTMLTextAreaElement>,
     type: "content" | "reasonForPhone"
   ) => void;
+  handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement>;
   handleSubmitNightStudy: () => void;
 }
 
@@ -17,6 +18,7 @@ const StudyInfo = ({
   placeData,
   handleChangePlace,
   handleChangeContent,
+  handleKeyDown,
   handleSubmitNightStudy,
 }: Props) => {
   return (
@@ -45,9 +47,8 @@ const StudyInfo = ({
           </S.ContentDescription>
           <S.StudyContentTextArea
             placeholder="학습 내용을 입력해주세요."
-            onChange={(e) =>
-              handleChangeContent(e, "content")
-            }></S.StudyContentTextArea>
+            onChange={(e) => handleChangeContent(e, "content")}
+            onKeyDown={handleKeyDown}></S.StudyContentTextArea>
         </S.StudyContent>
       </S.InfoWrap>
       <S.ButtonWrap>
