@@ -6,6 +6,8 @@ import { Place } from "../../types/Place/place.type";
 import { useQueryClient } from "react-query";
 import { useApplyNightStudyMutation } from "../../queries/NightStudy/nightstudy.query";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
+import { AxiosError } from "axios";
+import errorHandler from "../../utils/Error/errorHandler";
 
 export const useApplyNightStudy = () => {
   const queryClient = useQueryClient();
@@ -88,11 +90,12 @@ export const useApplyNightStudy = () => {
     applyNightStudyMutation.mutate(applyNightStudyData, {
       onSuccess: () => {
         queryClient.invalidateQueries("night-study/my");
-        B1ndToast.showSuccess("심자 신청 성공");
+        B1ndToast.showSuccess("심자 신청에 성공하였습니다.");
         setEnabled(true);
       },
-      onError: () => {
-        B1ndToast.showError("심자 신청 실패");
+      onError: (error) => {
+        const errorAxios = error as AxiosError;
+        errorHandler.applyNightStudy(errorAxios);
         setEnabled(true);
       },
     });
