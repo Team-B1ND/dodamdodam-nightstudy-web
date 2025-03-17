@@ -12,10 +12,10 @@ export const useGetMyNightStudyQuery = (
     NightStudyResponse,
     AxiosError,
     NightStudyResponse,
-    "/night-study/my"
+    "night-study/my"
   >
 ) =>
-  useQuery("/night-study/my", () => nightstudyRepository.getMyNightStudys(), {
+  useQuery("night-study/my", () => nightstudyRepository.getMyNightStudys(), {
     ...options,
     staleTime: 1000 * 60 * 60,
     cacheTime: 1000 * 60 * 60,

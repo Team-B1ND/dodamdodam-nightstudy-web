@@ -87,7 +87,7 @@ export const useApplyNightStudy = () => {
 
     applyNightStudyMutation.mutate(applyNightStudyData, {
       onSuccess: () => {
-        queryClient.invalidateQueries("/night-study/my");
+        queryClient.invalidateQueries("night-study/my");
         B1ndToast.showSuccess("심자 신청 성공");
         setEnabled(true);
       },

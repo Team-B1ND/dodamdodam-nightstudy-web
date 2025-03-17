@@ -80,6 +80,16 @@ export const DateWrap = styled.div`
 `;
 
 export const Date = styled.p`
-  color: ${({ theme }) => theme.labelNormal};
-  ${DodamTypography.Headline.Medium}
+  color: ${({ theme }) => theme.labelAlternative};
+  ${DodamTypography.Body2.Medium}
+
+  display: flex;
+  align-items: center;
+
+  span {
+    color: ${({ theme }) => theme.labelNormal};
+    ${DodamTypography.Headline.Medium}
+
+    margin-left: 7px;
+  }
 `;

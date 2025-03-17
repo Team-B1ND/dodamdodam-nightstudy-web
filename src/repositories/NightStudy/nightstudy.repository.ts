@@ -14,7 +14,7 @@ class NightStudyRepository {
   }
 
   public async getMyNightStudys(): Promise<NightStudyResponse> {
-    const { data } = await dodamAxios.get("/night-study/my");
+    const { data } = await dodamAxios.get("night-study/my");
     return data;
   }
 
