@@ -4,6 +4,7 @@ import { useTheme } from "styled-components";
 import { NightStudy } from "../../../types/NightStudy/nightstudy.type";
 import dateTransform from "../../../utils/Transform/dateTransform";
 import useDeleteMyNightStudy from "../../../hooks/NightStudy/useDeleteMyNightStudy";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
   type: "Pending" | "Allow";
@@ -13,6 +14,24 @@ interface Props {
 const MyNightStudy = ({ type, myNightStudyData }: Props) => {
   const theme = useTheme();
   const { handleClickDelete } = useDeleteMyNightStudy();
+  const dateRef = useRef<HTMLDivElement>(null);
+  const [isNarrow, setIsNarrow] = useState(false);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      if (!entries.length) return;
+      const { width } = entries[0].contentRect;
+      setIsNarrow(width < 230);
+    });
+
+    if (dateRef.current) {
+      resizeObserver.observe(dateRef.current);
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   return (
     <S.Container>
@@ -38,7 +57,7 @@ const MyNightStudy = ({ type, myNightStudyData }: Props) => {
               <S.Content>{item.content}</S.Content>
               <DodamDivider type="Small" />
             </S.InfoWrap>
-            <S.DateWrap>
+            <S.DateWrap ref={dateRef} isNarrow={isNarrow}>
               <S.Date>
                 시작<span>{dateTransform.monthDay(item.startAt)}</span>
               </S.Date>

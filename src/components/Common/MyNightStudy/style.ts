@@ -70,12 +70,13 @@ export const Content = styled.p`
   white-space: pre-line;
 `;
 
-export const DateWrap = styled.div`
+export const DateWrap = styled.div<{ isNarrow: boolean }>`
   width: 100%;
 
   display: flex;
+  flex-direction: ${({ isNarrow }) => (isNarrow ? "column" : "row")};
   justify-content: space-between;
-
+  gap: ${({ isNarrow }) => (isNarrow ? "5px" : "0")};
   padding: 0 10px;
 `;
 
