@@ -4,6 +4,7 @@ import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useState } from "react";
 import { AxiosError } from "axios";
 import errorHandler from "../../utils/Error/errorHandler";
+import { QUERY_KEYS } from "../../queries/queryKey";
 
 const useDeleteMyNightStudy = () => {
   const queryClient = useQueryClient();
@@ -16,7 +17,7 @@ const useDeleteMyNightStudy = () => {
 
     deleteMyNightStudyMutation.mutate(id, {
       onSuccess: () => {
-        queryClient.invalidateQueries("night-study/my");
+        queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyNightStudy);
         B1ndToast.showSuccess("내 심자 삭제에 성공하였습니다");
         setLoading(false);
       },

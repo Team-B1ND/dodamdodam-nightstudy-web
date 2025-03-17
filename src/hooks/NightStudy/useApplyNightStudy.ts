@@ -8,6 +8,7 @@ import { useApplyNightStudyMutation } from "../../queries/NightStudy/nightstudy.
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { AxiosError } from "axios";
 import errorHandler from "../../utils/Error/errorHandler";
+import { QUERY_KEYS } from "../../queries/queryKey";
 
 export const useApplyNightStudy = () => {
   const queryClient = useQueryClient();
@@ -23,8 +24,6 @@ export const useApplyNightStudy = () => {
       startAt: dateTransform.hyphen(),
       endAt: dateTransform.hyphen(),
     });
-
-  console.log(applyNightStudyData);
 
   // datePicker date 변경 함수 && startAt, endAt 값 변경 함수
   const handleChangeDate = (e: Date, scope: "start" | "end") => {
@@ -89,7 +88,7 @@ export const useApplyNightStudy = () => {
 
     applyNightStudyMutation.mutate(applyNightStudyData, {
       onSuccess: () => {
-        queryClient.invalidateQueries("night-study/my");
+        queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyNightStudy);
         B1ndToast.showSuccess("심자 신청에 성공하였습니다.");
         setEnabled(true);
       },
