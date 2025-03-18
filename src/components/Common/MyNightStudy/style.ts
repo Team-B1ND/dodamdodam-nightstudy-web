@@ -32,14 +32,18 @@ export const Wrap = styled.div`
   }
 `;
 
-export const InfoWrap = styled.div<{ isNarrow: boolean }>`
+export const InfoWrap = styled.div`
   width: 100%;
 
   display: flex;
   flex-direction: column;
 
   gap: 12px;
-  padding: ${({ isNarrow }) => isNarrow ? "16px 12px 0" : "16px 12px"};
+  padding: 16px 12px;
+
+  @media (min-width: 794px) and (max-width: 1270px) {
+    padding: 16px 12px 0;
+  }
 `;
 
 export const TitleWrap = styled.div`
@@ -70,14 +74,17 @@ export const Content = styled.p`
   white-space: pre-line;
 `;
 
-export const DateWrap = styled.div<{ isNarrow: boolean }>`
+export const DateWrap = styled.div`
   width: 100%;
 
   display: flex;
-  flex-direction: ${({ isNarrow }) => (isNarrow ? "column" : "row")};
   justify-content: space-between;
-  gap: ${({ isNarrow }) => (isNarrow ? "5px" : "0")};
   padding: 0 10px;
+
+  @media (min-width: 794px) and (max-width: 1270px) {
+    flex-direction: column;
+    gap: 5px;
+  }
 `;
 
 export const Date = styled.p`
