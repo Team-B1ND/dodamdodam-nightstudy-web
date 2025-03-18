@@ -20,6 +20,7 @@ const ApplyPeriod = ({ applyNightStudyData, handleChangeDate }: Props) => {
                 itemKey="startDate"
                 title="시작 날짜"
                 color="primaryNormal"
+                type="entire"
                 dateType="MonthDay"
                 value={applyNightStudyData.startAt}
                 customStyle={{ border: "none" }}
@@ -32,6 +33,7 @@ const ApplyPeriod = ({ applyNightStudyData, handleChangeDate }: Props) => {
                 itemKey="endDate"
                 title="종료 날짜"
                 color="primaryNormal"
+                type="entire"
                 dateType="MonthDay"
                 value={applyNightStudyData.endAt}
                 customStyle={{ border: "none" }}

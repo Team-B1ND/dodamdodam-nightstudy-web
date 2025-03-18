@@ -3,7 +3,6 @@ import * as S from "./style";
 import { useTheme } from "styled-components";
 import dateTransform from "../../../utils/Transform/dateTransform";
 import useDeleteMyNightStudy from "../../../hooks/NightStudy/useDeleteMyNightStudy";
-import { useEffect, useRef, useState } from "react";
 import { useGetMyNightStudyQuery } from "../../../queries/NightStudy/nightstudy.query";
 import MyNightStudyNull from "../Null/MyNightStudyNull";
 
