@@ -11,7 +11,7 @@ const MyNightStudyNull = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: 200px;
+  aspect-ratio: 16 / 9;
 
   display: flex;
   justify-content: center;
