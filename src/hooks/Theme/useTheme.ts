@@ -1,8 +1,8 @@
 import { useCallback, useMemo } from "react";
 import { useRecoilState } from "recoil";
-import { THEME_KEY } from "../../constants/Theme/theme.constant";
-import { ETheme } from "../../enum/Theme/theme.enum";
-import { themeModeAtom } from "../../store/Theme/theme.store";
+import { THEME_KEY } from "src/constants/Theme/theme.constant";
+import { ETheme } from "src/enum/Theme/theme.enum";
+import { themeModeAtom } from "src/store/Theme/theme.store";
 
 const useTheme = () => {
   const [currentTheme, setCurrentTheme] = useRecoilState<ETheme>(themeModeAtom);

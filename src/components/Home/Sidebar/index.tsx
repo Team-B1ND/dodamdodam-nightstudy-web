@@ -1,8 +1,8 @@
 import * as S from "./style";
 import { Suspense, useState } from "react";
 import { DodamErrorBoundary, DodamSegmentedButton } from "@b1nd/dds-web";
-import MyNightStudy from "../../Common/MyNightStudy";
-import MyNightStudyFallback from "../../Common/Fallback/MyNightStudyFallback";
+import MyNightStudy from "src/components/Common/MyNightStudy";
+import MyNightStudyFallback from "src/components/Common/Fallback/MyNightStudyFallback";
 
 interface PageDataType {
   text: string;

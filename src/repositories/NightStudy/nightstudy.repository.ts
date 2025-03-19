@@ -1,6 +1,6 @@
-import { dodamAxios } from "../../libs/Axios/dodamAxios";
-import { NightStudyResponse } from "../../types/NightStudy/nightstudy.type";
-import { Response } from "../../types/Util/response";
+import { dodamAxios } from "src/libs/Axios/dodamAxios";
+import { NightStudyResponse } from "src/types/NightStudy/nightstudy.type";
+import { Response } from "src/types/Util/response";
 import { ApplyNightStudyPram } from "./nightstudy.param";
 
 class NightStudyRepository {

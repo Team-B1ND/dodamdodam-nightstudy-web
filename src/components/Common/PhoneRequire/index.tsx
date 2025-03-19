@@ -1,7 +1,7 @@
 import * as S from "./style";
-import { DodamCheckBox, DodamDivider } from "@b1nd/dds-web";
-import { ApplyNightStudyPram } from "../../../repositories/NightStudy/nightstudy.param";
 import { ChangeEvent } from "react";
+import { DodamCheckBox, DodamDivider } from "@b1nd/dds-web";
+import { ApplyNightStudyPram } from "src/repositories/NightStudy/nightstudy.param";
 
 interface Props {
   applyNightStudyData: ApplyNightStudyPram;

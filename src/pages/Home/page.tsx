@@ -1,5 +1,5 @@
-import Main from "../../components/Home/Main";
-import Sidebar from "../../components/Home/Sidebar";
+import Main from "src/components/Home/Main";
+import Sidebar from "src/components/Home/Sidebar";
 import * as S from "./style";
 
 const HomePage = () => {

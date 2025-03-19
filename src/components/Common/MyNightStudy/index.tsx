@@ -1,10 +1,10 @@
 import { DodamDivider, DodamTag, Trash } from "@b1nd/dds-web";
 import * as S from "./style";
 import { useTheme } from "styled-components";
-import dateTransform from "../../../utils/Transform/dateTransform";
-import useDeleteMyNightStudy from "../../../hooks/NightStudy/useDeleteMyNightStudy";
-import { useGetMyNightStudyQuery } from "../../../queries/NightStudy/nightstudy.query";
-import MyNightStudyNull from "../Null/MyNightStudyNull";
+import dateTransform from "src/utils/Transform/dateTransform";
+import useDeleteMyNightStudy from "src/hooks/NightStudy/useDeleteMyNightStudy";
+import { useGetMyNightStudyQuery } from "src/queries/NightStudy/nightstudy.query";
+import MyNightStudyNull from "src/components/Common/Null/MyNightStudyNull/index";
 
 interface Props {
   type: "Pending" | "Allow";

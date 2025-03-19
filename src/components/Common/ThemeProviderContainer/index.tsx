@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import useTheme from "../../../hooks/Theme/useTheme";
+import useTheme from "src/hooks/Theme/useTheme";
 import { DodamThemeProvider, DodamGlobalStyles } from "@b1nd/dds-web";
 
 interface Props {

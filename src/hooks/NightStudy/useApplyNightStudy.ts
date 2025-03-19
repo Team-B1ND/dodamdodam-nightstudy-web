@@ -1,14 +1,14 @@
 import { useState, ChangeEvent, KeyboardEvent } from "react";
-import dateTransform from "../../utils/Transform/dateTransform";
-import { PLACE_ITEMS } from "../../constants/NightStudy/nightStudy.constant";
-import { ApplyNightStudyPram } from "../../repositories/NightStudy/nightstudy.param";
-import { Place } from "../../types/Place/place.type";
+import dateTransform from "src/utils/Transform/dateTransform";
+import { PLACE_ITEMS } from "src/constants/NightStudy/nightStudy.constant";
+import { ApplyNightStudyPram } from "src/repositories/NightStudy/nightstudy.param";
+import { Place } from "src/types/Place/place.type";
 import { useQueryClient } from "react-query";
-import { useApplyNightStudyMutation } from "../../queries/NightStudy/nightstudy.query";
+import { useApplyNightStudyMutation } from "src/queries/NightStudy/nightstudy.query";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { AxiosError } from "axios";
-import errorHandler from "../../utils/Error/errorHandler";
-import { QUERY_KEYS } from "../../queries/queryKey";
+import errorHandler from "src/utils/Error/errorHandler";
+import { QUERY_KEYS } from "src/queries/queryKey";
 
 export const useApplyNightStudy = () => {
   const queryClient = useQueryClient();

@@ -1,7 +1,7 @@
 import * as S from "./style";
 import { ChangeEvent, KeyboardEventHandler } from "react";
 import { DodamCheckBox, DodamFilledButton } from "@b1nd/dds-web";
-import { Place } from "../../../types/Place/place.type";
+import { Place } from "src/types/Place/place.type";
 
 interface Props {
   enabled: boolean;
