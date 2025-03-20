@@ -6,7 +6,6 @@ import { ApplyNightStudyPram } from "./nightstudy.param";
 class NightStudyRepository {
   public async applyNightStudy(params: ApplyNightStudyPram): Promise<Response> {
     const { data } = await dodamAxios.post("/night-study", params);
-
     return data;
   }
 
