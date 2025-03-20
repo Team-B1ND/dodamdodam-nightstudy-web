@@ -1,10 +1,18 @@
 import { DodamTypography } from "@b1nd/dds-web";
 import styled from "styled-components";
 
-const MyNightStudyNull = () => {
+interface Props {
+  type: "Pending" | "Allow";
+}
+
+const MyNightStudyNull = ({ type }: Props) => {
   return (
     <Container>
-      <Text>신청한 심자가 없습니다</Text>
+      <Text>
+        {type === "Pending"
+          ? "신청한 심자가 없습니다"
+          : "승인된 심자가 없습니다"}
+      </Text>
     </Container>
   );
 };

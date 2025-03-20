@@ -25,7 +25,7 @@ const MyNightStudy = ({ type }: Props) => {
   return (
     <S.Container>
       {myNightStudyData?.length === 0 ? (
-        <MyNightStudyNull />
+        <MyNightStudyNull type={type} />
       ) : (
         myNightStudyData?.map((item) => (
           <S.Wrap key={item.id}>
