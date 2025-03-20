@@ -1,5 +1,5 @@
 import { PageTemplateContainer } from "./style";
-import useTheme from "src/hooks/Theme/useTheme";
+import useTheme from "hooks/Theme/useTheme";
 import { DodamNavBar } from "@b1nd/dds-web";
 import { Outlet } from "react-router-dom";
 

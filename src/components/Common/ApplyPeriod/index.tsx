@@ -1,6 +1,6 @@
 import * as S from "./style";
 import { DodamDatePicker, DodamDivider } from "@b1nd/dds-web";
-import { ApplyNightStudyPram } from "src/repositories/NightStudy/nightstudy.param";
+import { ApplyNightStudyPram } from "repositories/NightStudy/nightstudy.param";
 
 interface Props {
   applyNightStudyData: ApplyNightStudyPram;

@@ -1,8 +1,8 @@
 import * as S from "./style";
 import { Suspense, useState } from "react";
 import { DodamErrorBoundary, DodamSegmentedButton } from "@b1nd/dds-web";
-import MyNightStudy from "src/components/Common/MyNightStudy";
-import MyNightStudyFallback from "src/components/Common/Fallback/MyNightStudyFallback";
+import MyNightStudy from "components/Common/MyNightStudy";
+import MyNightStudyFallback from "components/Common/Fallback/MyNightStudyFallback";
 
 interface PageDataType {
   text: string;
@@ -32,7 +32,7 @@ const Sidebar = () => {
           onClick={handleClickPage}
         />
         <DodamErrorBoundary text="에러 발생" showButton={true}>
-          <Suspense fallback={<MyNightStudyFallback />}>
+          <Suspense fallback={<MyNightStudyFallback length={3} />}>
             {pageData.some((item) => item.text === "대기중" && item.isAtv) ? (
               <MyNightStudy type="Pending" />
             ) : (

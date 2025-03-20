@@ -4,6 +4,21 @@ import { skeletonAnimtaion } from "@b1nd/b1nd-styled-components-util";
 
 export const Container = styled.div`
   width: 100%;
+  max-height: 350px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+  gap: 10px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const Wrap = styled.div`
+  width: 100%;
   height: min-content;
 
   display: flex;
@@ -11,17 +26,13 @@ export const Container = styled.div`
 
   ${DodamShape.Large}
   background-color: ${({ theme }) => theme.fillNormal};
-`;
-
-export const Wrap = styled.div`
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
 
   padding: 26px 22px;
   gap: 30px;
+
+  @media (min-width: 794px) and (max-width: 1270px) {
+    gap: 16px;
+  }
 `;
 
 export const Box = styled.div`
@@ -75,6 +86,11 @@ export const DateWrap = styled.div`
 
   display: flex;
   justify-content: space-between;
+
+  @media (min-width: 794px) and (max-width: 1270px) {
+    flex-direction: column;
+    gap: 5px;
+  }
 `;
 
 export const Date = styled.div`

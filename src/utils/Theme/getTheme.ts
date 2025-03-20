@@ -1,5 +1,5 @@
-import { THEME_KEY } from "src/constants/Theme/theme.constant";
-import { ETheme } from "src/enum/Theme/theme.enum";
+import { THEME_KEY } from "constants/Theme/theme.constant";
+import { ETheme } from "enum/Theme/theme.enum";
 
 export const getTheme = (): ETheme => {
   const themeMode = window.localStorage.getItem(THEME_KEY);

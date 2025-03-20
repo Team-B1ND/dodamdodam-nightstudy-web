@@ -1,10 +1,10 @@
 import { useQueryClient } from "react-query";
-import { useDeleteMyNightStudyMutation } from "src/queries/NightStudy/nightstudy.query";
+import { useDeleteMyNightStudyMutation } from "queries/NightStudy/nightstudy.query";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useState } from "react";
 import { AxiosError } from "axios";
-import errorHandler from "src/utils/Error/errorHandler";
-import { QUERY_KEYS } from "src/queries/queryKey";
+import errorHandler from "utils/Error/errorHandler";
+import { QUERY_KEYS } from "queries/queryKey";
 
 const useDeleteMyNightStudy = () => {
   const queryClient = useQueryClient();

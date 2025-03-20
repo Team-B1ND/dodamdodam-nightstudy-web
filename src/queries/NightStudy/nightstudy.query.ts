@@ -1,8 +1,8 @@
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
-import { NightStudyResponse } from "src/types/NightStudy/nightstudy.type";
+import { NightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { AxiosError } from "axios";
-import nightstudyRepository from "src/repositories/NightStudy/nightstudy.repository";
-import { ApplyNightStudyPram } from "src/repositories/NightStudy/nightstudy.param";
+import nightstudyRepository from "repositories/NightStudy/nightstudy.repository";
+import { ApplyNightStudyPram } from "repositories/NightStudy/nightstudy.param";
 import { QUERY_KEYS } from "../queryKey";
 
 export const useGetMyNightStudyQuery = (

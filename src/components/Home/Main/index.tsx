@@ -1,9 +1,9 @@
 import * as S from "./style";
 import { DodamDivider } from "@b1nd/dds-web";
-import ApplyPeriod from "src/components/Common/ApplyPeriod";
-import PhoneRequire from "src/components/Common/PhoneRequire";
-import StudyInfo from "src/components/Common/StudyInfo";
-import { useApplyNightStudy } from "src/hooks/NightStudy/useApplyNightStudy";
+import ApplyPeriod from "components/Common/ApplyPeriod";
+import PhoneRequire from "components/Common/PhoneRequire";
+import StudyInfo from "components/Common/StudyInfo";
+import { useApplyNightStudy } from "hooks/NightStudy/useApplyNightStudy";
 
 const Main = () => {
   const { ...applyNightStudy } = useApplyNightStudy();
