@@ -1,10 +1,9 @@
-import Router from "./router/Router";
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { B1ndToastContainer } from "@b1nd/b1nd-toastify";
 import { BrowserRouter } from "react-router-dom";
-import PageTemplate from "./components/Common/PageTemplate";
-import ThemeProviderContainer from "./components/Common/ThemeProvider";
+import ThemeProviderContainer from "components/Common/ThemeProviderContainer/index";
+import Router from "components/Router/router";
 
 function App() {
   const queryClient = new QueryClient({
@@ -22,12 +21,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <B1ndToastContainer autoClose={1000} limit={1} />
+        <B1ndToastContainer autoClose={3000} limit={1} />
         <BrowserRouter basename="/nightstudy">
           <ThemeProviderContainer>
-            <PageTemplate>
-              <Router />
-            </PageTemplate>
+            <Router />
           </ThemeProviderContainer>
         </BrowserRouter>
       </RecoilRoot>

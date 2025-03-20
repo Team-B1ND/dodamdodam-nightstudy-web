@@ -1,11 +1,8 @@
 import { AxiosError } from "axios";
 import cookie from "../Cookie/cookie";
-import {
-  ACCESS_TOKEN_KEY,
-  REFRESH_TOKEN_KEY,
-} from "../../constants/Token/token.constant";
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "constants/Token/token.constant";
 import { injectCustomAxiosAccessToken } from "./dodamAxios";
-import authRepository from "../../repositories/Auth/auth.repository";
+import authRepository from "repositories/Auth/auth.repository";
 
 export const dodamAxiosErrorInterceptor = async (config: AxiosError) => {
   if (config.response) {

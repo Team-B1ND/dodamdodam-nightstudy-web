@@ -1,175 +1,113 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import { Apply } from "../../types/Apply/apply.type";
-import { B1ndToast } from "@b1nd/b1nd-toastify";
-// import * as Sentry from "@sentry/react";
+import { useState, ChangeEvent, KeyboardEvent } from "react";
+import dateTransform from "utils/Transform/dateTransform";
+import { PLACE_ITEMS } from "constants/NightStudy/nightStudy.constant";
+import { ApplyNightStudyPram } from "repositories/NightStudy/nightstudy.param";
+import { Place } from "types/Place/place.type";
 import { useQueryClient } from "react-query";
-import { useApplyNightStudyMutation } from "../../queries/NightStudy/nightstudy.query";
-import dayjs from "dayjs";
+import { useApplyNightStudyMutation } from "queries/NightStudy/nightstudy.query";
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { AxiosError } from "axios";
+import errorHandler from "utils/Error/errorHandler";
+import { QUERY_KEYS } from "queries/queryKey";
 
-const useApplyNightStudy = () => {
+export const useApplyNightStudy = () => {
   const queryClient = useQueryClient();
-  const currentDate = new Date();
-  currentDate.setDate(currentDate.getDate());
-  const minDate = currentDate.toISOString().split("T")[0];
-
-  const [maxDate, setMaxDate] = useState("");
-  const [postData, setPostData] = useState<Apply>({
-    
-    content: "",
-    doNeedPhone: false,
-    reasonForPhone: "",
-    endAt: "",
-    startAt: "",
-  });
-
-  const [prevReasonForPhone, setPrevReasonForPhone] = useState("");
-
   const applyNightStudyMutation = useApplyNightStudyMutation();
+  const [enabled, setEnabled] = useState(true);
+  const [placeData, setPlaceData] = useState<Place[]>(PLACE_ITEMS);
+  const [applyNightStudyData, setApplyNightStudyData] =
+    useState<ApplyNightStudyPram>({
+      // place: "", 추후에 서버에서 추가되면 사용할 예정
+      content: "",
+      doNeedPhone: false,
+      reasonForPhone: "",
+      startAt: dateTransform.hyphen(),
+      endAt: dateTransform.hyphen(),
+    });
 
-  const onChangeStartDate = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setPostData((prev) => ({ ...prev, [name]: value }));
-    addTwoWeeks(value);
-  };
-
-  const onChangeEndDate = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    if (postData.startAt === "") {
-      B1ndToast.showInfo("시작일을 먼저 선택해주세요");
-      return;
-    }
-    setPostData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const addTwoWeeks = (date: string) => {
-    const startDateObj = new Date(date);
-    const newDate = new Date(startDateObj.getTime() + 11232e5);
-    setMaxDate(newDate.toISOString().slice(0, 10));
-  };
-
-  const onChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    //학습내용
-    const { name, value } = e.target;
-    setPostData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const onChangeReason = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setPostData((prev) => ({ ...prev, [name]: value }));
-  };
-
-
-  const onChangePhoneCheck = (e: ChangeEvent<HTMLInputElement>) => {
-    //휴대폰 필요여부 체크
-    const { name, checked } = e.target;
-    if (checked) {
-      setPostData((prev) => ({
+  // datePicker date 변경 함수 && startAt, endAt 값 변경 함수
+  const handleChangeDate = (e: Date, scope: "start" | "end") => {
+    if (scope === "start") {
+      setApplyNightStudyData((prev) => ({
         ...prev,
-        reasonForPhone: prevReasonForPhone,
-        [name]: true,
+        startAt: dateTransform.hyphen(e),
       }));
     } else {
-      setPrevReasonForPhone(postData.reasonForPhone);
-      setPostData((prev) => ({ ...prev, reasonForPhone: "", [name]: false }));
+      setApplyNightStudyData((prev) => ({
+        ...prev,
+        endAt: dateTransform.hyphen(e),
+      }));
     }
   };
 
-  const onSubmitNightStudy = (e: FormEvent) => {
-    e.preventDefault();
+  // doNeedPhone, place 값 변경 함수
+  const handleChangeCheckBox = (
+    type: "place" | "doNeedPhone",
+    placeName?: string
+  ) => {
+    if (type === "place") {
+      setPlaceData((prev) =>
+        prev.map((place) => ({ ...place, isAtv: place.name === placeName }))
+      );
+      // setApplyNightStudyData((prev) => ({ ...prev, place: placeName! })); 추후에 서버에서 추가되면 사용할 예정
+    } else {
+      setApplyNightStudyData((prev) => ({
+        ...prev,
+        doNeedPhone: !prev.doNeedPhone,
+      }));
+    }
+  };
 
-    const { content, endAt, doNeedPhone, reasonForPhone, startAt } =
-      postData;
+  // content, reasonForPhone 값 변경 함수
+  const handleChangeTextArea = (
+    e: ChangeEvent<HTMLTextAreaElement>,
+    type: "content" | "reasonForPhone"
+  ) => {
+    setApplyNightStudyData((prev) => ({
+      ...prev,
+      [type]: e.target.value,
+    }));
+  };
 
-    const handleStartDate = startAt;
-    const handleEndDate = endAt;
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmitNightStudy();
+    }
+  };
 
-    if (startAt === "") {
-      B1ndToast.showInfo("시작일을 작성해주세요");
+  const handleSubmitNightStudy = () => {
+    if (!enabled) return;
+
+    const content = applyNightStudyData.content;
+    if (content.length < 10 || content.length > 250) {
+      B1ndToast.showError("학습 내용은 10자 이상 250자 이하여야 합니다.");
       return;
     }
+    setEnabled(false);
 
-    if (endAt === "") {
-      B1ndToast.showInfo("종료일을 작성해주세요");
-      return;
-    }
-
-    if (dayjs(startAt).isAfter(endAt)) {
-      B1ndToast.showInfo("시작일을 종료일보다 작아야합니다");
-      return;
-    }
-
-    // if (place === "") {
-    //   B1ndToast.showInfo("학습 장소를 선택해주세요");
-    //   return;
-    // }
-
-    if (doNeedPhone === true && reasonForPhone.trim() === "") {
-      B1ndToast.showInfo("휴대폰 사용 이유를 작성해주세요");
-      return;
-    }
-
-    if (content.trim() === "") {
-      B1ndToast.showInfo("학습내용을 작성해주세요");
-      return;
-    }
-
-    if (content.length < 10) {
-      return B1ndToast.showInfo("학습 내용을 10자 이상 작성하세요");
-    }
-
-    if (content.length > 250) {
-      return B1ndToast.showInfo("학습 내용을 250자 내로 작성하세요");
-    }
-
-    applyNightStudyMutation.mutate(
-      {
-        content,
-        startAt: handleStartDate,
-        doNeedPhone,
-        reasonForPhone,
-        endAt: handleEndDate,
+    applyNightStudyMutation.mutate(applyNightStudyData, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyNightStudy);
+        B1ndToast.showSuccess("심자 신청에 성공하였습니다.");
+        setEnabled(true);
       },
-      {
-        onSuccess: () => {
-          B1ndToast.showSuccess("심야자습을 신청하였습니다.");
-          queryClient.invalidateQueries("/night-study/my");
-          setPostData({
-            content: "",
-            endAt: "",
-            doNeedPhone: true,
-            reasonForPhone: "",
-            startAt: "",
-          });
-        },
-        onError: (error) => {
-          const errorStatus = error as AxiosError;
-
-          if (errorStatus.response?.status === 403) {
-            return B1ndToast.showError("심야자습 신청 시간이 아닙니다!");
-          }
-          else if (errorStatus.response?.status === 409) {
-            return B1ndToast.showError("이미 신청한 심자가 있습니다");
-          }
-
-          B1ndToast.showError("심야자습 신청을 실패했습니다.");
-          // Sentry.captureException(`${error}이유로 심자 신청 실패`);
-        },
-      }
-    );
+      onError: (error) => {
+        const errorAxios = error as AxiosError;
+        errorHandler.applyNightStudy(errorAxios);
+        setEnabled(true);
+      },
+    });
   };
 
   return {
-    postData,
-    minDate,
-    maxDate,
-    onChangeStartDate,
-    onChangeEndDate,
-    onChangeContent,
-    onChangeReason,
-    onChangePhoneCheck,
-    onSubmitNightStudy,
+    enabled,
+    placeData,
+    applyNightStudyData,
+    handleChangeDate,
+    handleChangeCheckBox,
+    handleChangeTextArea,
+    handleKeyDown,
+    handleSubmitNightStudy,
   };
 };
-
-export default useApplyNightStudy;

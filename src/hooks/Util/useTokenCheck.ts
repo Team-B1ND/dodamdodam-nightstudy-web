@@ -1,9 +1,6 @@
 import { useEffect } from "react";
-import {
-  ACCESS_TOKEN_KEY,
-  REFRESH_TOKEN_KEY,
-} from "../../constants/Token/token.constant";
-import cookie from "../../libs/Cookie/cookie";
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "constants/Token/token.constant";
+import cookie from "libs/Cookie/cookie";
 
 const useTokenCheck = () => {
   useEffect(() => {
