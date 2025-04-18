@@ -2,7 +2,7 @@ import { DodamShape, DodamTypography } from "@b1nd/dds-web";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 50%;
+  width: 51%;
 
   display: flex;
   flex-direction: column;
@@ -35,8 +35,7 @@ export const Box = styled.div`
   display: flex;
   flex-direction: column;
 
-  gap: 10px;
-  padding: 20px 20px 20px 10px;
+  gap: 12px;
 `;
 
 export const Title = styled.p`
@@ -51,29 +50,28 @@ export const PhoneRequireInfo = styled.div`
   flex-direction: column;
 
   gap: 5px;
-  padding: 10px;
+  padding: 0 8px;
+
+  & span {
+    color: ${({ theme }) => theme.statusNegative};
+    ${DodamTypography.Caption2.Regular}
+  }
 `;
 
 export const PhoneCheckWrap = styled.div`
   display: flex;
   align-items: center;
+  gap: 8px;
 
-  gap: 19px;
-`;
-
-export const PhoneTitle = styled.p`
-  color: ${({ theme }) => theme.labelNormal};
-  ${DodamTypography.Body1.Bold};
-`;
-
-export const PhoneDescription = styled.p`
-  color: ${({ theme }) => theme.statusNegative};
-  ${DodamTypography.Caption2.Regular}
+  & p {
+    color: ${({ theme }) => theme.labelNormal};
+    ${DodamTypography.Body1.Bold};
+  }
 `;
 
 export const PhoneReason = styled.textarea`
   width: 100%;
-  aspect-ratio: 16 / 6;
+  aspect-ratio: 16 / 4;
 
   color: ${({ theme }) => theme.labelNormal};
   ${DodamTypography.Label.Medium}

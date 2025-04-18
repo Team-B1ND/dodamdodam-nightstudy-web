@@ -4,4 +4,9 @@ export interface Student {
   grade: number;
   room: number;
   number: number;
+  isBanned: boolean;
+}
+
+export interface StudentResponse extends Response {
+  data: Student[];
 }

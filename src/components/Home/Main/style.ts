@@ -30,7 +30,7 @@ export const Wrap = styled.div`
   gap: 16px;
   padding: 24px;
 
-  & > :nth-child(2) {
+  & > :nth-child(3) {
     display: block;
 
     @media (max-width: 1068px) {
@@ -43,7 +43,7 @@ export const ApplyInfo = styled.div`
   width: 100%;
 
   display: flex;
-
+  gap: 12px;
   @media (max-width: 1068px) {
     display: flex;
     flex-direction: column;

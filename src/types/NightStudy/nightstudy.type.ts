@@ -21,6 +21,7 @@ export interface StudentType {
   room: number;
   number: number;
 }
+
 export interface NightStudyResponse extends Response {
   data: NightStudy[];
 }

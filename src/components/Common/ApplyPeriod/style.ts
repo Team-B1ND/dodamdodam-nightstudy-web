@@ -2,7 +2,7 @@ import { DodamTypography } from "@b1nd/dds-web";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 50%;
+  flex-grow: 1;
 
   display: flex;
   flex-direction: column;
@@ -35,8 +35,7 @@ export const Box = styled.div`
   display: flex;
   flex-direction: column;
 
-  gap: 10px;
-  padding: 20px 10px 20px 20px;
+  gap: 12px;
 `;
 
 export const Title = styled.p`
@@ -50,8 +49,8 @@ export const DateInfoWrap = styled.div`
   display: flex;
   flex-direction: column;
 
-  gap: 20px;
-  padding: 10px;
+  gap: 8px;
+  padding: 0 8px;
 `;
 
 export const DateInfoBox = styled.div`
@@ -61,10 +60,8 @@ export const DateInfoBox = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding: 8px 0;
-`;
-
-export const DateInfoTitle = styled.p`
-  color: ${({ theme }) => theme.labelAlternative};
-  ${DodamTypography.Headline.Medium}
+  & p {
+    color: ${({ theme }) => theme.labelAlternative};
+    ${DodamTypography.Headline.Medium}
+  }
 `;
