@@ -41,7 +41,7 @@ const StudyInfo = ({
                   isDisabled={item.isAtv}
                   onClick={() => handleChangePlace("place", item.name)}
                 />
-                <p>{item.name}</p>
+                <p>{item.title}</p>
               </S.Place>
             ))}
           </S.PlaceWrap>

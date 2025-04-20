@@ -15,7 +15,8 @@ const Main = () => {
   return (
     <S.Container>
       <S.Wrap>
-        <DodamSegmentedButton
+        {/* Project 심자 패치 완료 시 활성화 */}
+        {/* <DodamSegmentedButton
           num={2}
           type="block"
           data={[
@@ -25,7 +26,7 @@ const Main = () => {
           width={240}
           height={48}
           onClick={() => setIsPersonalPage((prev) => !prev)}
-        />
+        /> */}
         <S.ApplyInfo>
           <ApplyPeriod
             applyNightStudyData={applyNightStudy.applyNightStudyData}
@@ -52,6 +53,7 @@ const Main = () => {
           handleSubmitNightStudy={applyNightStudy.handleSubmitNightStudy}
           isPersonalPage={isPersonalPage}
         />
+        {isPersonalPage ||
         <DodamErrorBoundary text="학생을 불러오지 못했습니다!" showButton={true}>
           <Suspense>
             <SelectProjectMember
@@ -60,6 +62,7 @@ const Main = () => {
             />
           </Suspense>
         </DodamErrorBoundary>
+        }
       </S.Wrap>
     </S.Container>
   );

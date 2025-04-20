@@ -22,6 +22,18 @@ export interface StudentType {
   number: number;
 }
 
+export interface BannedSearchType {
+  id: number;
+  student: StudentType;
+  banReason: string;
+  started: string;
+  ended: string;
+}
+
+export interface BannedSearchResponse extends Response {
+  data: BannedSearchType | null;
+}
+
 export interface NightStudyResponse extends Response {
   data: NightStudy[];
 }

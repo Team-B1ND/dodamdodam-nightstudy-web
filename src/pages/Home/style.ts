@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
 
   gap: 32px;
-  padding: 58px 32px 59px 0;
+  padding: 58px 32px 58px 0;
 
   @media (max-width: 1068px), (max-height: 794px) {
     padding: 58px 32px 59px;
