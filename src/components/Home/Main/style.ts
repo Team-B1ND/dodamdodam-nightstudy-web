@@ -25,8 +25,8 @@ export const Container = styled.div`
 export const Wrap = styled.div`
   width: 100%;
   height: min-content;
+  ${DodamShape.Large}
 
-  
   display: flex;
   flex-direction: column;
 
