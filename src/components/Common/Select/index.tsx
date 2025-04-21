@@ -11,7 +11,7 @@ import { CSSObject } from "styled-components";
 export interface SelectProps {
   items: string[];
   value: string;
-  onChange: (type: string) => void;
+  onSelectedItemChange: (type: string) => void;
   zIndex?: number;
   customStyle?: CSSObject;
 }
@@ -20,7 +20,7 @@ export const Select = ({
   items,
   value,
   zIndex,
-  onChange,
+  onSelectedItemChange,
   customStyle,
 }: SelectProps) => {
   const [close, setClose] = useState<boolean>(true);
@@ -38,7 +38,7 @@ export const Select = ({
       {!close && (
         <SelectItemWrap style={{ zIndex }}>
           {items.map((item, idx) => (
-            <SelectItem key={idx} onClick={() => onChange(item)}>
+            <SelectItem key={idx} onClick={() => onSelectedItemChange(item)}>
               {item}
             </SelectItem>
           ))}

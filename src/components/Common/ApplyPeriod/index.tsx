@@ -27,7 +27,7 @@ const ApplyPeriod = ({ applyNightStudyData, handleChangeDate, handleProjectType,
                 ? "심자 1"
                 : "심자 2"
                 }
-                onChange={handleProjectType}
+                onSelectedItemChange={handleProjectType}
                 zIndex={2}
               />
             </S.DateInfoBox>
