@@ -1,21 +1,39 @@
 import * as S from "./style";
 import { DodamDatePicker, DodamDivider } from "@b1nd/dds-web";
-import { ApplyNightStudyPram } from "repositories/NightStudy/nightstudy.param";
+import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
+import { Select } from "../Select";
 
 interface Props {
-  applyNightStudyData: ApplyNightStudyPram;
+  applyNightStudyData: ApplyNightStudyPram | ApplyProjectNightStudyPram;
   handleChangeDate: (e: Date, scope: "start" | "end") => void;
+  handleProjectType: (type : string) => void;
+  isPersonalPage: boolean;
+  checkApplyNightStudy: (props: ApplyNightStudyPram | ApplyProjectNightStudyPram) => props is ApplyNightStudyPram
 }
 
-const ApplyPeriod = ({ applyNightStudyData, handleChangeDate }: Props) => {
+const ApplyPeriod = ({ applyNightStudyData, handleChangeDate, handleProjectType, isPersonalPage, checkApplyNightStudy }: Props) => {
   return (
     <S.Container>
       <S.Wrap>
         <S.Box>
-          <S.Title>신청 기한</S.Title>
+          <S.Title>신청 {!isPersonalPage ? "정보" : "기한"}</S.Title>
           <S.DateInfoWrap>
+            {!isPersonalPage &&
             <S.DateInfoBox>
-              <S.DateInfoTitle>시작 날짜</S.DateInfoTitle>
+              <p>진행 시각</p>
+              <Select items={["심자 1", "심자 2"]} value={
+                !checkApplyNightStudy(applyNightStudyData) &&
+                applyNightStudyData.type === "NIGHT_STUDY_PROJECT_1"
+                ? "심자 1"
+                : "심자 2"
+                }
+                onSelectedItemChange={handleProjectType}
+                zIndex={2}
+              />
+            </S.DateInfoBox>
+            }
+            <S.DateInfoBox>
+              <p>시작 날짜</p>
               <DodamDatePicker
                 itemKey="startDate"
                 title="시작 날짜"
@@ -28,7 +46,7 @@ const ApplyPeriod = ({ applyNightStudyData, handleChangeDate }: Props) => {
               />
             </S.DateInfoBox>
             <S.DateInfoBox>
-              <S.DateInfoTitle>종료 날짜</S.DateInfoTitle>
+              <p>종료 날짜</p>
               <DodamDatePicker
                 itemKey="endDate"
                 title="종료 날짜"

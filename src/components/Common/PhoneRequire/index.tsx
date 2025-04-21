@@ -24,15 +24,15 @@ const PhoneRequire = ({
           <S.Title>핸드폰 필요여부</S.Title>
           <S.PhoneRequireInfo>
             <S.PhoneCheckWrap>
-              <S.PhoneTitle>핸드폰이 필요하신가요?</S.PhoneTitle>
+              <p>핸드폰이 필요하신가요?</p>
               <DodamCheckBox
                 isDisabled={applyNightStudyData.doNeedPhone}
                 onClick={() => handleChangeNeedPhone("doNeedPhone")}
               />
             </S.PhoneCheckWrap>
-            <S.PhoneDescription>
+            <span>
               체크하셨다면 사유를 꼭 적어주세요
-            </S.PhoneDescription>
+            </span>
             <S.PhoneReason
               disabled={!applyNightStudyData.doNeedPhone}
               placeholder={

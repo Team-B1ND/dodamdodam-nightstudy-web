@@ -18,6 +18,7 @@ class NightStudyRepository {
     const { data } = await dodamAxios.delete(`/night-study/${id}`);
     return data;
   }
+
 }
 
 const nightStudyRepository = new NightStudyRepository();

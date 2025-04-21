@@ -1,7 +1,7 @@
-import { useState, ChangeEvent, KeyboardEvent } from "react";
+import { useState, ChangeEvent, KeyboardEvent, useEffect } from "react";
 import dateTransform from "utils/Transform/dateTransform";
 import { PLACE_ITEMS } from "constants/NightStudy/nightStudy.constant";
-import { ApplyNightStudyPram } from "repositories/NightStudy/nightstudy.param";
+import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
 import { Place } from "types/Place/place.type";
 import { useQueryClient } from "react-query";
 import { useApplyNightStudyMutation } from "queries/NightStudy/nightstudy.query";
@@ -9,21 +9,77 @@ import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { AxiosError } from "axios";
 import errorHandler from "utils/Error/errorHandler";
 import { QUERY_KEYS } from "queries/queryKey";
+import { nightStudyProjectRoom } from "types/Apply/apply.type";
 
-export const useApplyNightStudy = () => {
+export const useApplyNightStudy = (isPersonalPage : boolean) => {
   const queryClient = useQueryClient();
   const applyNightStudyMutation = useApplyNightStudyMutation();
   const [enabled, setEnabled] = useState(true);
   const [placeData, setPlaceData] = useState<Place[]>(PLACE_ITEMS);
   const [applyNightStudyData, setApplyNightStudyData] =
-    useState<ApplyNightStudyPram>({
-      // place: "", 추후에 서버에서 추가되면 사용할 예정
+    useState<ApplyNightStudyPram | ApplyProjectNightStudyPram>(
+      isPersonalPage ? {
+        content: "",
+        doNeedPhone: false,
+        reasonForPhone: "",
+        startAt: dateTransform.hyphen(),
+        endAt: dateTransform.hyphen(),
+      } : {
+        type: "NIGHT_STUDY_PROJECT_1",
+        startAt: dateTransform.hyphen(),
+        endAt: dateTransform.hyphen(),
+        room: null,
+        title: "",
+        content: "",
+        members: [],
+      }
+  );
+
+  const checkApplyNightStudy = (
+    props: ApplyNightStudyPram | ApplyProjectNightStudyPram
+  ): props is ApplyNightStudyPram => {
+    return "doNeedPhone" in props;
+  };
+
+  useEffect(() => {
+    setApplyNightStudyData(isPersonalPage ? {
       content: "",
       doNeedPhone: false,
       reasonForPhone: "",
       startAt: dateTransform.hyphen(),
       endAt: dateTransform.hyphen(),
-    });
+    } : {
+      type: "NIGHT_STUDY_PROJECT_1",
+      startAt: dateTransform.hyphen(),
+      endAt: dateTransform.hyphen(),
+      room: null,
+      title: "",
+      content: "",
+      members: [],
+    })
+  }, [isPersonalPage])
+
+  const handleProjectMember = (id : number) => {
+    setApplyNightStudyData((prev) => {
+      if (!checkApplyNightStudy(prev)) {
+        if (id in prev.members) {
+          return {...prev, members:prev.members.filter((member) => member !== id)}
+        }
+        return {...prev, members:[...prev.members, id]}
+      }
+      return prev
+    })
+  }
+
+  const handleProjectType = (type : string) => {
+    setApplyNightStudyData((prev) => (
+      { ...prev,
+        type: type === "심자 1"
+        ? "NIGHT_STUDY_PROJECT_1"
+        : "NIGHT_STUDY_PROJECT_2" }
+      )
+    )
+  }
 
   // datePicker date 변경 함수 && startAt, endAt 값 변경 함수
   const handleChangeDate = (e: Date, scope: "start" | "end") => {
@@ -43,25 +99,26 @@ export const useApplyNightStudy = () => {
   // doNeedPhone, place 값 변경 함수
   const handleChangeCheckBox = (
     type: "place" | "doNeedPhone",
-    placeName?: string
+    placeName?: nightStudyProjectRoom
   ) => {
     if (type === "place") {
       setPlaceData((prev) =>
         prev.map((place) => ({ ...place, isAtv: place.name === placeName }))
       );
-      // setApplyNightStudyData((prev) => ({ ...prev, place: placeName! })); 추후에 서버에서 추가되면 사용할 예정
+      setApplyNightStudyData((prev) => ({ ...prev, room: placeName! }));
     } else {
-      setApplyNightStudyData((prev) => ({
-        ...prev,
-        doNeedPhone: !prev.doNeedPhone,
-      }));
+      setApplyNightStudyData((prev) => (
+        checkApplyNightStudy(prev)
+        ? { ...prev, doNeedPhone: !prev.doNeedPhone }
+        : prev
+      ));
     }
   };
 
   // content, reasonForPhone 값 변경 함수
   const handleChangeTextArea = (
     e: ChangeEvent<HTMLTextAreaElement>,
-    type: "content" | "reasonForPhone"
+    type: "content" | "reasonForPhone" | "title"
   ) => {
     setApplyNightStudyData((prev) => ({
       ...prev,
@@ -86,7 +143,7 @@ export const useApplyNightStudy = () => {
     }
     setEnabled(false);
 
-    applyNightStudyMutation.mutate(applyNightStudyData, {
+    applyNightStudyMutation.mutate(applyNightStudyData as ApplyNightStudyPram, {
       onSuccess: () => {
         queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyNightStudy);
         B1ndToast.showSuccess("심자 신청에 성공하였습니다.");
@@ -109,5 +166,8 @@ export const useApplyNightStudy = () => {
     handleChangeTextArea,
     handleKeyDown,
     handleSubmitNightStudy,
+    checkApplyNightStudy,
+    handleProjectType,
+    handleProjectMember,
   };
 };

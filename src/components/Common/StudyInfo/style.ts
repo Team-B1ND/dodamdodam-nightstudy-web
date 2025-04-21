@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  gap: 16px;
+  gap: 12px;
 `;
 
 export const Title = styled.p`
@@ -17,28 +17,24 @@ export const Title = styled.p`
 
 export const InfoWrap = styled.div`
   width: 100%;
-
   display: flex;
-
-  gap: 50px;
-  padding: 10px;
+  padding: 0 8px;
 `;
 
 export const StudyPlace = styled.div`
-  width: auto;
-
+  min-width: 140px;
   display: flex;
   flex-direction: column;
+  gap: 4px;
 
-  gap: 5px;
+  & p {
+    color: ${({ theme }) => theme.labelNormal};
+    ${DodamTypography.Body1.Bold};
+  }
 `;
 
-export const ContentTitle = styled.p`
-  color: ${({ theme }) => theme.labelNormal};
-  ${DodamTypography.Body1.Bold};
-`;
 
-export const ContentDescription = styled.p`
+export const ContentDescription = styled.span`
   color: ${({ theme }) => theme.statusNegative};
   ${DodamTypography.Caption2.Regular};
 `;
@@ -53,47 +49,47 @@ export const PlaceWrap = styled.div`
 
 export const Place = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
 
-  gap: 20px;
+  gap: 8px;
+  & p {
+    color: ${({ theme }) => theme.labelNormal};
+    ${DodamTypography.Label.Bold};
+  }
 `;
 
-export const PlaceName = styled.p`
-  flex: 1;
-  color: ${({ theme }) => theme.labelNormal};
-  ${DodamTypography.Caption1.Bold};
+export const StudyContentContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 `;
 
 export const StudyContent = styled.div`
-  width: calc(100% - 250px);
-
+  width: 100%;
   display: flex;
   flex-direction: column;
-
-  gap: 5px;
+  gap: 4px;
+  & p {
+    color: ${({ theme }) => theme.labelNormal};
+    ${DodamTypography.Body1.Bold};
+  }
 `;
 
-export const StudyContentTextArea = styled.textarea`
+export const StudyContentTextArea = styled.textarea<{ $height : string }>`
   width: 100%;
-  max-width: 415px;
-  min-width: 250px;
-  max-height: 150px;
-  min-height: 100px;
-  aspect-ratio: 16 / 6;
-
+  height: ${({ $height }) => $height};
   color: ${({ theme }) => theme.labelNormal};
   ${DodamTypography.Label.Medium}
 
   border: none;
   ${DodamShape.Medium}
   background-color: ${({ theme }) => theme.fillNormal};
-
-  padding: 10px;
+  padding: 12px;
   resize: none;
   outline: none;
 
-  &::placeholder {
+  & ::placeholder {
     color: ${({ theme }) => theme.labelAlternative};
   }
 `;
