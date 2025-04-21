@@ -34,9 +34,9 @@ export const Wrap = styled.div`
 
   gap: 16px;
   padding: 24px;
-  
+
   // Project 패치 이후에 3으로 바꿀 것
-  & > :nth-child(2) {
+  & > :nth-child(3) {
     display: block;
 
     @media (max-width: 1068px) {

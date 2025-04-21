@@ -1,3 +1,4 @@
+import { DodamTypography } from "@b1nd/dds-web";
 import styled from "styled-components";
 
 export const SelectContainer = styled.div<{ close: boolean }>`
@@ -12,18 +13,15 @@ export const SelectContainer = styled.div<{ close: boolean }>`
   position: relative;
   column-gap: 15px;
   cursor: pointer;
-
-`
-
-export const SelectText = styled.p`
-  font-size: 14px;
-  white-space: nowrap;
+  > p {
+    ${DodamTypography.Body1.Medium}
+    white-space: nowrap;
+  }
 `
 
 export const SelectIcon = styled.div<{ close: boolean }>`
   width: 14px;
   height: 14px;
-  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;

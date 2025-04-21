@@ -4,7 +4,6 @@ import {
   SelectIcon,
   SelectItem,
   SelectItemWrap,
-  SelectText,
 } from "./style";
 import { IoIosArrowDown } from "react-icons/io";
 import { CSSObject } from "styled-components";
@@ -32,7 +31,7 @@ export const Select = ({
       onClick={() => setClose((prev) => !prev)}
       style={customStyle}
     >
-      <SelectText>{value}</SelectText>
+      <p>{value}</p>
       <SelectIcon close={close}>
         <IoIosArrowDown />
       </SelectIcon>

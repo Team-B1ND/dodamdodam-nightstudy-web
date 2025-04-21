@@ -13,6 +13,7 @@ const MemberItem = ({value, pickerStatus, onClick}: MemberItemProps) => {
 
   return (
     <S.MemberItemContainer>
+      <S.MemberItemProfileImage/>
       <S.MemberInfoContainer>
         {name}
         <p>{grade}-{room}</p>

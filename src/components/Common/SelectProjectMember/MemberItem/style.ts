@@ -25,5 +25,5 @@ export const MemberInfoContainer = styled.div`
 export const MemberItemProfileImage = styled.img`
   width: 36px;
   aspect-ratio: 1;
-  border-radius: 999px;
+  border-radius: 100%;
 `
