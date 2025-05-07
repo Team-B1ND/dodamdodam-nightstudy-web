@@ -1,11 +1,10 @@
-import { DodamDivider, DodamTag, DodamTypography, Trash } from "@b1nd/dds-web";
+import { DodamDivider, DodamTag, Trash } from "@b1nd/dds-web";
 import * as S from "./style";
 import { useTheme } from "styled-components";
 import dateTransform from "utils/Transform/dateTransform";
 import useDeleteMyNightStudy from "hooks/NightStudy/useDeleteMyNightStudy";
 import { useGetMyNightStudyQuery, useGetMyProjectNightStudyQuery } from "queries/NightStudy/nightstudy.query";
 import MyNightStudyNull from "components/Common/Null/MyNightStudyNull/index";
-import { ApplyNightStudyPram } from "repositories/NightStudy/nightstudy.param";
 import { NightStudy, ProjectNightStudy } from "types/NightStudy/nightstudy.type";
 
 interface Props {
@@ -73,10 +72,10 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
             </S.DateWrap>
             <S.DateWrap>
               <S.Date>
-                사용 실<span>{checkNightStudy(item) || item.room}</span>
+                심자<span>{checkNightStudy(item) || item.type === "NIGHT_STUDY_PROJECT_1" ? 1 : 2}</span>
               </S.Date>
               <S.Date>
-                심자<span>{checkNightStudy(item) || item.type === "NIGHT_STUDY_PROJECT_1" ? 1 : 2}</span>
+                사용 실<span>{checkNightStudy(item) ? "없음" : `랩 ${item.room?.slice(-2)}실`}</span>
               </S.Date>
             </S.DateWrap>
           </S.Wrap>
