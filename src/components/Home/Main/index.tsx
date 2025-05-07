@@ -1,6 +1,7 @@
 import * as S from "./style";
-import { DodamDivider, DodamErrorBoundary, DodamSegmentedButton } from "@b1nd/dds-web";
+import { DodamDivider, DodamErrorBoundary, DodamFilledButton, DodamSegmentedButton } from "@b1nd/dds-web";
 import ApplyPeriod from "components/Common/ApplyPeriod";
+import NightStudyStudentFallback from "components/Common/Fallback/NightStudyStudentFallback";
 import PhoneRequire from "components/Common/PhoneRequire";
 import SelectProjectMember from "components/Common/SelectProjectMember";
 import StudyInfo from "components/Common/StudyInfo";
@@ -10,13 +11,17 @@ import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "repositories/Ni
 
 const Main = () => {
   const [ isPersonalPage, setIsPersonalPage ] = useState(true);
+  const [ projectNightStudyPage, setProjectNightStudyPage ] = useState(0);
   const { ...applyNightStudy } = useApplyNightStudy(isPersonalPage);
 
+  const handleProjectNightStudyPage = () => {
+    setProjectNightStudyPage((prev) => (prev - 1)**2)
+  }
+  
   return (
     <S.Container>
-      <S.Wrap>
-        {/* Project 심자 패치 완료 시 활성화 */}
-        {/* <DodamSegmentedButton
+      <S.Wrap >
+        <DodamSegmentedButton
           num={2}
           type="block"
           data={[
@@ -26,42 +31,78 @@ const Main = () => {
           width={240}
           height={48}
           onClick={() => setIsPersonalPage((prev) => !prev)}
-        /> */}
-        <S.ApplyInfo>
-          <ApplyPeriod
-            applyNightStudyData={applyNightStudy.applyNightStudyData}
-            handleChangeDate={applyNightStudy.handleChangeDate}
-            isPersonalPage={isPersonalPage}
-            checkApplyNightStudy={applyNightStudy.checkApplyNightStudy}
-            handleProjectType={applyNightStudy.handleProjectType}
-          />
-          {isPersonalPage &&
-            <PhoneRequire
-              applyNightStudyData={applyNightStudy.applyNightStudyData as ApplyNightStudyPram}
-              handleChangeNeedPhone={applyNightStudy.handleChangeCheckBox}
-              handleChangeReasonForPhone={applyNightStudy.handleChangeTextArea}
-            />
-          }
-        </S.ApplyInfo>
-        <DodamDivider type="Small" />
-        <StudyInfo
-          enabled={applyNightStudy.enabled}
-          placeData={applyNightStudy.placeData}
-          handleChangePlace={applyNightStudy.handleChangeCheckBox}
-          handleChangeContent={applyNightStudy.handleChangeTextArea}
-          handleKeyDown={applyNightStudy.handleKeyDown}
-          handleSubmitNightStudy={applyNightStudy.handleSubmitNightStudy}
-          isPersonalPage={isPersonalPage}
         />
-        {isPersonalPage ||
-        <DodamErrorBoundary text="학생을 불러오지 못했습니다!" showButton={true}>
-          <Suspense>
-            <SelectProjectMember
-              applyNightStudyData={applyNightStudy.applyNightStudyData as ApplyProjectNightStudyPram}
-              handleProjectMember={applyNightStudy.handleProjectMember}
+        {(isPersonalPage || projectNightStudyPage === 0) &&
+          <S.ApplyInfoContainer>
+            <S.ApplyInfo>
+              <ApplyPeriod
+                applyNightStudyData={applyNightStudy.applyNightStudyData}
+                handleChangeDate={applyNightStudy.handleChangeDate}
+                isPersonalPage={isPersonalPage}
+                checkApplyNightStudy={applyNightStudy.checkApplyNightStudy}
+                handleProjectType={applyNightStudy.handleProjectType}
+              />
+              <DodamDivider type="Small"/>
+              {isPersonalPage &&
+                <S.InfoContainer>
+                  <PhoneRequire
+                    applyNightStudyData={applyNightStudy.applyNightStudyData as ApplyNightStudyPram}
+                    handleChangeNeedPhone={applyNightStudy.handleChangeCheckBox}
+                    handleChangeReasonForPhone={applyNightStudy.handleChangeTextArea}
+                  />
+                  <DodamDivider type="Small"/>
+                </S.InfoContainer>
+              }
+            </S.ApplyInfo>
+            <DodamDivider type="Small"/>
+            <StudyInfo
+              applyNightStudyData={applyNightStudy.applyNightStudyData}
+              placeData={applyNightStudy.placeData}
+              handleChangePlace={applyNightStudy.handleChangeCheckBox}
+              handleChangeContent={applyNightStudy.handleChangeTextArea}
+              handleKeyDown={applyNightStudy.handleKeyDown}
+              isPersonalPage={isPersonalPage}
+              checkApplyNightStudy={applyNightStudy.checkApplyNightStudy}
             />
-          </Suspense>
-        </DodamErrorBoundary>
+          </S.ApplyInfoContainer>
+        }
+        {!isPersonalPage && projectNightStudyPage === 1 &&
+          <DodamErrorBoundary text="학생을 불러오지 못했습니다!" showButton={true}>
+            <Suspense fallback={<NightStudyStudentFallback/>}>
+              <SelectProjectMember
+                applyNightStudyData={applyNightStudy.applyNightStudyData as ApplyProjectNightStudyPram}
+                handleProjectMember={applyNightStudy.handleProjectMember}
+              />
+            </Suspense>
+          </DodamErrorBoundary>
+        }
+        <S.ButtonWrap>
+          {!isPersonalPage && projectNightStudyPage === 0
+            ? <DodamFilledButton
+                size="Large"
+                text="다음"
+                width={107}
+                enabled={true}
+                textTheme="staticWhite"
+                typography={["Body1", "Bold"]}
+                onClick={handleProjectNightStudyPage}
+              />
+            : <DodamFilledButton
+                size="Large"
+                text="제출"
+                width={107}
+                enabled={true}
+                textTheme="staticWhite"
+                typography={["Body1", "Bold"]}
+                onClick={applyNightStudy.handleSubmitNightStudy}
+              />
+          }
+        </S.ButtonWrap>
+        {!isPersonalPage &&
+          <S.Indicator>
+            <S.IndicatorButton $focus={projectNightStudyPage === 0} onClick={handleProjectNightStudyPage}/>
+            <S.IndicatorButton $focus={projectNightStudyPage === 1} onClick={handleProjectNightStudyPage}/>
+          </S.Indicator>
         }
       </S.Wrap>
     </S.Container>

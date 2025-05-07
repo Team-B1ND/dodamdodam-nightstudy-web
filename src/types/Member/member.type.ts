@@ -3,6 +3,7 @@ export interface Student {
   name: string;
   grade: number;
   room: number;
+  profileImage: string,
   number: number;
   isBanned: boolean;
 }

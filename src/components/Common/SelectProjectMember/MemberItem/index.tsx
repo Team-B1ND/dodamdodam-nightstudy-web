@@ -9,14 +9,18 @@ interface MemberItemProps {
 }
 
 const MemberItem = ({value, pickerStatus, onClick}: MemberItemProps) => {
-  const { name, id, grade, room } = value
+  const { name, id, grade, room, profileImage } = value
 
   return (
     <S.MemberItemContainer>
-      <S.MemberItemProfileImage/>
       <S.MemberInfoContainer>
-        {name}
-        <p>{grade}-{room}</p>
+        {profileImage ?
+        <S.MemberItemProfileImage src={profileImage}/> : <Avatar size="large"/>
+        }
+        <S.MemberInfo>
+          {name}
+          <p>{grade}-{room}</p>
+        </S.MemberInfo>
       </S.MemberInfoContainer>
       <div
         onClick={() => onClick(id)}
@@ -24,7 +28,7 @@ const MemberItem = ({value, pickerStatus, onClick}: MemberItemProps) => {
       >
         {pickerStatus
           ? <CheckmarkCircleFilled color="primaryNormal"/>
-          : <CheckmarkCircleLine color="staticWhite"/>} 
+          : <CheckmarkCircleLine color="lineNormal"/>} 
       </div>
     </S.MemberItemContainer>
   )

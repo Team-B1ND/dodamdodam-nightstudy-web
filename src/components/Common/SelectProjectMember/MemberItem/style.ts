@@ -13,6 +13,10 @@ export const MemberItemContainer = styled.div`
 
 export const MemberInfoContainer = styled.div`
   display: flex;
+  gap: 8px;
+`
+export const MemberInfo = styled.div`
+  display: flex;
   flex-direction: column;
   ${DodamTypography.Label.Bold}
   color: ${({ theme }) => theme.labelNormal};

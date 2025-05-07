@@ -3,7 +3,6 @@ import * as S from "./style";
 import { useState } from "react";
 import { ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
 import MemberItem from "./MemberItem";
-import { Student } from "types/Member/member.type";
 import { useGetStudentQuery } from "queries/Student/Student.query";
 
 interface Props {
@@ -33,7 +32,7 @@ const SelectProjectMember = ({ applyNightStudyData, handleProjectMember } : Prop
             />
             <S.SelectProjectMemberList>
               {MemberList?.data
-                .filter((item) => applyNightStudyData.members.indexOf(item.id) === -1)
+                .filter((item) => applyNightStudyData?.students?.indexOf(item.id) === -1)
                 .filter((item) => item.name.includes(memberSearchData))
                 .sort((a, b) => a.grade - b.grade || a.room - b.room)
                 .map((item) => (
@@ -48,7 +47,7 @@ const SelectProjectMember = ({ applyNightStudyData, handleProjectMember } : Prop
           </S.SelectProjectMemberSearch>
           <S.SelectProjectMemberSelected>
             {MemberList?.data
-              .filter((item) => applyNightStudyData.members.indexOf(item.id) !== -1)
+              .filter((item) => applyNightStudyData?.students?.indexOf(item.id) !== -1)
               .map((item) => (
                 <MemberItem
                   value={item}

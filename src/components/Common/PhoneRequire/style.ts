@@ -2,7 +2,7 @@ import { DodamShape, DodamTypography } from "@b1nd/dds-web";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 51%;
+  width: 100%;
 
   display: flex;
   flex-direction: column;

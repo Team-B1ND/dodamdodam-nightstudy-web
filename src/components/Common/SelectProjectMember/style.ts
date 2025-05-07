@@ -21,7 +21,7 @@ export const SelectProjectMemberContainer = styled.div`
   width: 100%;
   ${DodamShape.Medium}
   border: 1px ${({ theme}) => theme.lineAlternative} solid;
-  height: 320px;
+  height: 480px;
   padding: 16px;
   gap: 16px;
 `

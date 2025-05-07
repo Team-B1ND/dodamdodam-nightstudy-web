@@ -4,7 +4,7 @@ import { BannedSearchResponse } from "types/NightStudy/nightstudy.type";
 
 class StudentRepository {
   public async getStudents(): Promise<StudentResponse> {
-    const { data } = await dodamAxios.get("night-study/ban/students");
+    const { data } = await dodamAxios.get("night-study/students");
     return data;
   }
   public async getMyBanStatus() : Promise<BannedSearchResponse> {

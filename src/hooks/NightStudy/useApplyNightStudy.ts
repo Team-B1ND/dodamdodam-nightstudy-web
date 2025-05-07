@@ -4,7 +4,7 @@ import { PLACE_ITEMS } from "constants/NightStudy/nightStudy.constant";
 import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
 import { Place } from "types/Place/place.type";
 import { useQueryClient } from "react-query";
-import { useApplyNightStudyMutation } from "queries/NightStudy/nightstudy.query";
+import { useApplyNightStudyMutation, useApplyProjectNightStudyMutation } from "queries/NightStudy/nightstudy.query";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { AxiosError } from "axios";
 import errorHandler from "utils/Error/errorHandler";
@@ -14,6 +14,8 @@ import { nightStudyProjectRoom } from "types/Apply/apply.type";
 export const useApplyNightStudy = (isPersonalPage : boolean) => {
   const queryClient = useQueryClient();
   const applyNightStudyMutation = useApplyNightStudyMutation();
+  const applyProjcetNightStudyMutation = useApplyProjectNightStudyMutation();
+
   const [enabled, setEnabled] = useState(true);
   const [placeData, setPlaceData] = useState<Place[]>(PLACE_ITEMS);
   const [applyNightStudyData, setApplyNightStudyData] =
@@ -29,9 +31,9 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
         startAt: dateTransform.hyphen(),
         endAt: dateTransform.hyphen(),
         room: null,
-        title: "",
-        content: "",
-        members: [],
+        name: "",
+        description: "",
+        students: [],
       }
   );
 
@@ -53,19 +55,20 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
       startAt: dateTransform.hyphen(),
       endAt: dateTransform.hyphen(),
       room: null,
-      title: "",
-      content: "",
-      members: [],
+      name: "",
+      description: "",
+      students: [],
     })
   }, [isPersonalPage])
 
   const handleProjectMember = (id : number) => {
     setApplyNightStudyData((prev) => {
       if (!checkApplyNightStudy(prev)) {
-        if (id in prev.members) {
-          return {...prev, members:prev.members.filter((member) => member !== id)}
+        if (prev.students.includes(id)) {
+          console.log('gone')
+          return {...prev, students:prev.students.filter((member) => member !== id)}
         }
-        return {...prev, members:[...prev.members, id]}
+        return {...prev, students:[...prev.students, id]}
       }
       return prev
     })
@@ -118,7 +121,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
   // content, reasonForPhone 값 변경 함수
   const handleChangeTextArea = (
     e: ChangeEvent<HTMLTextAreaElement>,
-    type: "content" | "reasonForPhone" | "title"
+    type: "content" | "reasonForPhone" | "description" | "name"
   ) => {
     setApplyNightStudyData((prev) => ({
       ...prev,
@@ -136,25 +139,41 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
   const handleSubmitNightStudy = () => {
     if (!enabled) return;
 
-    const content = applyNightStudyData.content;
+    const content = checkApplyNightStudy(applyNightStudyData) ? applyNightStudyData.content : applyNightStudyData.description;
+
     if (content.length < 10 || content.length > 250) {
       B1ndToast.showError("학습 내용은 10자 이상 250자 이하여야 합니다.");
       return;
     }
     setEnabled(false);
 
-    applyNightStudyMutation.mutate(applyNightStudyData as ApplyNightStudyPram, {
-      onSuccess: () => {
-        queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyNightStudy);
-        B1ndToast.showSuccess("심자 신청에 성공하였습니다.");
-        setEnabled(true);
-      },
-      onError: (error) => {
-        const errorAxios = error as AxiosError;
-        errorHandler.applyNightStudy(errorAxios);
-        setEnabled(true);
-      },
-    });
+    if (checkApplyNightStudy(applyNightStudyData)) {
+      applyNightStudyMutation.mutate(applyNightStudyData as ApplyNightStudyPram, {
+        onSuccess: () => {
+          queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyNightStudy);
+          B1ndToast.showSuccess("심자 신청에 성공하였습니다.");
+          setEnabled(true);
+        },
+        onError: (error) => {
+          const errorAxios = error as AxiosError;
+          errorHandler.applyNightStudy(errorAxios);
+          setEnabled(true);
+        },
+      });
+    } else {
+      applyProjcetNightStudyMutation.mutate(applyNightStudyData as ApplyProjectNightStudyPram, {
+        onSuccess: () => {
+          queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyNightStudy);
+          B1ndToast.showSuccess("심자 신청에 성공하였습니다.");
+          setEnabled(true);
+        },
+        onError: (error) => {
+          const errorAxios = error as AxiosError;
+          errorHandler.applyNightStudy(errorAxios);
+          setEnabled(true);
+        },
+      });
+    }
   };
 
   return {

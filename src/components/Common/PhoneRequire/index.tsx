@@ -46,7 +46,6 @@ const PhoneRequire = ({
           </S.PhoneRequireInfo>
         </S.Box>
       </S.Wrap>
-      <DodamDivider type="Small" />
     </S.Container>
   );
 };

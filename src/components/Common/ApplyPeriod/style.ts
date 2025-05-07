@@ -13,10 +13,6 @@ export const Container = styled.div`
 
   & > :nth-child(2) {
     display: none;
-
-    @media (max-width: 1068px) {
-      display: block;
-    }
   }
 `;
 
@@ -25,8 +21,6 @@ export const Wrap = styled.div`
 
   display: flex;
   flex-direction: column;
-
-  padding-bottom: 16px;
 `;
 
 export const Box = styled.div`
