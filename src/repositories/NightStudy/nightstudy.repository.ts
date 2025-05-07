@@ -1,5 +1,5 @@
 import { dodamAxios } from "libs/Axios/dodamAxios";
-import { NightStudyResponse } from "types/NightStudy/nightstudy.type";
+import { NightStudyResponse, ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { Response } from "types/Util/response";
 import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "./nightstudy.param";
 
@@ -17,6 +17,11 @@ class NightStudyRepository {
   public async getMyNightStudys(): Promise<NightStudyResponse> {
     const { data } = await dodamAxios.get("night-study/my");
     return data;
+  }
+
+  public async getMyProjectNightStudys(): Promise<ProjectNightStudyResponse> {
+    const { data } = await dodamAxios.get("night-study/project/my")
+    return data
   }
 
   public async deleteNightStudy(id: number): Promise<Response> {

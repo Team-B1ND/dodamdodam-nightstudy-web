@@ -1,26 +1,42 @@
-import { DodamDivider, DodamTag, Trash } from "@b1nd/dds-web";
+import { DodamDivider, DodamTag, DodamTypography, Trash } from "@b1nd/dds-web";
 import * as S from "./style";
 import { useTheme } from "styled-components";
 import dateTransform from "utils/Transform/dateTransform";
 import useDeleteMyNightStudy from "hooks/NightStudy/useDeleteMyNightStudy";
-import { useGetMyNightStudyQuery } from "queries/NightStudy/nightstudy.query";
+import { useGetMyNightStudyQuery, useGetMyProjectNightStudyQuery } from "queries/NightStudy/nightstudy.query";
 import MyNightStudyNull from "components/Common/Null/MyNightStudyNull/index";
+import { ApplyNightStudyPram } from "repositories/NightStudy/nightstudy.param";
+import { NightStudy, ProjectNightStudy } from "types/NightStudy/nightstudy.type";
 
 interface Props {
   type: "Pending" | "Allow";
+  isPersonalPage: boolean;
 }
 
-const MyNightStudy = ({ type }: Props) => {
+const MyNightStudy = ({ type, isPersonalPage }: Props) => {
   const theme = useTheme();
   const { handleClickDelete } = useDeleteMyNightStudy();
   const { data: MyNightStudyData } = useGetMyNightStudyQuery({
     suspense: true,
   });
+  const { data: MyProjectNightStudyData } = useGetMyProjectNightStudyQuery({
+    suspense: true,
+  })
+
+  const checkNightStudy = (
+    props: NightStudy | ProjectNightStudy
+  ): props is NightStudy => {
+    return "doNeedPhone" in props;
+  };
 
   const myNightStudyData =
     type === "Pending"
-      ? MyNightStudyData?.data.filter((item) => item.status === "PENDING")
-      : MyNightStudyData?.data.filter((item) => item.status === "ALLOWED");
+      ? isPersonalPage
+        ? MyNightStudyData?.data.filter((item) => item.status === "PENDING" || item.status === "REJECTED")
+        : MyProjectNightStudyData?.data.filter((item) => item.status === "PENDING" || item.status === "REJECTED")
+      : isPersonalPage
+        ? MyNightStudyData?.data.filter((item) => item.status === "ALLOWED")
+        : MyProjectNightStudyData?.data.filter((item) => item.status === "ALLOWED")
 
   return (
     <S.Container>
@@ -43,7 +59,8 @@ const MyNightStudy = ({ type }: Props) => {
                   <Trash color="lineNormal" />
                 </S.IconWrap>
               </S.TitleWrap>
-              <S.Content>{item.content}</S.Content>
+              <S.ProjectName>{checkNightStudy(item) || item.name}</S.ProjectName>
+              <p>{checkNightStudy(item) ? item.content : item.description}</p>
               <DodamDivider type="Small" />
             </S.InfoWrap>
             <S.DateWrap>
@@ -52,6 +69,14 @@ const MyNightStudy = ({ type }: Props) => {
               </S.Date>
               <S.Date>
                 종료<span>{dateTransform.monthDay(item.endAt)}</span>
+              </S.Date>
+            </S.DateWrap>
+            <S.DateWrap>
+              <S.Date>
+                사용 실<span>{checkNightStudy(item) || item.room}</span>
+              </S.Date>
+              <S.Date>
+                심자<span>{checkNightStudy(item) || item.type === "NIGHT_STUDY_PROJECT_1" ? 1 : 2}</span>
               </S.Date>
             </S.DateWrap>
           </S.Wrap>

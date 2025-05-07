@@ -32,6 +32,7 @@ const SelectProjectMember = ({ applyNightStudyData, handleProjectMember } : Prop
             />
             <S.SelectProjectMemberList>
               {MemberList?.data
+                .filter((item) => item.isBanned === false)
                 .filter((item) => applyNightStudyData?.students?.indexOf(item.id) === -1)
                 .filter((item) => item.name.includes(memberSearchData))
                 .sort((a, b) => a.grade - b.grade || a.room - b.room)
@@ -47,6 +48,7 @@ const SelectProjectMember = ({ applyNightStudyData, handleProjectMember } : Prop
           </S.SelectProjectMemberSearch>
           <S.SelectProjectMemberSelected>
             {MemberList?.data
+              .filter((item) => item.isBanned === false)
               .filter((item) => applyNightStudyData?.students?.indexOf(item.id) !== -1)
               .map((item) => (
                 <MemberItem

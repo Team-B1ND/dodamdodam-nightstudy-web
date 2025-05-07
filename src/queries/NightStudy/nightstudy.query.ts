@@ -1,5 +1,5 @@
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
-import { NightStudyResponse } from "types/NightStudy/nightstudy.type";
+import { NightStudyResponse, ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { AxiosError } from "axios";
 import nightstudyRepository from "repositories/NightStudy/nightstudy.repository";
 import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
@@ -16,6 +16,24 @@ export const useGetMyNightStudyQuery = (
   useQuery(
     QUERY_KEYS.nightStudy.getMyNightStudy,
     () => nightstudyRepository.getMyNightStudys(),
+    {
+      ...options,
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+    }
+  );
+
+export const useGetMyProjectNightStudyQuery = (
+  options?: UseQueryOptions<
+    ProjectNightStudyResponse,
+    AxiosError,
+    ProjectNightStudyResponse,
+    string
+  >
+) =>
+  useQuery(
+    QUERY_KEYS.nightStudy.getMyProjectNightStudy,
+    () => nightstudyRepository.getMyProjectNightStudys(),
     {
       ...options,
       staleTime: 1000 * 60 * 60,

@@ -6,11 +6,15 @@ import PhoneRequire from "components/Common/PhoneRequire";
 import SelectProjectMember from "components/Common/SelectProjectMember";
 import StudyInfo from "components/Common/StudyInfo";
 import { useApplyNightStudy } from "hooks/NightStudy/useApplyNightStudy";
-import { Suspense, useState } from "react";
+import { SetStateAction, Suspense, useState } from "react";
 import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
 
-const Main = () => {
-  const [ isPersonalPage, setIsPersonalPage ] = useState(true);
+interface Props {
+  isPersonalPage: boolean;
+  setIsPersonalPage: React.Dispatch<SetStateAction<boolean>>
+}
+
+const Main = ({ isPersonalPage, setIsPersonalPage }: Props) => {
   const [ projectNightStudyPage, setProjectNightStudyPage ] = useState(0);
   const { ...applyNightStudy } = useApplyNightStudy(isPersonalPage);
 

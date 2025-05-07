@@ -1,9 +1,10 @@
+import { nightStudyProjectRoom, nightStudyType } from "types/Apply/apply.type";
 import { Response } from "../Util/response";
 
 export interface NightStudy {
   id: number;
   content: string;
-  status: "ALLOWED" | "PENDING" | "DENIED";
+  status: "ALLOWED" | "PENDING" | "REJECTED";
   doNeedPhone: boolean;
   reasonForPhone: string;
   student: StudentType;
@@ -14,15 +15,27 @@ export interface NightStudy {
   modifiedAt: string;
 }
 
+export interface ProjectNightStudy {
+  id: number;
+  type: nightStudyType;
+  status: "ALLOWED" | "PENDING" | "REJECTED";
+  room: nightStudyProjectRoom;
+  name: string;
+  description: string;
+  startAt: string;
+  endAt: string;
+}
+
 export interface StudentType {
   id: number;
   name: string;
   grade: number;
   room: number;
   number: number;
+  profileImage?: string;
 }
 
-export interface BannedSearchType {
+export interface BannedSearchResponse {
   id: number;
   student: StudentType;
   banReason: string;
@@ -30,10 +43,10 @@ export interface BannedSearchType {
   ended: string;
 }
 
-export interface BannedSearchResponse extends Response {
-  data: BannedSearchType | null;
-}
-
 export interface NightStudyResponse extends Response {
   data: NightStudy[];
+}
+
+export interface ProjectNightStudyResponse extends Response {
+  data: ProjectNightStudy[];
 }

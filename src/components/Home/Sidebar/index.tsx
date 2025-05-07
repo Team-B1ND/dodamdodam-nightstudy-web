@@ -1,5 +1,5 @@
 import * as S from "./style";
-import { Suspense, useState } from "react";
+import { SetStateAction, Suspense, useState } from "react";
 import { DodamErrorBoundary, DodamSegmentedButton } from "@b1nd/dds-web";
 import MyNightStudy from "components/Common/MyNightStudy";
 import MyNightStudyFallback from "components/Common/Fallback/MyNightStudyFallback";
@@ -9,7 +9,7 @@ interface PageDataType {
   isAtv: boolean;
 }
 
-const Sidebar = () => {
+const Sidebar = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
   const [pageData, setPageData] = useState<PageDataType[]>([
     { text: "대기중", isAtv: true },
     { text: "승인됨", isAtv: false },
@@ -23,7 +23,7 @@ const Sidebar = () => {
 
   return (
     <S.Container>
-      <S.Title>My 신청</S.Title>
+      <S.Title>My {isPersonalPage ? "개인 심자" : "프로젝트 심자"} 신청</S.Title>
       <S.Wrap>
         <DodamSegmentedButton
           num={pageData.length}
@@ -34,9 +34,9 @@ const Sidebar = () => {
         <DodamErrorBoundary text="에러 발생" showButton={true}>
           <Suspense fallback={<MyNightStudyFallback length={3} />}>
             {pageData.some((item) => item.text === "대기중" && item.isAtv) ? (
-              <MyNightStudy type="Pending" />
+              <MyNightStudy type="Pending" isPersonalPage={isPersonalPage}/>
             ) : (
-              <MyNightStudy type="Allow" />
+              <MyNightStudy type="Allow" isPersonalPage={isPersonalPage}/>
             )}
           </Suspense>
         </DodamErrorBoundary>
