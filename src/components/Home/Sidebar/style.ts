@@ -1,8 +1,17 @@
 import { DodamShape, DodamTypography } from "@b1nd/dds-web";
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const SideBarContainer = styled.div`
   width: 32%;
+  height: min-content;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`
+
+export const Container = styled.div`
+  width: 100%;
   height: min-content;
 
   display: flex;

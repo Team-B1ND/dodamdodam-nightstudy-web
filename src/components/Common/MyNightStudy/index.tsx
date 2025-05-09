@@ -1,4 +1,4 @@
-import { DodamDivider, DodamTag, Trash } from "@b1nd/dds-web";
+import { DodamColor, DodamDivider, DodamTag, Trash } from "@b1nd/dds-web";
 import * as S from "./style";
 import { useTheme } from "styled-components";
 import dateTransform from "utils/Transform/dateTransform";
@@ -47,14 +47,14 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
             <S.InfoWrap>
               <S.TitleWrap>
                 <DodamTag
-                  text={type === "Pending" ? "대기중" : "승인됨"}
+                  text={item.status === "PENDING" ? "대기중" : item.status === "REJECTED" ? "거절됨" : "승인됨"}
                   color="blue"
                   customStyle={{
                     height: "32px",
-                    backgroundColor: type === "Pending" && theme.lineNormal,
+                    backgroundColor: item.status === "PENDING" ? theme.lineNormal : DodamColor.red50,
                   }}
                 />
-                <S.IconWrap onClick={() => handleClickDelete(item.id)}>
+                <S.IconWrap onClick={() => handleClickDelete(item.id, isPersonalPage ? "PERSONAL" : "PROJECT")}>
                   <Trash color="lineNormal" />
                 </S.IconWrap>
               </S.TitleWrap>

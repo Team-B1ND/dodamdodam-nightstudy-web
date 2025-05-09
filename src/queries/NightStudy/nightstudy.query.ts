@@ -1,5 +1,5 @@
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
-import { NightStudyResponse, ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
+import { BanDataResponse, NightStudyResponse, ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { AxiosError } from "axios";
 import nightstudyRepository from "repositories/NightStudy/nightstudy.repository";
 import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
@@ -41,6 +41,24 @@ export const useGetMyProjectNightStudyQuery = (
     }
   );
 
+export const useGetIsImBannedQuery = (
+  options?: UseQueryOptions<
+    BanDataResponse,
+    AxiosError,
+    BanDataResponse,
+    string
+  >
+) =>
+  useQuery(
+    QUERY_KEYS.nightStudy.getIsImBanned,
+    () => nightstudyRepository.getIsImBanned(),
+    {
+      ...options,
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+    }
+  );
+
 export const useApplyNightStudyMutation = () => {
   const mutation = useMutation((params: ApplyNightStudyPram) =>
     nightstudyRepository.applyNightStudy(params)
@@ -60,4 +78,11 @@ export const useDeleteMyNightStudyMutation = () => {
     nightstudyRepository.deleteNightStudy(id)
   );
   return mutation;
+};
+
+export const useDeleteMyProjcetNightStudyMutation = () => {
+  const mutation = useMutation((id: number) =>
+    nightstudyRepository.deleteNightStudy(id)
+  );
+  return mutation
 };

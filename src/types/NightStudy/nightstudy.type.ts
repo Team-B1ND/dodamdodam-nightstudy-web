@@ -35,12 +35,16 @@ export interface StudentType {
   profileImage?: string;
 }
 
-export interface BannedSearchResponse {
-  id: number;
+export interface BanData {
+  id: 28;
   student: StudentType;
   banReason: string;
   started: string;
   ended: string;
+}
+
+export interface BanDataResponse extends Response {
+  data: BanData;
 }
 
 export interface NightStudyResponse extends Response {
