@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
 import MemberItem from "./MemberItem";
 import { useGetStudentQuery } from "queries/Student/Student.query";
+import { filterStudent } from "utils/Student/filterStudent";
 
 interface Props {
   applyNightStudyData: ApplyProjectNightStudyPram;
@@ -31,11 +32,8 @@ const SelectProjectMember = ({ applyNightStudyData, handleProjectMember } : Prop
               placeholder="이름으로 검색"
             />
             <S.SelectProjectMemberList>
-              {MemberList?.data
-                .filter((item) => item.isBanned === false)
-                .filter((item) => applyNightStudyData?.students?.indexOf(item.id) === -1)
+              {filterStudent(MemberList!.data, applyNightStudyData.students, "id", false, "isBanned")
                 .filter((item) => item.name.includes(memberSearchData))
-                .sort((a, b) => a.grade - b.grade || a.room - b.room)
                 .map((item) => (
                   <MemberItem
                     value={item}
@@ -47,9 +45,7 @@ const SelectProjectMember = ({ applyNightStudyData, handleProjectMember } : Prop
             </S.SelectProjectMemberList>
           </S.SelectProjectMemberSearch>
           <S.SelectProjectMemberSelected>
-            {MemberList?.data
-              .filter((item) => item.isBanned === false)
-              .filter((item) => applyNightStudyData?.students?.indexOf(item.id) !== -1)
+            {filterStudent(MemberList!.data, applyNightStudyData.students, "id", true, "isBanned")
               .map((item) => (
                 <MemberItem
                   value={item}
