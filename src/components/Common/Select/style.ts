@@ -1,4 +1,4 @@
-import { DodamTypography } from "@b1nd/dds-web";
+import { DodamShape, DodamTypography } from "@b1nd/dds-web";
 import styled from "styled-components";
 
 export const SelectContainer = styled.div<{ close: boolean }>`
@@ -8,8 +8,6 @@ export const SelectContainer = styled.div<{ close: boolean }>`
   display: flex;
   align-items: center;
   padding: 0px 8px;
-
-  border-radius: 5px;
   position: relative;
   column-gap: 15px;
   cursor: pointer;
@@ -46,7 +44,7 @@ export const SelectItemWrap = styled.div`
 
   overflow: hidden;
   background-color: ${({ theme }) => theme.fillNormal};
-  border-radius: 8px;
+  ${DodamShape.ExtraSmall}
   box-sizing: border-box;
 `
 
@@ -58,7 +56,7 @@ export const SelectItem = styled.div`
   align-items: center;
   box-sizing: border-box;
   padding: 0px 10px;
-  font-size: 14px;
+  ${DodamTypography.Caption1.Medium}
   color: ${({ theme }) => theme.labelNormal };
 
   :hover {
