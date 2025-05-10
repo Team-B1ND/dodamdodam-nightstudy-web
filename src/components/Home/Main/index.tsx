@@ -104,8 +104,8 @@ const Main = ({ isPersonalPage, setIsPersonalPage }: Props) => {
         </S.ButtonWrap>
         {!isPersonalPage &&
           <S.Indicator>
-            <S.IndicatorButton $focus={projectNightStudyPage === 0} onClick={handleProjectNightStudyPage}/>
-            <S.IndicatorButton $focus={projectNightStudyPage === 1} onClick={handleProjectNightStudyPage}/>
+            <S.IndicatorButton $focus={`${projectNightStudyPage === 0}`} onClick={handleProjectNightStudyPage}/>
+            <S.IndicatorButton $focus={`${projectNightStudyPage === 1}`} onClick={handleProjectNightStudyPage}/>
           </S.Indicator>
         }
       </S.Wrap>

@@ -86,7 +86,7 @@ export const Indicator = styled.div`
   gap: 12px;
 `
 
-export const IndicatorButton = styled.div<{ $focus : boolean }>`
+export const IndicatorButton = styled.div<{ $focus : "true" | "false" }>`
   background-color: ${({ $focus, theme }) => $focus ? theme.primaryNormal : theme.labelDisabled };
   border-radius: 99px;
   width: 10px;
