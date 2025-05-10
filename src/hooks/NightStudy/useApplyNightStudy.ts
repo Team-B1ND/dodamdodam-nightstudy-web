@@ -64,10 +64,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
   const handleProjectMember = (id : number) => {
     setApplyNightStudyData((prev) => {
       if (!checkApplyNightStudy(prev)) {
-        if (prev.students.includes(id)) {
-          console.log('gone')
-          return {...prev, students:prev.students.filter((member) => member !== id)}
-        }
+        if (prev.students.includes(id)) return {...prev, students:prev.students.filter((member) => member !== id)}
         return {...prev, students:[...prev.students, id]}
       }
       return prev
