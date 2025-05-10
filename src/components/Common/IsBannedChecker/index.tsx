@@ -24,7 +24,7 @@ const BannedCheckerContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${DodamColor.red50};
+  background-color: ${({ theme }) => theme.statusNegative};
   ${DodamShape.Large}
 
   > p {
@@ -34,7 +34,6 @@ const BannedCheckerContainer = styled.div`
 `
 
 const BanReason = styled.p`
-  color: ${DodamColor.red10};
   ${DodamTypography.Headline.Bold}
 `
 export default IsBannedChecker

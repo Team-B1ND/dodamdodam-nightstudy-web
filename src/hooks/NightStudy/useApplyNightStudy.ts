@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, KeyboardEvent, useEffect } from "react";
 import dateTransform from "utils/Transform/dateTransform";
 import { PLACE_ITEMS } from "constants/NightStudy/nightStudy.constant";
-import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
+import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.param";
 import { Place } from "types/Place/place.type";
 import { useQueryClient } from "react-query";
 import { useApplyNightStudyMutation, useApplyProjectNightStudyMutation } from "queries/NightStudy/nightstudy.query";
@@ -19,7 +19,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
   const [enabled, setEnabled] = useState(true);
   const [placeData, setPlaceData] = useState<Place[]>(PLACE_ITEMS);
   const [applyNightStudyData, setApplyNightStudyData] =
-    useState<ApplyNightStudyPram | ApplyProjectNightStudyPram>(
+    useState<ApplyNightStudyParam | ApplyProjectNightStudyParam>(
       isPersonalPage ? {
         content: "",
         doNeedPhone: false,
@@ -38,8 +38,8 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
   );
 
   const checkApplyNightStudy = (
-    props: ApplyNightStudyPram | ApplyProjectNightStudyPram
-  ): props is ApplyNightStudyPram => {
+    props: ApplyNightStudyParam | ApplyProjectNightStudyParam
+  ): props is ApplyNightStudyParam => {
     return "doNeedPhone" in props;
   };
 
@@ -148,7 +148,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
     setEnabled(false);
 
     if (checkApplyNightStudy(applyNightStudyData)) {
-      applyNightStudyMutation.mutate(applyNightStudyData as ApplyNightStudyPram, {
+      applyNightStudyMutation.mutate(applyNightStudyData as ApplyNightStudyParam, {
         onSuccess: () => {
           queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyNightStudy);
           B1ndToast.showSuccess("심자 신청에 성공하였습니다.");
@@ -161,7 +161,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
         },
       });
     } else {
-      applyProjcetNightStudyMutation.mutate(applyNightStudyData as ApplyProjectNightStudyPram, {
+      applyProjcetNightStudyMutation.mutate(applyNightStudyData as ApplyProjectNightStudyParam, {
         onSuccess: () => {
           queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyNightStudy);
           B1ndToast.showSuccess("심자 신청에 성공하였습니다.");

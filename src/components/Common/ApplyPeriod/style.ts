@@ -13,6 +13,9 @@ export const Container = styled.div`
 
   & > :nth-child(2) {
     display: none;
+    @media (max-width: 1068px) {
+      display: block;
+    }
   }
 `;
 

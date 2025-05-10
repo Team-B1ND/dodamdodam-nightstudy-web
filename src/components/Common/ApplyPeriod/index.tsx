@@ -1,14 +1,14 @@
 import * as S from "./style";
 import { DodamDatePicker, DodamDivider } from "@b1nd/dds-web";
-import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
+import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.param";
 import { Select } from "../Select";
 
 interface Props {
-  applyNightStudyData: ApplyNightStudyPram | ApplyProjectNightStudyPram;
+  applyNightStudyData: ApplyNightStudyParam | ApplyProjectNightStudyParam;
   handleChangeDate: (e: Date, scope: "start" | "end") => void;
   handleProjectType: (type : string) => void;
   isPersonalPage: boolean;
-  checkApplyNightStudy: (props: ApplyNightStudyPram | ApplyProjectNightStudyPram) => props is ApplyNightStudyPram
+  checkApplyNightStudy: (props: ApplyNightStudyParam | ApplyProjectNightStudyParam) => props is ApplyNightStudyParam
 }
 
 const ApplyPeriod = ({ applyNightStudyData, handleChangeDate, handleProjectType, isPersonalPage, checkApplyNightStudy }: Props) => {

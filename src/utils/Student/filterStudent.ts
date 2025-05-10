@@ -13,12 +13,11 @@ export const filterStudent: filterProps = (
   isInclude,
   falseAttributes
 ) => {
-  data = data
-    .filter((item) => item[falseAttributes] === false)
+  data = data?.filter((item) => item[falseAttributes] === false)
     .filter((item) =>
       isInclude
-        ? includeCompareData.indexOf(item[includeCompareAttributes]) !== -1
-        : includeCompareData.indexOf(item[includeCompareAttributes]) === -1
+        ? includeCompareData?.indexOf(item[includeCompareAttributes]) !== -1
+        : includeCompareData?.indexOf(item[includeCompareAttributes]) === -1
     )
     .sort((a, b) => a["grade"] - b["grade"] || a["room"] - b["room"]);
 

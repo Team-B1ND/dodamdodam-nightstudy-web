@@ -36,7 +36,7 @@ export interface StudentType {
 }
 
 export interface BanData {
-  id: 28;
+  id: number;
   student: StudentType;
   banReason: string;
   started: string;

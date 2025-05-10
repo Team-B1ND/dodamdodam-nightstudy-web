@@ -3,11 +3,11 @@ import { ChangeEvent, KeyboardEventHandler } from "react";
 import { DodamCheckBox } from "@b1nd/dds-web";
 import { Place } from "types/Place/place.type";
 import { nightStudyProjectRoom } from "types/Apply/apply.type";
-import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
+import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.param";
 
 interface Props {
   placeData: Place[];
-  applyNightStudyData: ApplyNightStudyPram | ApplyProjectNightStudyPram;
+  applyNightStudyData: ApplyNightStudyParam | ApplyProjectNightStudyParam;
   handleChangePlace: (type: "place" | "doNeedPhone", placeName: nightStudyProjectRoom) => void;
   handleChangeContent: (
     e: ChangeEvent<HTMLTextAreaElement>,
@@ -15,7 +15,7 @@ interface Props {
   ) => void;
   handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement>;
   isPersonalPage: boolean;
-  checkApplyNightStudy: (props: ApplyNightStudyPram | ApplyProjectNightStudyPram) => props is ApplyNightStudyPram;
+  checkApplyNightStudy: (props: ApplyNightStudyParam | ApplyProjectNightStudyParam) => props is ApplyNightStudyParam;
 }
 
 const StudyInfo = ({
@@ -56,7 +56,7 @@ const StudyInfo = ({
             <S.StudyContentTextArea
               placeholder="프로젝트 이름을 입력해주세요."
               onChange={(e) => handleChangeContent(e, "name")}
-              value={(applyNightStudyData as ApplyProjectNightStudyPram).name}
+              value={(applyNightStudyData as ApplyProjectNightStudyParam).name}
               onKeyDown={handleKeyDown}
               $height="42px"
             />

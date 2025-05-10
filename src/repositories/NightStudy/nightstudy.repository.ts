@@ -1,15 +1,15 @@
 import { dodamAxios } from "libs/Axios/dodamAxios";
 import { BanDataResponse, NightStudyResponse, ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { Response } from "types/Util/response";
-import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "./nightstudy.param";
+import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "./nightstudy.param";
 
 class NightStudyRepository {
-  public async applyNightStudy(params: ApplyNightStudyPram): Promise<Response> {
+  public async applyNightStudy(params: ApplyNightStudyParam): Promise<Response> {
     const { data } = await dodamAxios.post("/night-study", params);
     return data;
   }
 
-  public async applyProjcetNightStudy(params: ApplyProjectNightStudyPram): Promise<Response> {
+  public async applyProjcetNightStudy(params: ApplyProjectNightStudyParam): Promise<Response> {
     const { data } = await dodamAxios.post("/night-study/project", params)
     return data;
   }

@@ -2,7 +2,7 @@ import { UseQueryOptions, useMutation, useQuery } from "react-query";
 import { BanDataResponse, NightStudyResponse, ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { AxiosError } from "axios";
 import nightstudyRepository from "repositories/NightStudy/nightstudy.repository";
-import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
+import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.param";
 import { QUERY_KEYS } from "../queryKey";
 
 export const useGetMyNightStudyQuery = (
@@ -60,14 +60,14 @@ export const useGetIsImBannedQuery = (
   );
 
 export const useApplyNightStudyMutation = () => {
-  const mutation = useMutation((params: ApplyNightStudyPram) =>
+  const mutation = useMutation((params: ApplyNightStudyParam) =>
     nightstudyRepository.applyNightStudy(params)
   );
   return mutation;
 };
 
 export const useApplyProjectNightStudyMutation = () => {
-  const mutation = useMutation((params: ApplyProjectNightStudyPram) => 
+  const mutation = useMutation((params: ApplyProjectNightStudyParam) => 
     nightstudyRepository.applyProjcetNightStudy(params)
   );
   return mutation

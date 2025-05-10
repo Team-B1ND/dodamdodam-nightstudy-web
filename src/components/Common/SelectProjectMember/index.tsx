@@ -1,13 +1,13 @@
 import { DodamFilledTextField } from "@b1nd/dds-web";
 import * as S from "./style";
 import { useState } from "react";
-import { ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
+import { ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.param";
 import MemberItem from "./MemberItem";
 import { useGetStudentQuery } from "queries/Student/Student.query";
 import { filterStudent } from "utils/Student/filterStudent";
 
 interface Props {
-  applyNightStudyData: ApplyProjectNightStudyPram;
+  applyNightStudyData: ApplyProjectNightStudyParam;
   handleProjectMember: (id: number) => void;
 }
 

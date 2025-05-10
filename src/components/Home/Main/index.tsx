@@ -7,7 +7,7 @@ import SelectProjectMember from "components/Common/SelectProjectMember";
 import StudyInfo from "components/Common/StudyInfo";
 import { useApplyNightStudy } from "hooks/NightStudy/useApplyNightStudy";
 import { SetStateAction, Suspense, useState } from "react";
-import { ApplyNightStudyPram, ApplyProjectNightStudyPram } from "repositories/NightStudy/nightstudy.param";
+import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.param";
 
 interface Props {
   isPersonalPage: boolean;
@@ -46,11 +46,10 @@ const Main = ({ isPersonalPage, setIsPersonalPage }: Props) => {
                 checkApplyNightStudy={applyNightStudy.checkApplyNightStudy}
                 handleProjectType={applyNightStudy.handleProjectType}
               />
-              <DodamDivider type="Small"/>
               {isPersonalPage &&
                 <S.InfoContainer>
                   <PhoneRequire
-                    applyNightStudyData={applyNightStudy.applyNightStudyData as ApplyNightStudyPram}
+                    applyNightStudyData={applyNightStudy.applyNightStudyData as ApplyNightStudyParam}
                     handleChangeNeedPhone={applyNightStudy.handleChangeCheckBox}
                     handleChangeReasonForPhone={applyNightStudy.handleChangeTextArea}
                   />
@@ -74,7 +73,7 @@ const Main = ({ isPersonalPage, setIsPersonalPage }: Props) => {
           <DodamErrorBoundary text="학생을 불러오지 못했습니다!" showButton={true}>
             <Suspense fallback={<NightStudyStudentFallback/>}>
               <SelectProjectMember
-                applyNightStudyData={applyNightStudy.applyNightStudyData as ApplyProjectNightStudyPram}
+                applyNightStudyData={applyNightStudy.applyNightStudyData as ApplyProjectNightStudyParam}
                 handleProjectMember={applyNightStudy.handleProjectMember}
               />
             </Suspense>
