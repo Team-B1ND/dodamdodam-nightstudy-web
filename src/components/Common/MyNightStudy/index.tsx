@@ -51,7 +51,7 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
                   color="blue"
                   customStyle={{
                     height: "32px",
-                    backgroundColor: item.status === "PENDING" ? theme.lineNormal : DodamColor.red50,
+                    backgroundColor: item.status === "REJECTED" ? DodamColor.red50 : item.status === "PENDING" ? theme.lineNormal : DodamColor.blue50,
                   }}
                 />
                 <S.IconWrap onClick={() => handleClickDelete(item.id, isPersonalPage ? "PERSONAL" : "PROJECT")}>
@@ -70,14 +70,16 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
                 종료<span>{dateTransform.monthDay(item.endAt)}</span>
               </S.Date>
             </S.DateWrap>
-            <S.DateWrap>
-              <S.Date>
-                심자<span>{checkNightStudy(item) || item.type === "NIGHT_STUDY_PROJECT_1" ? 1 : 2}</span>
-              </S.Date>
-              <S.Date>
-                사용 실<span>{checkNightStudy(item) ? "없음" : `랩 ${item.room?.slice(-2)}실`}</span>
-              </S.Date>
-            </S.DateWrap>
+            {checkNightStudy(item) || 
+              <S.DateWrap>
+                <S.Date>
+                  심자<span>{checkNightStudy(item) || item.type === "NIGHT_STUDY_PROJECT_1" ? 1 : 2}</span>
+                </S.Date>
+                <S.Date>
+                  사용 실<span>{checkNightStudy(item) ? "없음" : `랩 ${item.room?.slice(-2)}실`}</span>
+                </S.Date>
+              </S.DateWrap>
+            }
           </S.Wrap>
         ))
       )}
