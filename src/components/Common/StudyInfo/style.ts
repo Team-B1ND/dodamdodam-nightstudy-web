@@ -93,12 +93,3 @@ export const StudyContentTextArea = styled.textarea<{ $height : string }>`
     color: ${({ theme }) => theme.labelAlternative};
   }
 `;
-
-export const ButtonWrap = styled.div`
-  width: 100%;
-
-  display: flex;
-  justify-content: flex-end;
-
-  padding-right: 10px;
-`;

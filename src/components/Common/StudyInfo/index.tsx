@@ -1,30 +1,31 @@
 import * as S from "./style";
 import { ChangeEvent, KeyboardEventHandler } from "react";
-import { DodamCheckBox, DodamFilledButton } from "@b1nd/dds-web";
+import { DodamCheckBox } from "@b1nd/dds-web";
 import { Place } from "types/Place/place.type";
 import { nightStudyProjectRoom } from "types/Apply/apply.type";
+import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.param";
 
 interface Props {
-  enabled: boolean;
   placeData: Place[];
+  applyNightStudyData: ApplyNightStudyParam | ApplyProjectNightStudyParam;
   handleChangePlace: (type: "place" | "doNeedPhone", placeName: nightStudyProjectRoom) => void;
   handleChangeContent: (
     e: ChangeEvent<HTMLTextAreaElement>,
-    type: "content" | "reasonForPhone" | "title"
+    type: "content" | "reasonForPhone" | "description" | "name"
   ) => void;
   handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement>;
-  handleSubmitNightStudy: () => void;
-  isPersonalPage: boolean
+  isPersonalPage: boolean;
+  checkApplyNightStudy: (props: ApplyNightStudyParam | ApplyProjectNightStudyParam) => props is ApplyNightStudyParam;
 }
 
 const StudyInfo = ({
-  enabled,
+  applyNightStudyData,
   placeData,
   handleChangePlace,
   handleChangeContent,
   handleKeyDown,
-  handleSubmitNightStudy,
-  isPersonalPage
+  isPersonalPage,
+  checkApplyNightStudy
 }: Props) => {
   return (
     <S.Container>
@@ -54,7 +55,8 @@ const StudyInfo = ({
             <S.ContentDescription>20자 이내로 작성해주세요.</S.ContentDescription>
             <S.StudyContentTextArea
               placeholder="프로젝트 이름을 입력해주세요."
-              onChange={(e) => handleChangeContent(e, "title")}
+              onChange={(e) => handleChangeContent(e, "name")}
+              value={(applyNightStudyData as ApplyProjectNightStudyParam).name}
               onKeyDown={handleKeyDown}
               $height="42px"
             />
@@ -65,24 +67,18 @@ const StudyInfo = ({
             <S.ContentDescription>10 ~ 250 이내로 작성해주세요.</S.ContentDescription>
             <S.StudyContentTextArea
               placeholder="학습 내용을 입력해주세요."
-              onChange={(e) => handleChangeContent(e, "content")}
+              onChange={(e) => handleChangeContent(e, isPersonalPage ? "content" : "description")}
+              value={
+                checkApplyNightStudy(applyNightStudyData)
+                ? applyNightStudyData.content
+                : applyNightStudyData.description
+              }
               onKeyDown={handleKeyDown}
-              $height="154px"
+              $height="124px"
             />
           </S.StudyContent>
         </S.StudyContentContainer>
       </S.InfoWrap>
-      <S.ButtonWrap>
-        <DodamFilledButton
-          size="Large"
-          text="제출"
-          width={107}
-          enabled={enabled}
-          textTheme="staticWhite"
-          typography={["Body1", "Bold"]}
-          onClick={handleSubmitNightStudy}
-        />
-      </S.ButtonWrap>
     </S.Container>
   );
 };

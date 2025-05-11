@@ -11,9 +11,9 @@ export interface ProjectApply {
   startAt: string;
   endAt: string;
   room: nightStudyProjectRoom;
-  title: string;
-  content: string;
-  members: number[];
+  name: string;
+  description: string;
+  students: number[];
 }
 
 export type nightStudyType = "NIGHT_STUDY_PROJECT_1" | "NIGHT_STUDY_PROJECT_2";

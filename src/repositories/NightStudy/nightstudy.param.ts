@@ -1,5 +1,5 @@
 import { Apply, ProjectApply } from "types/Apply/apply.type";
 
-export interface ApplyNightStudyPram extends Apply {};
+export interface ApplyNightStudyParam extends Apply {};
 
-export interface ApplyProjectNightStudyPram extends ProjectApply {};
+export interface ApplyProjectNightStudyParam extends ProjectApply {};

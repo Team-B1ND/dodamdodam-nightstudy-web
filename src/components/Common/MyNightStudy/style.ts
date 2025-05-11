@@ -25,7 +25,7 @@ export const Wrap = styled.div`
   ${DodamShape.Large}
 
   gap: 12px;
-  padding: 10px;
+  padding: 12px 0;
 
   &:hover {
     background-color: ${({ theme }) => theme.fillNormal};
@@ -38,11 +38,16 @@ export const InfoWrap = styled.div`
   display: flex;
   flex-direction: column;
 
-  gap: 12px;
-  padding: 16px 12px;
+  gap: 8px;
+  padding: 0 8px;
 
   @media (min-width: 794px) and (max-width: 1270px) {
-    padding: 16px 12px 0;
+    padding: 0 8px;
+  }
+
+  > p {
+    color: ${({ theme }) => theme.labelNormal};
+    white-space: pre-line;
   }
 `;
 
@@ -67,19 +72,19 @@ export const IconWrap = styled.div`
   cursor: pointer;
 `;
 
-export const Content = styled.p`
+export const ProjectName = styled.p`
   color: ${({ theme }) => theme.labelNormal};
-  ${DodamTypography.Body1.Medium}
+  ${DodamTypography.Heading2.Bold}
 
   white-space: pre-line;
-`;
+`
 
 export const DateWrap = styled.div`
   width: 100%;
 
   display: flex;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0 8px;
 
   @media (min-width: 794px) and (max-width: 1270px) {
     flex-direction: column;
@@ -89,14 +94,14 @@ export const DateWrap = styled.div`
 
 export const Date = styled.p`
   color: ${({ theme }) => theme.labelAlternative};
-  ${DodamTypography.Body2.Medium}
+  ${DodamTypography.Caption1.Medium}
 
   display: flex;
   align-items: center;
 
   span {
     color: ${({ theme }) => theme.labelNormal};
-    ${DodamTypography.Headline.Medium}
+    ${DodamTypography.Body2.Medium}
 
     margin-left: 7px;
   }

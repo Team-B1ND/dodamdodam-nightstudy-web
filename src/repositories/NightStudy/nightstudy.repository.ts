@@ -1,17 +1,32 @@
 import { dodamAxios } from "libs/Axios/dodamAxios";
-import { NightStudyResponse } from "types/NightStudy/nightstudy.type";
+import { BanDataResponse, NightStudyResponse, ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
 import { Response } from "types/Util/response";
-import { ApplyNightStudyPram } from "./nightstudy.param";
+import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "./nightstudy.param";
 
 class NightStudyRepository {
-  public async applyNightStudy(params: ApplyNightStudyPram): Promise<Response> {
+  public async applyNightStudy(params: ApplyNightStudyParam): Promise<Response> {
     const { data } = await dodamAxios.post("/night-study", params);
+    return data;
+  }
+
+  public async applyProjcetNightStudy(params: ApplyProjectNightStudyParam): Promise<Response> {
+    const { data } = await dodamAxios.post("/night-study/project", params)
+    return data;
+  }
+
+  public async getIsImBanned(): Promise<BanDataResponse> {
+    const { data } = await dodamAxios.get("night-study/ban/my");
     return data;
   }
 
   public async getMyNightStudys(): Promise<NightStudyResponse> {
     const { data } = await dodamAxios.get("night-study/my");
     return data;
+  }
+
+  public async getMyProjectNightStudys(): Promise<ProjectNightStudyResponse> {
+    const { data } = await dodamAxios.get("night-study/project/my")
+    return data
   }
 
   public async deleteNightStudy(id: number): Promise<Response> {
