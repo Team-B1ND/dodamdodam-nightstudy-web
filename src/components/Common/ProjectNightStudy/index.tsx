@@ -11,11 +11,6 @@ import { ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.
 
 const ProjcetNightStudy = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
   const { ...applyNightStudy } = useApplyNightStudy(isPersonalPage);
-  const [projectNightStudyPage, setProjectNightStudyPage] = useState(0);
-
-  const handleProjectNightStudyPage = () => {
-    setProjectNightStudyPage((prev) => (prev - 1) ** 2);
-  };
 
   return (
     <>
@@ -46,31 +41,29 @@ const ProjcetNightStudy = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
             />
           </S.ApplyInfoContainer>,
           Page2:
-          <DodamErrorBoundary text="학생을 불러오지 못했습니다!" showButton={true}>
-            <Suspense fallback={<NightStudyStudentFallback />}>
-              <SelectProjectMember
-                applyNightStudyData={applyNightStudy.applyNightStudyData as ApplyProjectNightStudyParam}
-                handleProjectMember={applyNightStudy.handleProjectMember}
+          <S.Page2Container>
+            <DodamErrorBoundary text="학생을 불러오지 못했습니다!" showButton={true}>
+              <Suspense fallback={<NightStudyStudentFallback />}>
+                <SelectProjectMember
+                  applyNightStudyData={applyNightStudy.applyNightStudyData as ApplyProjectNightStudyParam}
+                  handleProjectMember={applyNightStudy.handleProjectMember}
+                />
+              </Suspense>
+            </DodamErrorBoundary>
+            <S.ButtonWrap>
+              <DodamFilledButton
+                size="Large"
+                text="제출"
+                width={107}
+                enabled={true}
+                textTheme="staticWhite"
+                typography={["Body1", "Bold"]}
+                onClick={applyNightStudy.handleSubmitNightStudy}
               />
-            </Suspense>
-          </DodamErrorBoundary>,
+            </S.ButtonWrap>
+          </S.Page2Container>,
         }}
       />
-      <S.ButtonWrap>
-        <DodamFilledButton
-          size="Large"
-          text={projectNightStudyPage === 0 ? "다음" : "제출"}
-          width={107}
-          enabled={true}
-          textTheme="staticWhite"
-          typography={["Body1", "Bold"]}
-          onClick={
-            projectNightStudyPage === 0
-              ? handleProjectNightStudyPage
-              : applyNightStudy.handleSubmitNightStudy
-          }
-        />
-      </S.ButtonWrap>
     </>
   );
 };

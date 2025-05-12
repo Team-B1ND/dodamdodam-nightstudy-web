@@ -28,6 +28,12 @@ export const ApplyInfo = styled.div`
   }
 `;
 
+export const Page2Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`
+
 export const ButtonWrap = styled.div`
   width: 100%;
 
