@@ -20,7 +20,10 @@ const ApplyPeriod = ({ applyNightStudyData, handleChangeDate, handleProjectType,
           <S.DateInfoWrap>
             {!isPersonalPage &&
             <S.DateInfoBox>
-              <p>진행 시각</p>
+              <S.ProjcetDataInfoTextBox>
+                <p>진행 시각</p>
+                <span>{!isPersonalPage && "( 하나의 프로젝트는 심자 1, 2 중 하나만 선택 가능합니다. )"}</span>
+              </S.ProjcetDataInfoTextBox>
               <Select items={["심자 1", "심자 2"]} value={
                 !checkApplyNightStudy(applyNightStudyData) &&
                 applyNightStudyData.type === "NIGHT_STUDY_PROJECT_1"
