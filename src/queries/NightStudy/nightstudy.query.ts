@@ -82,7 +82,7 @@ export const useDeleteMyNightStudyMutation = () => {
 
 export const useDeleteMyProjcetNightStudyMutation = () => {
   const mutation = useMutation((id: number) =>
-    nightstudyRepository.deleteNightStudy(id)
+    nightstudyRepository.deleteProjectNightStudy(id)
   );
   return mutation
 };

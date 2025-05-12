@@ -34,6 +34,10 @@ class NightStudyRepository {
     return data;
   }
 
+  public async deleteProjectNightStudy(id: number): Promise<Response> {
+    const { data } = await dodamAxios.delete(`/night-study/project/${id}`);
+    return data;
+  }
 }
 
 const nightStudyRepository = new NightStudyRepository();
