@@ -4,7 +4,6 @@ import { DodamErrorBoundary, DodamSegmentedButton } from "@b1nd/dds-web";
 import MyNightStudy from "components/Common/MyNightStudy";
 import MyNightStudyFallback from "components/Common/Fallback/MyNightStudyFallback";
 import IsBannedChecker from "components/Common/IsBannedChecker";
-import IsBannedCheckerFallback from "components/Common/Fallback/IsBannedCheckerFallback";
 
 interface PageDataType {
   text: string;
@@ -25,9 +24,11 @@ const Sidebar = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
 
   return (
     <S.SideBarContainer>
-      <Suspense fallback={<IsBannedCheckerFallback/>}>
-        <IsBannedChecker/>
-      </Suspense>
+      <DodamErrorBoundary text="정지 여부를 불러오는데 실패했습니다." showButton>
+        <Suspense fallback={<></>}>
+          <IsBannedChecker/>
+        </Suspense>
+      </DodamErrorBoundary>
       <S.Container>
         <S.Title>My {isPersonalPage ? "개인 심자" : "프로젝트 심자"} 신청</S.Title>
         <S.Wrap>

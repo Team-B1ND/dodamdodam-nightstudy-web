@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, KeyboardEvent, useEffect } from "react";
+import { useState, ChangeEvent, KeyboardEvent, useEffect, useCallback } from "react";
 import dateTransform from "utils/Transform/dateTransform";
 import { PLACE_ITEMS } from "constants/NightStudy/nightStudy.constant";
 import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.param";
@@ -44,6 +44,10 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
   };
 
   useEffect(() => {
+    resetNightStudyContent();
+  }, [isPersonalPage])
+
+  const resetNightStudyContent = () => {
     setApplyNightStudyData(isPersonalPage ? {
       content: "",
       doNeedPhone: false,
@@ -58,9 +62,10 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
       name: "",
       description: "",
       students: [],
-    })
-  }, [isPersonalPage])
+    });
+  }
 
+  // 프로젝트 인원 선택 함수
   const handleProjectMember = (id : number) => {
     setApplyNightStudyData((prev) => {
       if (!checkApplyNightStudy(prev)) {
@@ -71,6 +76,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
     })
   }
 
+  // 프로젝트 심자 시간 변경 함수
   const handleProjectType = (type : string) => {
     setApplyNightStudyData((prev) => (
       { ...prev,
@@ -136,7 +142,9 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
   const handleSubmitNightStudy = () => {
     if (!enabled) return;
 
-    const content = checkApplyNightStudy(applyNightStudyData) ? applyNightStudyData.content : applyNightStudyData.description;
+    const content = checkApplyNightStudy(applyNightStudyData)
+      ? applyNightStudyData.content
+      : applyNightStudyData.description;
 
     if (content.length < 10 || content.length > 250) {
       B1ndToast.showError("학습 내용은 10자 이상 250자 이하여야 합니다.");
@@ -145,11 +153,13 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
     setEnabled(false);
 
     if (checkApplyNightStudy(applyNightStudyData)) {
+      // 일반 심자
       applyNightStudyMutation.mutate(applyNightStudyData as ApplyNightStudyParam, {
         onSuccess: () => {
           queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyNightStudy);
           B1ndToast.showSuccess("심자 신청에 성공하였습니다.");
           setEnabled(true);
+          resetNightStudyContent();
         },
         onError: (error) => {
           const errorAxios = error as AxiosError;
@@ -158,11 +168,13 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
         },
       });
     } else {
+      // 프로젝트 심자
       applyProjcetNightStudyMutation.mutate(applyNightStudyData as ApplyProjectNightStudyParam, {
         onSuccess: () => {
           queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyNightStudy);
           B1ndToast.showSuccess("심자 신청에 성공하였습니다.");
           setEnabled(true);
+          resetNightStudyContent();
         },
         onError: (error) => {
           const errorAxios = error as AxiosError;
