@@ -58,7 +58,7 @@ const StudyInfo = ({
               onChange={(e) => handleChangeContent(e, "name")}
               value={(applyNightStudyData as ApplyProjectNightStudyParam).name}
               onKeyDown={handleKeyDown}
-              $height="42px"
+              $height="48px"
             />
           </S.StudyContent>
           }
@@ -74,7 +74,7 @@ const StudyInfo = ({
                 : applyNightStudyData.description
               }
               onKeyDown={handleKeyDown}
-              $height="124px"
+              $height="210px"
             />
           </S.StudyContent>
         </S.StudyContentContainer>
