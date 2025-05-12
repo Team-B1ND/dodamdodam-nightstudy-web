@@ -31,15 +31,9 @@ export const ApplyInfo = styled.div`
 
   display: flex;
   gap: 12px;
-  & > :nth-child(2) {
-    display: none;
-  }
   @media (max-width: 1068px) {
     display: flex;
     flex-direction: column;
-    & > :nth-child(2) {
-    display: block;
-    }
   }
 `;
 
