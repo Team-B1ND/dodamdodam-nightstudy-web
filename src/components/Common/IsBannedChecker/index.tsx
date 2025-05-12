@@ -1,15 +1,13 @@
-import { DodamColor, DodamShape, DodamTypography } from "@b1nd/dds-web";
+import { DodamShape, DodamTypography } from "@b1nd/dds-web";
 import { useGetIsImBannedQuery } from "queries/NightStudy/nightstudy.query"
 import styled from "styled-components";
 
 const IsBannedChecker = () => {
-  const { data : isImBannedData } = useGetIsImBannedQuery({
-    suspense: true,
-  });
+  const { data: isImBannedData } = useGetIsImBannedQuery();
 
   return isImBannedData?.data ? (
     <BannedCheckerContainer>
-      <p>{isImBannedData.data.ended} 까지 심자 정지 상태입니다!</p>
+      <p>{isImBannedData.data.ended} 까지 심자 정지입니다.</p>
       <BanReason>사유 : {isImBannedData.data.banReason}</BanReason>
     </BannedCheckerContainer>
   ) : (

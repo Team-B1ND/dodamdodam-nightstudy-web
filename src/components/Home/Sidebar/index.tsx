@@ -24,10 +24,8 @@ const Sidebar = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
 
   return (
     <S.SideBarContainer>
-      <DodamErrorBoundary text="정지 여부를 불러오는데 실패했습니다." showButton>
-        <Suspense fallback={<></>}>
-          <IsBannedChecker/>
-        </Suspense>
+      <DodamErrorBoundary text="정지 여부를 불러오는데 실패했습니다." showButton={true}>
+        <IsBannedChecker/>
       </DodamErrorBoundary>
       <S.Container>
         <S.Title>My {isPersonalPage ? "개인 심자" : "프로젝트 심자"} 신청</S.Title>
