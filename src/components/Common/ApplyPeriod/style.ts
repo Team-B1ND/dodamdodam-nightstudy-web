@@ -62,3 +62,13 @@ export const DateInfoBox = styled.div`
     ${DodamTypography.Headline.Medium}
   }
 `;
+
+export const ProjcetDataInfoTextBox = styled.div`
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  > span {
+    color: ${({ theme }) => theme.statusNegative};
+    ${DodamTypography.Caption1.Medium}
+  }
+`;

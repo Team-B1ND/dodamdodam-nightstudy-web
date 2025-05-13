@@ -31,6 +31,9 @@ export const SelectProjectMemberSearch = styled.div`
   flex-direction: column;
   width: 50%;
   height: 100%;
+  & ::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 export const SelectProjectMemberSelected = styled.div`
@@ -43,6 +46,9 @@ export const SelectProjectMemberSelected = styled.div`
   width: 50%;
   padding: 8px 12px;
   overflow-y: scroll;
+  & ::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 export const SelectProjectMemberList = styled.div`

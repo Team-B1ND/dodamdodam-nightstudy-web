@@ -1,33 +1,22 @@
 import * as S from "./style";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import { DodamErrorBoundary, DodamSegmentedButton } from "@b1nd/dds-web";
 import MyNightStudy from "components/Common/MyNightStudy";
 import MyNightStudyFallback from "components/Common/Fallback/MyNightStudyFallback";
 import IsBannedChecker from "components/Common/IsBannedChecker";
-import IsBannedCheckerFallback from "components/Common/Fallback/IsBannedCheckerFallback";
-
-interface PageDataType {
-  text: string;
-  isAtv: boolean;
-}
+import { useChangePage } from "hooks/NightStudy/useChangePage";
 
 const Sidebar = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
-  const [pageData, setPageData] = useState<PageDataType[]>([
+  const { handleClickPage, pageData } = useChangePage([
     { text: "대기중", isAtv: true },
     { text: "승인됨", isAtv: false },
-  ]);
-
-  const handleClickPage = (text?: string) => {
-    setPageData((prev) =>
-      prev.map((item) => ({ ...item, isAtv: item.text === text }))
-    );
-  };
+  ])
 
   return (
     <S.SideBarContainer>
-      <Suspense fallback={<IsBannedCheckerFallback/>}>
+      <DodamErrorBoundary text="정지 여부를 불러오는데 실패했습니다." showButton={true}>
         <IsBannedChecker/>
-      </Suspense>
+      </DodamErrorBoundary>
       <S.Container>
         <S.Title>My {isPersonalPage ? "개인 심자" : "프로젝트 심자"} 신청</S.Title>
         <S.Wrap>

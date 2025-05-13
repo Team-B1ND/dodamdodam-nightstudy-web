@@ -14,6 +14,7 @@ export const SelectContainer = styled.div<{ close: boolean }>`
   > p {
     ${DodamTypography.Body1.Medium}
     white-space: nowrap;
+    color: ${({ theme }) => theme.labelNormal};
   }
 `
 
