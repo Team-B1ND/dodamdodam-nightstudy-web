@@ -2,9 +2,11 @@ import { PageTemplateContainer } from "./style";
 import useTheme from "hooks/Theme/useTheme";
 import { DodamNavBar } from "@b1nd/dds-web";
 import { Outlet } from "react-router-dom";
+import useLogout from "hooks/Auth/useLogout";
 
 const PageTemplate = () => {
   const { themeColor, handleTheme } = useTheme();
+  const { handleClickLogout } = useLogout();
 
   return (
     <PageTemplateContainer>
@@ -12,7 +14,7 @@ const PageTemplate = () => {
         location={"nightstudy"}
         currentTheme={themeColor}
         handleTheme={handleTheme}
-        logout={() => console.log("로그아웃")}
+        logout={handleClickLogout}
       />
       <Outlet />
     </PageTemplateContainer>
