@@ -12,6 +12,7 @@ interface Props {
 }
 
 const ApplyPeriod = ({ applyNightStudyData, handleChangeDate, handleProjectType, isPersonalPage, checkApplyNightStudy }: Props) => {
+  
   return (
     <S.Container>
       <S.Wrap>
@@ -41,7 +42,7 @@ const ApplyPeriod = ({ applyNightStudyData, handleChangeDate, handleProjectType,
                 itemKey="startDate"
                 title="시작 날짜"
                 color="primaryNormal"
-                type="entire"
+                type="future"
                 dateType="MonthDay"
                 value={applyNightStudyData.startAt}
                 customStyle={{ border: "none" }}
@@ -54,7 +55,7 @@ const ApplyPeriod = ({ applyNightStudyData, handleChangeDate, handleProjectType,
                 itemKey="endDate"
                 title="종료 날짜"
                 color="primaryNormal"
-                type="entire"
+                type="future"
                 dateType="MonthDay"
                 value={applyNightStudyData.endAt}
                 customStyle={{ border: "none" }}

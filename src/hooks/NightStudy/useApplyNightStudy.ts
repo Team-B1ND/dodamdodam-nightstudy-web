@@ -10,6 +10,7 @@ import { AxiosError } from "axios";
 import errorHandler from "utils/Error/errorHandler";
 import { QUERY_KEYS } from "queries/queryKey";
 import { nightStudyProjectRoom } from "types/Apply/apply.type";
+import dayjs from "dayjs";
 
 export const useApplyNightStudy = (isPersonalPage : boolean) => {
   const queryClient = useQueryClient();
@@ -28,14 +29,16 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
         endAt: dateTransform.hyphen(),
       } : {
         type: "NIGHT_STUDY_PROJECT_1",
-        startAt: dateTransform.hyphen(),
-        endAt: dateTransform.hyphen(),
+        startAt: dateTransform.hyphen(dayjs().add(1, 'day').toDate()),
+        endAt: dateTransform.hyphen(dayjs().add(1, 'day').toDate()),
         room: null,
         name: "",
         description: "",
         students: [],
       }
   );
+
+
 
   const checkApplyNightStudy = (
     props: ApplyNightStudyParam | ApplyProjectNightStudyParam
@@ -56,8 +59,8 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
       endAt: dateTransform.hyphen(),
     } : {
       type: "NIGHT_STUDY_PROJECT_1",
-      startAt: dateTransform.hyphen(),
-      endAt: dateTransform.hyphen(),
+      startAt: dateTransform.hyphen(dayjs().add(1, 'day').toDate()),
+      endAt: dateTransform.hyphen(dayjs().add(1, 'day').toDate()),
       room: null,
       name: "",
       description: "",

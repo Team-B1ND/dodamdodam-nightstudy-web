@@ -12,6 +12,7 @@ import { ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.
 const ProjcetNightStudy = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
   const { ...applyNightStudy } = useApplyNightStudy(isPersonalPage);
 
+  
   return (
     <>
       <PageIndicator 
@@ -27,6 +28,7 @@ const ProjcetNightStudy = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
                 isPersonalPage={isPersonalPage}
                 checkApplyNightStudy={applyNightStudy.checkApplyNightStudy}
                 handleProjectType={applyNightStudy.handleProjectType}
+                
               />
             </S.ApplyInfo>
             <DodamDivider type="Small" />
