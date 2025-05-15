@@ -1,4 +1,4 @@
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import ApplyPeriod from "../ApplyPeriod";
 import { useApplyNightStudy } from "hooks/NightStudy/useApplyNightStudy";
 import * as S from "./style";
@@ -7,7 +7,6 @@ import StudyInfo from "../StudyInfo";
 import NightStudyStudentFallback from "../Fallback/NightStudyStudentFallback";
 import SelectProjectMember from "../SelectProjectMember";
 import { ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.param";
-
 
 const ProjcetNightStudy = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
   const { ...applyNightStudy } = useApplyNightStudy(isPersonalPage);
@@ -38,6 +37,8 @@ const ProjcetNightStudy = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
               handleKeyDown={applyNightStudy.handleKeyDown}
               isPersonalPage={isPersonalPage}
               checkApplyNightStudy={applyNightStudy.checkApplyNightStudy}
+              isRoomAvailable={applyNightStudy.isRoomAvailable}
+              projectRooms={applyNightStudy.projectRooms}
             />
           </S.ApplyInfoContainer>,
           Page2:
