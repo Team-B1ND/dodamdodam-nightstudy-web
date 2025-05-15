@@ -157,10 +157,10 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
       const startAt = dayjs(applyNightStudyData.startAt);
       const endAt = dayjs(applyNightStudyData.endAt);
     
-      if (startAt.isSameOrBefore(today) || endAt.isSameOrBefore(today)) {
-        B1ndToast.showError("오늘 이후의 날짜를 선택해주세요.");
-        return;
-      }
+      // if (startAt.isSameOrBefore(today) || endAt.isSameOrBefore(today)) {
+      //   B1ndToast.showError("오늘 이후의 날짜를 선택해주세요.");
+      //   return;
+      // }
     if (content.length < 10 || content.length > 250) {
       B1ndToast.showError("학습 내용은 10자 이상 250자 이하여야 합니다.");
       return;
