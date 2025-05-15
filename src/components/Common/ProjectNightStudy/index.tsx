@@ -10,7 +10,6 @@ import { ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.
 
 const ProjcetNightStudy = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
   const { ...applyNightStudy } = useApplyNightStudy(isPersonalPage);
-
   return (
     <>
       <PageIndicator 
@@ -31,14 +30,10 @@ const ProjcetNightStudy = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
             <DodamDivider type="Small" />
             <StudyInfo
               applyNightStudyData={applyNightStudy.applyNightStudyData}
-              placeData={applyNightStudy.placeData}
-              handleChangePlace={applyNightStudy.handleChangeCheckBox}
               handleChangeContent={applyNightStudy.handleChangeTextArea}
               handleKeyDown={applyNightStudy.handleKeyDown}
               isPersonalPage={isPersonalPage}
               checkApplyNightStudy={applyNightStudy.checkApplyNightStudy}
-              isRoomAvailable={applyNightStudy.isRoomAvailable}
-              projectRooms={applyNightStudy.projectRooms}
             />
           </S.ApplyInfoContainer>,
           Page2:

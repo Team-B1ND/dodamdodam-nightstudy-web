@@ -34,8 +34,6 @@ const PersonalNightStudy = ({ isPersonalPage }: { isPersonalPage: boolean }) => 
         <DodamDivider type="Small" />
         <StudyInfo
           applyNightStudyData={applyNightStudy.applyNightStudyData}
-          placeData={applyNightStudy.placeData}
-          handleChangePlace={applyNightStudy.handleChangeCheckBox}
           handleChangeContent={applyNightStudy.handleChangeTextArea}
           handleKeyDown={applyNightStudy.handleKeyDown}
           isPersonalPage={isPersonalPage}

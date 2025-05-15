@@ -1,15 +1,9 @@
 import * as S from "./style";
 import { ChangeEvent, KeyboardEventHandler } from "react";
-import { DodamCheckBox } from "@b1nd/dds-web";
-import { Place } from "types/Place/place.type";
-import { nightStudyProjectRoom } from "types/Apply/apply.type";
 import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.param";
-import { ProjectRoom } from "types/NightStudy/nightstudy.type";
 
 interface Props {
-  placeData: Place[];
   applyNightStudyData: ApplyNightStudyParam | ApplyProjectNightStudyParam;
-  handleChangePlace: (type: "place" | "doNeedPhone", placeName: nightStudyProjectRoom) => void;
   handleChangeContent: (
     e: ChangeEvent<HTMLTextAreaElement>,
     type: "content" | "reasonForPhone" | "description" | "name"
@@ -17,40 +11,15 @@ interface Props {
   handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement>;
   isPersonalPage: boolean;
   checkApplyNightStudy: (props: ApplyNightStudyParam | ApplyProjectNightStudyParam) => props is ApplyNightStudyParam;
-  isRoomAvailable?: (roomName: nightStudyProjectRoom) => boolean;
-  projectRooms?: ProjectRoom[];
 }
 
 const StudyInfo = ({
   applyNightStudyData,
-  placeData,
-  handleChangePlace,
   handleChangeContent,
   handleKeyDown,
   isPersonalPage,
   checkApplyNightStudy,
-  isRoomAvailable,
-  projectRooms
 }: Props) => {
-  const getRoomPeriod = (roomName: nightStudyProjectRoom): string | null => {
-    if (!projectRooms || !roomName) return null;
-    
-    const room = projectRooms.find(r => r.room === roomName);
-    if (!room) return null;
-    
-    const formatDate = (dateStr: string): string => {
-      const date = new Date(dateStr);
-      const month = date.getMonth() + 1;
-      const day = date.getDate();
-      return `${month}/${day}`;
-    };
-    
-    const startDate = formatDate(room.startAt);
-    const endDate = formatDate(room.endAt);
-    
-    return `${startDate} ~ ${endDate}`;
-  };
-
   return (
     <S.Container>
       <S.Title>{!isPersonalPage ? "프로젝트 진행 정보" : "학습 정보"}</S.Title>
