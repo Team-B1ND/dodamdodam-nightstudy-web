@@ -11,7 +11,6 @@ import { ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.
 const ProjcetNightStudy = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
   const { ...applyNightStudy } = useApplyNightStudy(isPersonalPage);
 
-  
   return (
     <>
       <PageIndicator 

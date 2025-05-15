@@ -34,14 +34,11 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
         type: "NIGHT_STUDY_PROJECT_1",
         startAt: dateTransform.hyphen(dayjs().add(1, 'day').toDate()),
         endAt: dateTransform.hyphen(dayjs().add(1, 'day').toDate()),
-        room: null,
         name: "",
         description: "",
         students: [],
       }
   );
-
-
 
   const checkApplyNightStudy = (
     props: ApplyNightStudyParam | ApplyProjectNightStudyParam
@@ -64,7 +61,6 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
       type: "NIGHT_STUDY_PROJECT_1",
       startAt: dateTransform.hyphen(dayjs().add(1, 'day').toDate()),
       endAt: dateTransform.hyphen(dayjs().add(1, 'day').toDate()),
-      room: null,
       name: "",
       description: "",
       students: [],
@@ -200,46 +196,6 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
     }
   };
 
-  // 프로젝트 실 사용 가능 여부 확인 함수
-  const isRoomAvailable = (roomName: nightStudyProjectRoom): boolean => {
-    if (!projectRooms || projectRoomsLoading || !roomName) return true;
-    
-    const selectedStartDate = new Date(
-      checkApplyNightStudy(applyNightStudyData) 
-        ? applyNightStudyData.startAt 
-        : applyNightStudyData.startAt
-    );
-    const selectedEndDate = new Date(
-      checkApplyNightStudy(applyNightStudyData) 
-        ? applyNightStudyData.endAt 
-        : applyNightStudyData.endAt
-    );
-    
-    return !projectRooms.some(room => {
-      if (room.room !== roomName) return false;
-      
-      const roomStartDate = new Date(room.startAt);
-      const roomEndDate = new Date(room.endAt);
-      
-      return (
-        (selectedStartDate <= roomEndDate && selectedStartDate >= roomStartDate) ||
-        (selectedEndDate <= roomEndDate && selectedEndDate >= roomStartDate) ||
-        (selectedStartDate <= roomStartDate && selectedEndDate >= roomEndDate)
-      );
-    });
-  };
-
-  const getUsedRooms = () => {
-    if (!projectRooms) return [];
-    
-    return projectRooms.map(room => ({
-      room: room.room,
-      project: room.project,
-      type: room.type === "NIGHT_STUDY_PROJECT_1" ? "심자 1" : "심자 2",
-      period: `${room.startAt} ~ ${room.endAt}`
-    }));
-  };
-
   return {
     enabled,
     placeData,
@@ -254,7 +210,5 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
     checkApplyNightStudy,
     handleProjectType,
     handleProjectMember,
-    isRoomAvailable,
-    getUsedRooms,
   };
 };
