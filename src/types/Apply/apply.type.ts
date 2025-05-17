@@ -10,7 +10,6 @@ export interface ProjectApply {
   type: nightStudyType;
   startAt: string;
   endAt: string;
-  room: nightStudyProjectRoom;
   name: string;
   description: string;
   students: number[];

@@ -1,5 +1,5 @@
 import { dodamAxios } from "libs/Axios/dodamAxios";
-import { BanDataResponse, NightStudyResponse, ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
+import { BanDataResponse, NightStudyResponse, ProjectNightStudyResponse, ProjectRoom, ProjectRoomsResponse } from "types/NightStudy/nightstudy.type";
 import { Response } from "types/Util/response";
 import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "./nightstudy.param";
 
@@ -37,6 +37,11 @@ class NightStudyRepository {
   public async deleteProjectNightStudy(id: number): Promise<Response> {
     const { data } = await dodamAxios.delete(`/night-study/project/${id}`);
     return data;
+  }
+
+  public async getProjectRooms(): Promise<ProjectRoom[]> {
+    const { data } = await dodamAxios.get<ProjectRoomsResponse>("night-study/project/rooms");
+    return data.data;
   }
 }
 

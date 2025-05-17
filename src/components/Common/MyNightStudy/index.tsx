@@ -76,7 +76,7 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
                   심자<span>{checkNightStudy(item) || item.type === "NIGHT_STUDY_PROJECT_1" ? 1 : 2}</span>
                 </S.Date>
                 <S.Date>
-                  사용 실<span>{checkNightStudy(item) ? "없음" : `랩 ${item.room?.slice(-2)}실`}</span>
+                  사용 실<span>{checkNightStudy(item) ? "없음" : item.room ? `랩 ${item.room?.slice(-2)}실` : "지정 대기중"}</span>
                 </S.Date>
               </S.DateWrap>
             }

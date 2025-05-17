@@ -1,5 +1,5 @@
 import { UseQueryOptions, useMutation, useQuery } from "react-query";
-import { BanDataResponse, NightStudyResponse, ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
+import { BanDataResponse, NightStudyResponse, ProjectNightStudyResponse, ProjectRoom } from "types/NightStudy/nightstudy.type";
 import { AxiosError } from "axios";
 import nightstudyRepository from "repositories/NightStudy/nightstudy.repository";
 import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.param";
@@ -56,6 +56,25 @@ export const useGetIsImBannedQuery = (
       ...options,
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
+    }
+  );
+
+// 프로젝트 실 조회 쿼리 추가
+export const useGetProjectRoomsQuery = (
+  options?: UseQueryOptions<
+    ProjectRoom[],
+    AxiosError,
+    ProjectRoom[],
+    string
+  >
+) =>
+  useQuery(
+    QUERY_KEYS.nightStudy.getProjectRooms,
+    () => nightstudyRepository.getProjectRooms(),
+    {
+      ...options,
+      refetchOnWindowFocus: false,
+      retry: 1,
     }
   );
 
