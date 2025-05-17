@@ -10,6 +10,10 @@ import { AxiosError } from "axios";
 import errorHandler from "utils/Error/errorHandler";
 import { QUERY_KEYS } from "queries/queryKey";
 import { nightStudyProjectRoom } from "types/Apply/apply.type";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import dayjs from "dayjs";
+
+dayjs.extend(isSameOrBefore);
 
 export const useApplyNightStudy = (isPersonalPage : boolean) => {
   const queryClient = useQueryClient();
@@ -35,6 +39,8 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
         students: [],
       }
   );
+
+
 
   const checkApplyNightStudy = (
     props: ApplyNightStudyParam | ApplyProjectNightStudyParam
@@ -145,6 +151,14 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
       ? applyNightStudyData.content
       : applyNightStudyData.description;
 
+      const today = dayjs().startOf("day");
+      const startAt = dayjs(applyNightStudyData.startAt);
+      const endAt = dayjs(applyNightStudyData.endAt);
+    
+      // if (startAt.isSameOrBefore(today) || endAt.isSameOrBefore(today)) {
+      //   B1ndToast.showError("오늘 이후의 날짜를 선택해주세요.");
+      //   return;
+      // }
     if (content.length < 10 || content.length > 250) {
       B1ndToast.showError("학습 내용은 10자 이상 250자 이하여야 합니다.");
       return;
