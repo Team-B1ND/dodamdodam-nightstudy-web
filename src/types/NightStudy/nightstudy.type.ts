@@ -54,3 +54,17 @@ export interface NightStudyResponse extends Response {
 export interface ProjectNightStudyResponse extends Response {
   data: ProjectNightStudy[];
 }
+
+export interface ProjectRoom {
+  room: nightStudyProjectRoom;
+  type: nightStudyType;
+  project: string;
+  startAt: string;
+  endAt: string;
+}
+
+export interface ProjectRoomsResponse {
+  status: number;
+  message: string;
+  data: ProjectRoom[];
+}
