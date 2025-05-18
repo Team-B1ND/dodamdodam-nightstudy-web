@@ -185,7 +185,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
       applyProjcetNightStudyMutation.mutate(applyNightStudyData as ApplyProjectNightStudyParam, {
         onSuccess: () => {
           queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyProjectNightStudy);
-          B1ndToast.showSuccess("심자 신청에 성공하였습니다.");
+          B1ndToast.showSuccess("심자 신청에 성공하였습니다. 자치위원의 심사를 거친 후 심자실 배정 또는 거절이 이루어집니다.");
           setEnabled(true);
           resetNightStudyContent();
         },
