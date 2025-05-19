@@ -15,33 +15,26 @@ const useDeleteMyNightStudy = () => {
   const handleClickDelete = (id: number, type: "PERSONAL" | "PROJECT") => {
     if (loading) return;
     setLoading(true);
-    if (type === "PERSONAL") {
-      deleteMyNightStudyMutation.mutate(id, {
-        onSuccess: () => {
-          queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyNightStudy);
-          B1ndToast.showSuccess("내 심자 삭제에 성공하였습니다");
-          setLoading(false);
-        },
-        onError: (error) => {
-          const errorAxios = error as AxiosError;
-          errorHandler.deleteMyNightStudy(errorAxios);
-          setLoading(false);
-        },
-      });
-    } else {
-      deleteMyProjectNightStudyMutation.mutate(id, {
-        onSuccess: () => {
-          queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyProjectNightStudy);
-          B1ndToast.showSuccess("내 심자 삭제에 성공하였습니다");
-          setLoading(false);
-        },
-        onError: (error) => {
-          const errorAxios = error as AxiosError;
-          errorHandler.deleteMyProjcetNightStudy(errorAxios);
-          setLoading(false);
-        },
-      });
-    }
+    const isPersonal = type === "PERSONAL";
+    (isPersonal
+      ? deleteMyNightStudyMutation
+      : deleteMyProjectNightStudyMutation
+    ).mutate(id, {
+      onSuccess: () => {
+        queryClient.invalidateQueries(
+          QUERY_KEYS.nightStudy[
+            isPersonal ? "getMyNightStudy" : "getMyProjectNightStudy"
+          ]
+        );
+        B1ndToast.showSuccess("심자 삭제에 성공하였습니다");
+        setLoading(false);
+      },
+      onError: (error) => {
+        const errorAxios = error as AxiosError;
+        errorHandler.deleteMyNightStudy(errorAxios, type);
+        setLoading(false);
+      },
+    });
   };
 
   return {
