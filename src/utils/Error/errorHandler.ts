@@ -11,7 +11,7 @@ class ErrorHandler {
       case 403:
         return B1ndToast.showError("심자 신청 기간이 아닙니다.");
       case 409:
-        return B1ndToast.showError("해당장소에 이미 프로젝트가 존재합니다.");
+        return B1ndToast.showError("해당 날짜에 이미 심야자습을 신청했습니다.");
       case 412:
         return B1ndToast.showError("현재 심야자습 정지된 멤버입니다.")
       case 500:
