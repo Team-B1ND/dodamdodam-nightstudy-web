@@ -1,8 +1,8 @@
-
+import DomitoryManager from "components/Common/DomitoryManager"
 
 const ManagePage = () => {
   return (
-    <div>ManagePage</div>
+    <DomitoryManager></DomitoryManager>
   )
 }
 
