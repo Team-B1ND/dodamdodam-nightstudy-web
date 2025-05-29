@@ -27,12 +27,11 @@ export const Select = ({
 
   return (
     <SelectContainer
-      close={close}
       onClick={() => setClose((prev) => !prev)}
       style={customStyle}
     >
       <p>{value}</p>
-      <SelectIcon close={close}>
+      <SelectIcon close={close ? "true" : "false"}>
         <IoIosArrowDown />
       </SelectIcon>
       {!close && (
