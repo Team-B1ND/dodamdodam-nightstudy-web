@@ -25,6 +25,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
   const [applyNightStudyData, setApplyNightStudyData] =
     useState<ApplyNightStudyParam | ApplyProjectNightStudyParam>(
       isPersonalPage ? {
+        type: "NIGHT_STUDY_1",
         content: "",
         doNeedPhone: false,
         reasonForPhone: "",
@@ -54,6 +55,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
 
   const resetNightStudyContent = () => {
     setApplyNightStudyData(isPersonalPage ? {
+      type:"NIGHT_STUDY_1",
       content: "",
       doNeedPhone: false,
       reasonForPhone: "",
@@ -81,15 +83,35 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
     })
   }
 
+  // 개인 심자 시간 변경 함수
+  const handlePersonalType = (type : number) => {
+    setApplyNightStudyData((prev) => {
+      if (checkApplyNightStudy(prev)) {
+        return {
+          ...prev,
+          type: type === 1
+          ? "NIGHT_STUDY_1"
+          : type === 2
+            ? "NIGHT_STUDY_2"
+            : "NIGHT_STUDY_3"
+        }
+      }
+      return prev
+    })
+  }
+
   // 프로젝트 심자 시간 변경 함수
   const handleProjectType = (type : string) => {
-    setApplyNightStudyData((prev) => (
-      { ...prev,
-        type: type === "심자 1"
-        ? "NIGHT_STUDY_PROJECT_1"
-        : "NIGHT_STUDY_PROJECT_2" }
-      )
-    )
+    setApplyNightStudyData((prev) => {
+      if (!checkApplyNightStudy(prev)) {
+        return {
+          ...prev,
+          type: type === "심자 1"
+          ? "NIGHT_STUDY_PROJECT_1"
+          : "NIGHT_STUDY_PROJECT_2" }
+      }
+      return prev
+    })
   }
 
   // datePicker date 변경 함수 && startAt, endAt 값 변경 함수
@@ -245,6 +267,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
     projectRooms,
     projectRoomsLoading,
     handleChangeDate,
+    handlePersonalType,
     handleChangeCheckBox,
     handleChangeTextArea,
     handleKeyDown,

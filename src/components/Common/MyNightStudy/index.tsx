@@ -70,7 +70,13 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
                 종료<span>{dateTransform.monthDay(item.endAt)}</span>
               </S.Date>
             </S.DateWrap>
-            {checkNightStudy(item) || 
+            {checkNightStudy(item) ?
+              <S.DateWrap>
+                <S.Date>
+                  심자<span>{`${item.type.substring(item.type.length-1)}까지`}</span>
+                </S.Date>
+              </S.DateWrap>
+            : (
               <S.DateWrap>
                 <S.Date>
                   심자<span>{checkNightStudy(item) || item.type === "NIGHT_STUDY_PROJECT_1" ? 1 : 2}</span>
@@ -79,7 +85,7 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
                   사용 실<span>{checkNightStudy(item) ? "없음" : item.room ? `랩 ${item.room?.slice(-2)}실` : "지정 대기중"}</span>
                 </S.Date>
               </S.DateWrap>
-            }
+            )}
           </S.Wrap>
         ))
       )}
