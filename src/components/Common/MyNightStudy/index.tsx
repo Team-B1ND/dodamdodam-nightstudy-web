@@ -1,8 +1,7 @@
-import { DodamColor, DodamDivider, DodamTag, Trash } from "@b1nd/dds-web";
+import { DodamColor, DodamDivider, DodamTag } from "@b1nd/dds-web";
 import * as S from "./style";
 import { useTheme } from "styled-components";
 import dateTransform from "utils/Transform/dateTransform";
-import useDeleteMyNightStudy from "hooks/NightStudy/useDeleteMyNightStudy";
 import { useGetMyNightStudyQuery, useGetMyProjectNightStudyQuery } from "queries/NightStudy/nightstudy.query";
 import MyNightStudyNull from "components/Common/Null/MyNightStudyNull/index";
 import { NightStudy, ProjectNightStudy } from "types/NightStudy/nightstudy.type";
@@ -14,7 +13,6 @@ interface Props {
 
 const MyNightStudy = ({ type, isPersonalPage }: Props) => {
   const theme = useTheme();
-  const { handleClickDelete } = useDeleteMyNightStudy();
   const { data: MyNightStudyData } = useGetMyNightStudyQuery({
     suspense: true,
   });
