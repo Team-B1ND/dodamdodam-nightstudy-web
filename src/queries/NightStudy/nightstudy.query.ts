@@ -91,17 +91,3 @@ export const useApplyProjectNightStudyMutation = () => {
   );
   return mutation
 }
-
-export const useDeleteMyNightStudyMutation = () => {
-  const mutation = useMutation((id: number) =>
-    nightstudyRepository.deleteNightStudy(id)
-  );
-  return mutation;
-};
-
-export const useDeleteMyProjcetNightStudyMutation = () => {
-  const mutation = useMutation((id: number) =>
-    nightstudyRepository.deleteProjectNightStudy(id)
-  );
-  return mutation
-};

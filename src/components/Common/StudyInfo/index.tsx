@@ -50,7 +50,7 @@ const StudyInfo = ({
                 : applyNightStudyData.description
               }
               onKeyDown={handleKeyDown}
-              $height="200px"
+              $height="108px"
             />
           </S.StudyContent>
         </S.StudyContentContainer>
