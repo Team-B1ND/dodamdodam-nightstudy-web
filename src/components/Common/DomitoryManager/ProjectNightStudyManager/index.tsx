@@ -31,26 +31,26 @@ const ProjectNightStudyManager = () => {
   const {modalInfo:rejectModalInfo, openModalId:openRejectModal, closeModal:closeRejectModal} = useNightStudyModal();
 
   // 필터링 및 검색
-    useEffect(() => {
-      const timeFilter = searchTagData.find(item => item.name === "진행 시간")?.tags.find(item => item.isSelected)?.value;
-      const statusFilter = searchTagData.find(item => item.name === "상태")?.tags.find(item => item.isSelected)?.value;
+  useEffect(() => {
+    const timeFilter = searchTagData.find(item => item.name === "진행 시간")?.tags.find(item => item.isSelected)?.value;
+    const statusFilter = searchTagData.find(item => item.name === "상태")?.tags.find(item => item.isSelected)?.value;
       
-      const sourceData = statusFilter === "ALLOWED" ? allowedProjectData?.data : pendingProjectData?.data;
+    const sourceData = statusFilter === "ALLOWED" ? allowedProjectData?.data : pendingProjectData?.data;
       
-      if (sourceData) {
-        const filteredData = sourceData
-          .filter(item => timeFilter === "ALL" || item.type === timeFilter)
-          .filter(item => item.name.includes(searchInputData))
-        setProjectData(filteredData);
-      }
-    }, [searchTagData, allowedProjectData, pendingProjectData, searchInputData]);
+    if (sourceData) {
+      const filteredData = sourceData
+        .filter(item => timeFilter === "ALL" || item.type === timeFilter)
+        .filter(item => item.name.includes(searchInputData))
+      setProjectData(filteredData);
+    }
+  }, [searchTagData, allowedProjectData, pendingProjectData, searchInputData]);
   
   const tableContents = useMemo(() => {
     return new Map<string, tableContentsData>([
       ["프로젝트명", [projectData?.map(item => item.name), 140]],
       ["프로젝트 설명", [projectData?.map(item => item.description), 200]],
       ["진행시간", [projectData?.map(item => item.type === "NIGHT_STUDY_PROJECT_1" ? "심자 1" : "심자 2"), 64]],
-      ["장소", [projectData?.map(item => item.room || "미지정"), 64]],
+      ["장소", [projectData?.map(item => item.room || "미지정"), 120]],
       ["시작일", [projectData?.map(item => item.startAt), 120]],
       ["종료일", [projectData?.map(item => item.endAt), 120]],
       ["상태 제어", [projectData?.map(item => (
@@ -129,19 +129,17 @@ const ProjectNightStudyManager = () => {
           project={projectData.find(item => item.id === allowModalInfo.dataId)!}
         />
       </DodamModal>
-      <DodamModal isOpen={rejectModalInfo.isOpen} background={true}>
-        <RejectModal
-          close={closeRejectModal}
-          dataId={rejectModalInfo.dataId}
-          type="REJECT_PROJECT"
-        />
-      </DodamModal>
-      <DodamModal isOpen={dataModalInfo.isOpen} background={true}>
-        <DataViewModal
-          data={projectData.find(item => item.id === dataModalInfo.dataId)!}
-          close={closeDataModal}
-        />
-      </DodamModal>
+      <DataViewModal
+        isOpen={dataModalInfo.isOpen}
+        data={projectData.find(item => item.id === dataModalInfo.dataId)!}
+        close={closeDataModal}
+      />
+      <RejectModal
+        isOpen={rejectModalInfo.isOpen}
+        close={closeRejectModal}
+        dataId={rejectModalInfo.dataId}
+        type="REJECT_PROJECT"
+      />
     </ProjectNightStudyContainer>
   )
 }

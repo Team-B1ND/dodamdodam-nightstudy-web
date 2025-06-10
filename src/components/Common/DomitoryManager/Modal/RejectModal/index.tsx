@@ -1,20 +1,23 @@
-import { DodamFilledButton, DodamTextField } from '@b1nd/dds-web';
+import { DodamFilledButton, DodamModal, DodamTextField } from '@b1nd/dds-web';
 import * as S from './style';
 import { ChangeEvent, useState } from 'react';
 import useManageNightStudy from 'hooks/NightStudy/useManageNightStudy';
+import useBanStudent from 'hooks/NightStudy/useBanStudent';
 
 interface RejectModalProps {
-  type: "REJECT_PROJECT" | "REJECT_NIGHT_STUDY" | "BAN";
+  type: "REJECT_PROJECT" | "REJECT_NIGHT_STUDY";
   close: () => void;
   dataId: number;
+  isOpen: boolean;
 }
-const RejectModal = ({type, close, dataId}: RejectModalProps) => {
+const RejectModal = ({type, close, dataId, isOpen}: RejectModalProps) => {
   const [rejectReason, setRejectReason] = useState<string>("");
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setRejectReason(event.target.value);
   };
 
   const {rejectProject, rejectNightStudy} = useManageNightStudy();
+  const {createBan} = useBanStudent();
 
   const handleRejectButton = (type: "REJECT_PROJECT" | "REJECT_NIGHT_STUDY" | "BAN") => {
     if (!rejectReason.trim()) {
@@ -26,49 +29,47 @@ const RejectModal = ({type, close, dataId}: RejectModalProps) => {
     } else if (type === "REJECT_NIGHT_STUDY") {
       rejectNightStudy(dataId, close);
     } else {
-      // 밴 기능
+      createBan({student: dataId, reason: rejectReason, ended:""})
     }
   };
 
   return (
-    <S.RejectModalContainer>
-      <S.RejectModalData>
-        <p>
-          {type === "BAN"
-            ? "정지 사유를 입력해주세요"
-            : "거절 사유를 입력해주세요"}
-        </p>
-        <DodamTextField
-          id="rejectReason"
-          name="rejectReason"
-          type="text"
-          value={rejectReason}
-          label="거절 사유"
-          width={273}
-          onChange={handleChange}
-          customStyle={{ marginTop: "20px" }}
-        />
-      </S.RejectModalData>
-      <S.RejectModalButtonContainer>
-        <DodamFilledButton
-          size={"Large"}
-          enabled={true}
-          text="취소"
-          typography={["Body1", "Medium"]}
-          backgroundColorType={"Assisitive"}
-          onClick={close}
-        />
-        <DodamFilledButton
-          size={"Large"}
-          enabled={rejectReason.trim().length > 0}
-          text="확인"
-          textTheme={"staticWhite"}
-          typography={["Body1", "Medium"]}
-          style={{ marginLeft: "8px" }}
-          onClick={() => handleRejectButton(type)}
-        />
-      </S.RejectModalButtonContainer>
-    </S.RejectModalContainer>
+    <DodamModal isOpen={isOpen} background={true}>
+      <S.RejectModalContainer>
+        <S.RejectModalData>
+          <p>거절 사유를 입력해주세요</p>
+          <DodamTextField
+            id="rejectReason"
+            name="rejectReason"
+            type="text"
+            value={rejectReason}
+            label="거절 사유"
+            width={273}
+            onChange={handleChange}
+            customStyle={{ marginTop: "20px" }}
+          />
+        </S.RejectModalData>
+        <S.RejectModalButtonContainer>
+          <DodamFilledButton
+            size={"Large"}
+            enabled={true}
+            text="취소"
+            typography={["Body1", "Medium"]}
+            backgroundColorType={"Assisitive"}
+            onClick={close}
+          />
+          <DodamFilledButton
+            size={"Large"}
+            enabled={rejectReason.trim().length > 0}
+            text="확인"
+            textTheme={"staticWhite"}
+            typography={["Body1", "Medium"]}
+            style={{ marginLeft: "8px" }}
+            onClick={() => handleRejectButton(type)}
+          />
+        </S.RejectModalButtonContainer>
+      </S.RejectModalContainer>
+    </DodamModal>
   );
 }
 

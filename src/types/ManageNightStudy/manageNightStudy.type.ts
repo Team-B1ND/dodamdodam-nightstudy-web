@@ -6,6 +6,7 @@ export interface StudentBanType {
   number: number;
   phone: string;
   isBanned: boolean;
+  banReason: string;
 }
 
 export interface NightStudyBanResponse extends Response {

@@ -76,7 +76,7 @@ export const useGetBanMemberQuery = (
   >
 ) =>
   useQuery(
-    QUERY_KEYS.nightStudy.getMyNightStudy,
+    QUERY_KEYS.manageNightStudy.getBanMember,
     () => manageNightStudyRepository.getBanMember(),
     {
       ...options,

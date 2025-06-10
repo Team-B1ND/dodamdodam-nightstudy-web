@@ -38,7 +38,7 @@ class ManageNightStudyRepository {
     await dodamAxios.patch(`/night-study/${id}/revert`);
   }
 
-  // 심자 정지 멤버 불러오기
+  // 멤버 불러오기 ( 심자 정지 여부 포함 )
   public async getBanMember(): Promise<NightStudyBanResponse> {
     const { data } = await dodamAxios.get("/night-study/ban/students");
     return data;

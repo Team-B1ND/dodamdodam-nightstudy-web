@@ -19,7 +19,7 @@ const useManageNightStudy = () => {
     allowNightStudyMutation.mutate(id, {
       onSuccess: () => {
         B1ndToast.showSuccess("승인 성공");
-        queryClient.invalidateQueries(
+        return queryClient.invalidateQueries(
           [QUERY_KEYS.manageNightStudy.getAllowedNightStudy, QUERY_KEYS.manageNightStudy.getPendingNightStudy]
         );
       },
@@ -30,7 +30,7 @@ const useManageNightStudy = () => {
     revertNightStudyMutation.mutate(id, {
       onSuccess: () => {
         B1ndToast.showSuccess("승인 취소 성공");
-        queryClient.invalidateQueries(
+        return queryClient.invalidateQueries(
           [QUERY_KEYS.manageNightStudy.getAllowedNightStudy, QUERY_KEYS.manageNightStudy.getPendingNightStudy]
         );
       },
@@ -41,10 +41,10 @@ const useManageNightStudy = () => {
     rejectNightStudyMutation.mutate(id, {
       onSuccess: () => {
         B1ndToast.showSuccess("거절 성공");
-        queryClient.invalidateQueries(
+        closeModal()
+        return queryClient.invalidateQueries(
           [QUERY_KEYS.manageNightStudy.getAllowedNightStudy, QUERY_KEYS.manageNightStudy.getPendingNightStudy]
         );
-        closeModal()
       },
     });
   };
@@ -53,19 +53,19 @@ const useManageNightStudy = () => {
     allowProjectMutation.mutate(params, {
       onSuccess: () => {
         B1ndToast.showSuccess("프로젝트 심자 승인 성공");
-        queryClient.invalidateQueries(
+        closeModal();
+        return queryClient.invalidateQueries(
           [QUERY_KEYS.manageNightStudy.getAllowedProjectNightStudy, QUERY_KEYS.manageNightStudy.getPendingProjectNightStudy]
         );
-        closeModal();
       }
     })
   }
 
   const revertProject = (id:number) => {
     revertProjectMutation.mutate(id, {
-      onSuccess: () => {
+      onSuccess: async () => {
         B1ndToast.showSuccess("프로젝트 심자 대기 성공");
-        queryClient.invalidateQueries(
+        await queryClient.invalidateQueries(
           [QUERY_KEYS.manageNightStudy.getAllowedProjectNightStudy, QUERY_KEYS.manageNightStudy.getPendingProjectNightStudy]
         );
       }
@@ -74,12 +74,12 @@ const useManageNightStudy = () => {
 
   const rejectProject = (params: {id: number, rejectReason: string}, closeModal: () => void) => {
     rejectProjectMutation.mutate(params, {
-      onSuccess: () => {
+      onSuccess: async () => {
         B1ndToast.showSuccess("프로젝트 심자 대기 성공");
-        queryClient.invalidateQueries(
+        closeModal();
+        return queryClient.invalidateQueries(
           [QUERY_KEYS.manageNightStudy.getAllowedProjectNightStudy, QUERY_KEYS.manageNightStudy.getPendingProjectNightStudy]
         );
-        closeModal();
       }
     })
   }

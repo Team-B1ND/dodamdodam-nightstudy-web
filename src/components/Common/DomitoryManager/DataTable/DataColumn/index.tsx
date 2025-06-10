@@ -1,7 +1,7 @@
 import { ReactElement } from "react"
 import styled from "styled-components"
 import { DataTableBlock } from "../style"
-import { DodamTypography } from "@b1nd/dds-web";
+import { DodamShape, DodamTypography } from "@b1nd/dds-web";
 
 interface DataColumnProps {
   tableColumnData: {
@@ -34,6 +34,7 @@ const DataColumnContainer = styled.button`
   align-items: center;
   min-height: 56px;
   background-color: transparent;
+  border: 4px;
   cursor: pointer;
   ${DodamTypography.Body1.Medium}
   &:hover {
