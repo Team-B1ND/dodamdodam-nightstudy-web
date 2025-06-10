@@ -10,9 +10,9 @@ import StatusController from "../StatusController";
 import useManageNightStudy from "hooks/NightStudy/useManageNightStudy";
 import useNightStudyModal from "hooks/NightStudy/useNightStudyModal";
 import styled from "styled-components";
-import DataViewModal from "../DataViewModal";
+import DataViewModal from "../Modal/DataViewModal";
 import { NIGHT_STUDY_TIME } from "constants/NightStudy/nightStudy.constant";
-import RejectModal from "../RejectModal";
+import RejectModal from "../Modal/RejectModal";
 
 const PersonalNightStudyManager = () => {
   const {

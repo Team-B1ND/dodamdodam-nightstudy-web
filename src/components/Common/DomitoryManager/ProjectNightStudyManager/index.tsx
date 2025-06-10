@@ -8,8 +8,9 @@ import { useEffect, useMemo, useState } from "react";
 import { ProjectNightStudy } from "types/ManageNightStudy/manageProjectNightStudy.type";
 import useNightStudyModal from "hooks/NightStudy/useNightStudyModal";
 import ProjectAllowModal from "./ProjectAllowModal";
-import DataViewModal from "../DataViewModal";
-import RejectModal from "../RejectModal";
+import DataViewModal from "../Modal/DataViewModal";
+import RejectModal from "../Modal/RejectModal";
+import styled from "styled-components";
 
 const ProjectNightStudyManager = () => {
   const {
@@ -108,7 +109,7 @@ const ProjectNightStudyManager = () => {
   }, [projectData, searchInputData, searchTagData])
 
   return (
-    <div>
+    <ProjectNightStudyContainer>
       <SearchBar
         searchInputData={searchInputData}
         searchTagData={searchTagData}
@@ -141,8 +142,19 @@ const ProjectNightStudyManager = () => {
           close={closeDataModal}
         />
       </DodamModal>
-    </div>
+    </ProjectNightStudyContainer>
   )
 }
+
+const ProjectNightStudyContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 90%;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`
 
 export default ProjectNightStudyManager
