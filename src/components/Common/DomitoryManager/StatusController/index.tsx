@@ -23,15 +23,6 @@ const StatusController = ({type, isObjectSelected, pageData = "PENDING", selecte
         enabled={isObjectSelected}
         onClick={() => selectedIds.forEach(item => allowNightStudy(item))}
       />
-      <DodamFilledButton
-        size="Medium"
-        text="일괄 거절"
-        width={144}
-        customStyle={{color:"#fff"}}
-        backgroundColorType="Negative"
-        enabled={isObjectSelected}
-        onClick={() => selectedIds.forEach(item => openRejectModal(item))}
-      />
     </ControllerContainer>
   ) : (
     <ControllerContainer>

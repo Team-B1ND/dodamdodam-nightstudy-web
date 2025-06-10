@@ -2,7 +2,7 @@ import useSearchBar from "hooks/NightStudy/useSearchBar"
 import SearchBar from "../SearchBar"
 import DataTable, { tableContentsData } from "../DataTable";
 import dateTransform from "utils/Transform/dateTransform";
-import { DodamCheckBox, DodamFilledButton } from "@b1nd/dds-web";
+import { DodamCheckBox, DodamFilledButton, DodamModal } from "@b1nd/dds-web";
 import { ReactElement, useState, useMemo, useEffect } from "react";
 import { useGetAllowedNightStudyQuery, useGetPendingNightStudyQuery } from "queries/ManageNightStudy/manageNightstudy.query";
 import { NightStudy } from "types/NightStudy/nightstudy.type";
@@ -29,7 +29,7 @@ const PersonalNightStudyManager = () => {
   const [nightStudyData, setNightStudyData] = useState<NightStudy[]>([]);
 
   // 모달 사용
-  const {modalInfo, openModalId, closeModal} = useNightStudyModal();
+  const {modalInfo:dataModalInfo, openModalId:openDataModalId, closeModal:closeDataModal} = useNightStudyModal();
   const {modalInfo:rejectModalInfo, openModalId:openRejectModalId, closeModal:closeRejectModal} = useNightStudyModal();
 
   // 일괄 승인 및 일괄 거절
@@ -149,13 +149,15 @@ const PersonalNightStudyManager = () => {
         dataLength={nightStudyData?.length}
         itemIds={nightStudyData.map(item => item.id)}
         tableContents={tableContents}
-        onColumnClick={openModalId}
+        onColumnClick={openDataModalId}
       />
-      <DataViewModal
-        isOpen={modalInfo.isOpen}
-        data={nightStudyData.find(item => item.id === modalInfo.dataId)!}
-        close={closeModal}
-      />
+      <DodamModal isOpen={dataModalInfo.isOpen} background={true}>
+        <DataViewModal
+          isOpen={dataModalInfo.isOpen}
+          data={nightStudyData?.find(item => item.id === dataModalInfo.dataId)!}
+          close={closeDataModal}
+        />
+      </DodamModal>
       <RejectModal
         isOpen={rejectModalInfo.isOpen}
         dataId={rejectModalInfo.dataId}
