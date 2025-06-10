@@ -1,5 +1,5 @@
 export interface NightStudyBanParams {
   student: number;
-  reason: string;
+  reason: string | null;
   ended: string;
 }

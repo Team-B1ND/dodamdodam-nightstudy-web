@@ -6,13 +6,14 @@ export interface NightStudy {
   content: string;
   status: "ALLOWED" | "PENDING" | "REJECTED";
   doNeedPhone: boolean;
-  reasonForPhone: string;
+  reasonForPhone: string | null;
   student: StudentType;
-  place: string;
+  rejectReason: string | null;
   startAt: string;
   endAt: string;
   createdAt: string;
   modifiedAt: string;
+  type: "NIGHT_STUDY_1" | "NIGHT_STUDY_2" | "NIGHT_STUDY_3";
 }
 
 export interface ProjectNightStudy {

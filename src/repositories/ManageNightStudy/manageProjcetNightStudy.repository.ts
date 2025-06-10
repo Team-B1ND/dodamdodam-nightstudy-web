@@ -1,11 +1,22 @@
 import { dodamAxios } from "libs/Axios/dodamAxios";
-import { ProjectStudentsResponse, ProjectUsingRoomResonse } from "types/ManageNightStudy/manageProjectNightStudy.type";
-import { ProjectNightStudyResponse } from "types/NightStudy/nightstudy.type";
+import { ProjectStudentsResponse, ProjectUsingRoomResonse, ProjectNightStudyResponse } from "types/ManageNightStudy/manageProjectNightStudy.type";
 
 class ManageProjcetNightStudyRepository {
   // 프로젝트 심자 가져오기
   public async getProjects(): Promise<ProjectNightStudyResponse> {
     const { data } = await dodamAxios.get("/night-study/projects");
+    return data;
+  }
+
+  // 승인된 프로젝트 심자 가져오기
+  public async getAllowedProjects(): Promise<ProjectNightStudyResponse> {
+    const { data } = await dodamAxios.get("/night-study/project/allowed");
+    return data;
+  }
+
+  // 대기중인 프로젝트 심자 가져오기
+  public async getPendingProjects(): Promise<ProjectNightStudyResponse> {
+    const { data } = await dodamAxios.get("/night-study/project/pending");
     return data;
   }
 
@@ -18,12 +29,6 @@ class ManageProjcetNightStudyRepository {
   // 사용중인 실 가져오기
   public async getProjectUsingLab(): Promise<ProjectUsingRoomResonse> {
     const { data } = await dodamAxios.get("night-study/project/rooms");
-    return data;
-  }
-
-  // 대기중인 심자 조회
-  public async getPendingProjcet(): Promise<ProjectNightStudyResponse> {
-    const { data } = await dodamAxios.get("/night-study/project/pending");
     return data;
   }
 

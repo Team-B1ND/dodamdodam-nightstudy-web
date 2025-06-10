@@ -11,6 +11,18 @@ class ManageNightStudyRepository {
     return data;
   }
 
+  // 승인된 일반 심자 조회
+  public async getAllowedStudys(): Promise<NightStudyResponse> {
+    const { data } = await dodamAxios.get("/night-study");
+    return data;
+  }
+
+  // 대기 중인 일반 심자 조회
+  public async getPendingStudys(): Promise<NightStudyResponse> {
+    const { data } = await dodamAxios.get("/night-study/pending");
+    return data;
+  }
+
   // id로 일반 심자 허용
   public async allowNightStudy(id: number): Promise<void> {
     await dodamAxios.patch(`/night-study/${id}/allow`);
