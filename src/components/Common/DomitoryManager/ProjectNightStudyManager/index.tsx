@@ -47,12 +47,12 @@ const ProjectNightStudyManager = () => {
   
   const tableContents = useMemo(() => {
     return new Map<string, tableContentsData>([
-      ["프로젝트명", [projectData?.map(item => item.name), 140]],
+      ["프로젝트명", [projectData?.map(item => item.name), 160]],
       ["프로젝트 설명", [projectData?.map(item => item.description), 200]],
       ["진행시간", [projectData?.map(item => item.type === "NIGHT_STUDY_PROJECT_1" ? "심자 1" : "심자 2"), 64]],
       ["장소", [projectData?.map(item => item.room || "미지정"), 120]],
-      ["시작일", [projectData?.map(item => item.startAt), 120]],
-      ["종료일", [projectData?.map(item => item.endAt), 120]],
+      ["시작일", [projectData?.map(item => item.startAt), 144]],
+      ["종료일", [projectData?.map(item => item.endAt), 144]],
       ["상태 제어", [projectData?.map(item => (
         item.status === "ALLOWED"
         ? <DodamFilledButton

@@ -21,7 +21,8 @@ export const DataTableNotContents = styled.div`
 `
 
 export const DataTableBlock = styled.div<{ $size: number | "FILL" }>`
-  display: ${({$size}) => ($size === "FILL" || $size !== 160) ? "flex" : ""};
+  display: ${({$size}) => ($size === "FILL" || $size < 160) ? "flex" : ""};
+  text-align: start;
   justify-content: ${({$size}) => ($size === 40 || $size === 64 || $size === "FILL") ? "center" : "flex-start"};
   padding: ${({ $size }) => ($size === 40 || $size === 64 || $size === "FILL") ? "0" : "0 8px"};
   width: ${({ $size }) => $size === "FILL" ? "" : `${$size}px`};
