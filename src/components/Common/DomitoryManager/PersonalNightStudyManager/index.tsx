@@ -24,8 +24,8 @@ const PersonalNightStudyManager = () => {
 
   const {allowNightStudy, revertNightStudy} = useManageNightStudy();
 
-  const {data: allowedNightStudyData} = useGetAllowedNightStudyQuery();
-  const {data: pendingNightStudyData} = useGetPendingNightStudyQuery();
+  const {data: allowedNightStudyData, isLoading: isAllowNightStudyLoading} = useGetAllowedNightStudyQuery();
+  const {data: pendingNightStudyData, isLoading: isPendingNightStudyLoading} = useGetPendingNightStudyQuery();
   const [nightStudyData, setNightStudyData] = useState<NightStudy[]>([]);
 
   // 모달 사용
@@ -145,6 +145,7 @@ const PersonalNightStudyManager = () => {
         openRejectModal={openRejectModalId}
       />
       <DataTable
+        isDataLoading={isAllowNightStudyLoading || isPendingNightStudyLoading}
         key={`${nightStudyData?.length}-${nightStudyData?.map(item => item.id).join(',')}-${isSelectAll}-${selectedNightStudy.length}`}
         dataLength={nightStudyData?.length}
         itemIds={nightStudyData.map(item => item.id)}

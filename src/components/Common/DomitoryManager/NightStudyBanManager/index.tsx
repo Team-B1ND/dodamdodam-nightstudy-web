@@ -21,7 +21,7 @@ const NightStudyBanManager = () => {
   const {deleteBan} = useBanStudent();
   const {modalInfo, closeModal, openModalId} = useNightStudyModal();
 
-  const {data:banMemberData} = useGetBanMemberQuery();
+  const {data:banMemberData, isLoading} = useGetBanMemberQuery();
   const [banData, setBanData] = useState<StudentBanType[]>([]);
 
   // 필터링 및 검색
@@ -83,6 +83,7 @@ const NightStudyBanManager = () => {
         handleTagSelect={handleTagSelect}
       />
       <DataTable
+        isDataLoading={isLoading}
         key={`${banData?.length}-${banData?.map(item => item.id).join(',')}`}
         tableContents={tableContents}
         itemIds={banData?.map(item => item.id)}

@@ -9,9 +9,10 @@ export interface DataTableProps {
   itemIds: number[];
   dataLength: number;
   onColumnClick: (id: number) => void;
+  isDataLoading: boolean;
 }
 
-const DataTable = ({tableContents, dataLength, onColumnClick, itemIds}: DataTableProps) => {
+const DataTable = ({tableContents, dataLength, onColumnClick, itemIds, isDataLoading}: DataTableProps) => {
   const [columnData] = useState<tableContentsData[]>(Array.from(tableContents.values()));
   return (
     <S.DataTableContainer>
@@ -27,7 +28,7 @@ const DataTable = ({tableContents, dataLength, onColumnClick, itemIds}: DataTabl
         />
       )) : (
         <S.DataTableNotContents>
-          검색에 부합하는 결과가 없거나, 데이터가 없습니다!
+          {isDataLoading ? "데이터를 불러오는 중입니다..." : "검색에 부합하는 결과가 없거나, 데이터가 없습니다!"}
         </S.DataTableNotContents>
       )}
     </S.DataTableContainer>

@@ -21,8 +21,8 @@ const ProjectNightStudyManager = () => {
   } = useSearchBar("PROJECT");
   const {revertProject} = useManageNightStudy();
 
-  const {data: allowedProjectData} = useGetAllowedProjectQuery();
-  const {data: pendingProjectData} = useGetPendingProjectQuery();
+  const {data: allowedProjectData, isLoading: isAllowProjectLoading} = useGetAllowedProjectQuery();
+  const {data: pendingProjectData, isLoading: isPendingProjectLoading} = useGetPendingProjectQuery();
   const [projectData, setProjectData] = useState<ProjectNightStudy[]>([]);
 
   // 각각 승인, 데이터, 거절 모달
@@ -117,6 +117,7 @@ const ProjectNightStudyManager = () => {
         handleTagSelect={handleTagSelect}
       />
       <DataTable
+        isDataLoading={isAllowProjectLoading || isPendingProjectLoading}
         key={`${projectData?.length}-${projectData?.map(item => item.id).join(',')}`}
         tableContents={tableContents}
         itemIds={projectData.map(item => item.id)}
