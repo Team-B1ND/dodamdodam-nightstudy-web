@@ -14,7 +14,6 @@ export interface NightStudy {
   endAt: string;
   createdAt: string;
   modifiedAt: string;
-  type: "NIGHT_STUDY_1" | "NIGHT_STUDY_2" | "NIGHT_STUDY_3";
 }
 
 export interface ProjectNightStudy {

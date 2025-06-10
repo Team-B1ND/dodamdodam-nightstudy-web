@@ -33,11 +33,6 @@ class NightStudyRepository {
     const { data } = await dodamAxios.get<ProjectRoomsResponse>("night-study/project/rooms");
     return data.data;
   }
-
-  public async getProjectRooms(): Promise<ProjectRoom[]> {
-    const { data } = await dodamAxios.get<ProjectRoomsResponse>("night-study/project/rooms");
-    return data.data;
-  }
 }
 
 const nightStudyRepository = new NightStudyRepository();
