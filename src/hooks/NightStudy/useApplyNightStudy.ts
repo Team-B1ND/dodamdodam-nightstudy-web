@@ -25,6 +25,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
   const [applyNightStudyData, setApplyNightStudyData] =
     useState<ApplyNightStudyParam | ApplyProjectNightStudyParam>(
       isPersonalPage ? {
+        type: "NIGHT_STUDY_1",
         content: "",
         doNeedPhone: false,
         reasonForPhone: "",
@@ -32,8 +33,8 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
         endAt: dateTransform.hyphen(),
       } : {
         type: "NIGHT_STUDY_PROJECT_1",
-        startAt: dateTransform.hyphen(dayjs().add(1, 'day').toDate()),
-        endAt: dateTransform.hyphen(dayjs().add(1, 'day').toDate()),
+        startAt: dateTransform.hyphen(),
+        endAt: dateTransform.hyphen(),
         name: "",
         description: "",
         students: [],
@@ -52,6 +53,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
 
   const resetNightStudyContent = () => {
     setApplyNightStudyData(isPersonalPage ? {
+      type:"NIGHT_STUDY_1",
       content: "",
       doNeedPhone: false,
       reasonForPhone: "",
@@ -59,8 +61,8 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
       endAt: dateTransform.hyphen(),
     } : {
       type: "NIGHT_STUDY_PROJECT_1",
-      startAt: dateTransform.hyphen(dayjs().add(1, 'day').toDate()),
-      endAt: dateTransform.hyphen(dayjs().add(1, 'day').toDate()),
+      startAt: dateTransform.hyphen(),
+      endAt: dateTransform.hyphen(),
       name: "",
       description: "",
       students: [],
@@ -79,15 +81,35 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
     })
   }
 
+  // 개인 심자 시간 변경 함수
+  const handlePersonalType = (type : number) => {
+    setApplyNightStudyData((prev) => {
+      if (checkApplyNightStudy(prev)) {
+        return {
+          ...prev,
+          type: type === 1
+          ? "NIGHT_STUDY_1"
+          : type === 2
+            ? "NIGHT_STUDY_2"
+            : "NIGHT_STUDY_3"
+        }
+      }
+      return prev
+    })
+  }
+
   // 프로젝트 심자 시간 변경 함수
   const handleProjectType = (type : string) => {
-    setApplyNightStudyData((prev) => (
-      { ...prev,
-        type: type === "심자 1"
-        ? "NIGHT_STUDY_PROJECT_1"
-        : "NIGHT_STUDY_PROJECT_2" }
-      )
-    )
+    setApplyNightStudyData((prev) => {
+      if (!checkApplyNightStudy(prev)) {
+        return {
+          ...prev,
+          type: type === "심자 1"
+          ? "NIGHT_STUDY_PROJECT_1"
+          : "NIGHT_STUDY_PROJECT_2" }
+      }
+      return prev
+    })
   }
 
   // datePicker date 변경 함수 && startAt, endAt 값 변경 함수
@@ -183,7 +205,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
       applyProjcetNightStudyMutation.mutate(applyNightStudyData as ApplyProjectNightStudyParam, {
         onSuccess: () => {
           queryClient.invalidateQueries(QUERY_KEYS.nightStudy.getMyProjectNightStudy);
-          B1ndToast.showSuccess("심자 신청에 성공하였습니다.");
+          B1ndToast.showSuccess("심자 신청에 성공하였습니다. 자치위원의 심사를 거친 후 심자실 배정 또는 거절이 이루어집니다.");
           setEnabled(true);
           resetNightStudyContent();
         },
@@ -196,6 +218,46 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
     }
   };
 
+  // 프로젝트 실 사용 가능 여부 확인 함수
+  const isRoomAvailable = (roomName: nightStudyProjectRoom): boolean => {
+    if (!projectRooms || projectRoomsLoading || !roomName) return true;
+    
+    const selectedStartDate = new Date(
+      checkApplyNightStudy(applyNightStudyData) 
+        ? applyNightStudyData.startAt 
+        : applyNightStudyData.startAt
+    );
+    const selectedEndDate = new Date(
+      checkApplyNightStudy(applyNightStudyData) 
+        ? applyNightStudyData.endAt 
+        : applyNightStudyData.endAt
+    );
+    
+    return !projectRooms.some(room => {
+      if (room.room !== roomName) return false;
+      
+      const roomStartDate = new Date(room.startAt);
+      const roomEndDate = new Date(room.endAt);
+      
+      return (
+        (selectedStartDate <= roomEndDate && selectedStartDate >= roomStartDate) ||
+        (selectedEndDate <= roomEndDate && selectedEndDate >= roomStartDate) ||
+        (selectedStartDate <= roomStartDate && selectedEndDate >= roomEndDate)
+      );
+    });
+  };
+
+  const getUsedRooms = () => {
+    if (!projectRooms) return [];
+    
+    return projectRooms.map(room => ({
+      room: room.room,
+      project: room.project,
+      type: room.type === "NIGHT_STUDY_PROJECT_1" ? "심자 1" : "심자 2",
+      period: `${room.startAt} ~ ${room.endAt}`
+    }));
+  };
+
   return {
     enabled,
     placeData,
@@ -203,6 +265,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
     projectRooms,
     projectRoomsLoading,
     handleChangeDate,
+    handlePersonalType,
     handleChangeCheckBox,
     handleChangeTextArea,
     handleKeyDown,
@@ -210,5 +273,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
     checkApplyNightStudy,
     handleProjectType,
     handleProjectMember,
+    isRoomAvailable,
+    getUsedRooms,
   };
 };

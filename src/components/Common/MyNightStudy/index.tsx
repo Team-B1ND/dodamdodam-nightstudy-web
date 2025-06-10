@@ -1,8 +1,7 @@
-import { DodamColor, DodamDivider, DodamTag, Trash } from "@b1nd/dds-web";
+import { DodamColor, DodamDivider, DodamTag } from "@b1nd/dds-web";
 import * as S from "./style";
 import { useTheme } from "styled-components";
 import dateTransform from "utils/Transform/dateTransform";
-import useDeleteMyNightStudy from "hooks/NightStudy/useDeleteMyNightStudy";
 import { useGetMyNightStudyQuery, useGetMyProjectNightStudyQuery } from "queries/NightStudy/nightstudy.query";
 import MyNightStudyNull from "components/Common/Null/MyNightStudyNull/index";
 import { NightStudy, ProjectNightStudy } from "types/NightStudy/nightstudy.type";
@@ -14,7 +13,6 @@ interface Props {
 
 const MyNightStudy = ({ type, isPersonalPage }: Props) => {
   const theme = useTheme();
-  const { handleClickDelete } = useDeleteMyNightStudy();
   const { data: MyNightStudyData } = useGetMyNightStudyQuery({
     suspense: true,
   });
@@ -54,9 +52,6 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
                     backgroundColor: item.status === "REJECTED" ? DodamColor.red50 : item.status === "PENDING" ? theme.lineNormal : DodamColor.blue50,
                   }}
                 />
-                <S.IconWrap onClick={() => handleClickDelete(item.id, isPersonalPage ? "PERSONAL" : "PROJECT")}>
-                  <Trash color="lineNormal" />
-                </S.IconWrap>
               </S.TitleWrap>
               <S.ProjectName>{checkNightStudy(item) || item.name}</S.ProjectName>
               <p>{checkNightStudy(item) ? item.content : item.description}</p>
@@ -70,16 +65,22 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
                 종료<span>{dateTransform.monthDay(item.endAt)}</span>
               </S.Date>
             </S.DateWrap>
-            {checkNightStudy(item) || 
+            {checkNightStudy(item) ?
+              <S.DateWrap>
+                <S.Date>
+                  심자<span>{`${item.type.substring(item.type.length-1)}까지`}</span>
+                </S.Date>
+              </S.DateWrap>
+            : (
               <S.DateWrap>
                 <S.Date>
                   심자<span>{checkNightStudy(item) || item.type === "NIGHT_STUDY_PROJECT_1" ? 1 : 2}</span>
                 </S.Date>
                 <S.Date>
-                  사용 실<span>{checkNightStudy(item) ? "없음" : `랩 ${item.room?.slice(-2)}실`}</span>
+                  사용 실<span>{checkNightStudy(item) ? "없음" : item.room ? `랩 ${item.room?.slice(-2)}실` : "지정 대기중"}</span>
                 </S.Date>
               </S.DateWrap>
-            }
+            )}
           </S.Wrap>
         ))
       )}
