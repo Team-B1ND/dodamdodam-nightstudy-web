@@ -13,7 +13,7 @@ export const SearchBarInputContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-  width: 400px;
+  width: 30%;
   height: 48px;
   background-color: ${({ theme }) => theme.fillNormal};
   ${DodamShape.Small}
@@ -29,6 +29,8 @@ export const SearchBarInputContainer = styled.div`
     border: none;
     outline: none;
   }
+
+
 `
 
 export const SearchBarTagContainer = styled.div`

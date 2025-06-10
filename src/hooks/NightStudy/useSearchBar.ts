@@ -1,9 +1,10 @@
 import { SEARCH_BAR_DATA, searchBarDataName } from "constants/ManageSearchTag/manageSearchTag";
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 interface searchTagType {
   text: string;
   isSelected: boolean;
+  value: string;
 }
 
 export interface searchTagObject {
@@ -13,7 +14,7 @@ export interface searchTagObject {
 
 const useSearchBar = (type: searchBarDataName) => {
   const [searchInputData, setSearchInputData] = useState<string>("");
-  const [searchTagData, setSearchTagData] = useState<searchTagObject[]>([]);
+  const [searchTagData, setSearchTagData] = useState<searchTagObject[]>(SEARCH_BAR_DATA.find(item => item.name === type)!.data);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInputData(e.target.value);
@@ -35,10 +36,6 @@ const useSearchBar = (type: searchBarDataName) => {
       })
     );
   }
-
-  useEffect(() => {
-    setSearchTagData(SEARCH_BAR_DATA.find(item => item.name === type)!.data)
-  }, [])
 
   return {
     searchInputData,
