@@ -1,8 +1,11 @@
-import { DodamCheckBox } from "@b1nd/dds-web"
-import { DataTableProps } from ".."
-import { useState } from "react"
+import { ReactElement, useState } from "react"
 import { DataTableBlock } from "../style";
 import styled from "styled-components";
+import { tableContentsData } from "..";
+
+interface DataTableProps {
+  tableContents: Map<string | ReactElement, tableContentsData>;
+}
 
 const DataHeader = ({tableContents}: DataTableProps) => {
   const [headerData] = useState(
@@ -24,6 +27,7 @@ const DataHeader = ({tableContents}: DataTableProps) => {
 const DataHeaderContainer = styled.div`
   display: flex;
   width: 100%;
+  min-height: 48px;
   align-items: center;
   border-bottom: 1px solid ${({ theme }) => theme.lineNormal};
 `
