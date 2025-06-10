@@ -5,6 +5,7 @@ import * as S from "./style";
 import StudyInfo from "../StudyInfo";
 import { DodamDivider, DodamFilledButton } from "@b1nd/dds-web";
 import { ApplyNightStudyParam } from "repositories/NightStudy/nightstudy.param";
+import PeriodSlider from "../PeriodSlider";
 
 const PersonalNightStudy = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
   const { ...applyNightStudy } = useApplyNightStudy(isPersonalPage);
@@ -12,6 +13,8 @@ const PersonalNightStudy = ({ isPersonalPage }: { isPersonalPage: boolean }) => 
   return (
     <>
       <S.ApplyInfoContainer>
+        <PeriodSlider handlePersonalType={applyNightStudy.handlePersonalType}/>
+        <DodamDivider type="Small" />
         <S.ApplyInfo>
           <ApplyPeriod
             applyNightStudyData={applyNightStudy.applyNightStudyData}
@@ -28,7 +31,6 @@ const PersonalNightStudy = ({ isPersonalPage }: { isPersonalPage: boolean }) => 
               handleChangeNeedPhone={applyNightStudy.handleChangeCheckBox}
               handleChangeReasonForPhone={applyNightStudy.handleChangeTextArea}
             />
-            <DodamDivider type="Small" />
           </S.InfoContainer>
         </S.ApplyInfo>
         <DodamDivider type="Small" />

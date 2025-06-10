@@ -1,7 +1,8 @@
-import { nightStudyProjectRoom, nightStudyType } from "types/Apply/apply.type";
+import { nightStudyProjectRoom, nightStudyType, personalNightStudyType } from "types/Apply/apply.type";
 import { Response } from "../Util/response";
 
 export interface NightStudy {
+  type: personalNightStudyType;
   id: number;
   content: string;
   status: "ALLOWED" | "PENDING" | "REJECTED";
