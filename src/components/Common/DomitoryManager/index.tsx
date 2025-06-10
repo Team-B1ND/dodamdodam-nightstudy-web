@@ -37,6 +37,10 @@ const ManagerWarp = styled.div`
   padding: 58px 32px 58px 16px;
   width: 100%;
   height: 100%;
+
+  @media (max-width: 1069px) {
+  padding: 58px 32px;
+  }
 `
 const ManagerContainer = styled.div`
   ${DodamShape.Large};

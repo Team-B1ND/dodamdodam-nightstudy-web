@@ -6,3 +6,12 @@ export const PLACE_ITEMS : Place[] = [
   { id: 3, name: "LAB_14", title: "랩 14실", isAtv: false },
   { id: 4, name: "LAB_15", title: "랩 15실", isAtv: false },
 ];
+
+export const NIGHT_STUDY_TIME = {
+  "NIGHT_STUDY_1": "심자 1",
+  "NIGHT_STUDY_2": "심자 2",
+  "NIGHT_STUDY_3": "심자 3",
+  "NIGHT_STUDY_PROJECT_1": "심자 1",
+  "NIGHT_STUDY_PROJECT_2": "심자 2",
+  "NIGHT_STUDY_PROJECT_3": "심자 3",
+}
