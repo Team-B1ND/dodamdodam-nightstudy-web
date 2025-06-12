@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { useGetProjectUsingLab } from "queries/ManageNightStudy/manageProjectNightStudy.query";
+import { useGetProjectUsingLabQuery } from "queries/ManageNightStudy/manageProjectNightStudy.query";
 
 export const useAvailableProjectLabs = (targetType: string) => {
-  const { data } = useGetProjectUsingLab();
+  const { data } = useGetProjectUsingLabQuery();
 
   const result = useMemo(() => {
     const usedRooms = data?.data?.filter(lab => lab.type === targetType) || [];

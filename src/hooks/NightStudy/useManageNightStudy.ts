@@ -75,7 +75,7 @@ const useManageNightStudy = () => {
   const rejectProject = (params: {id: number, rejectReason: string}, closeModal: () => void) => {
     rejectProjectMutation.mutate(params, {
       onSuccess: async () => {
-        B1ndToast.showSuccess("프로젝트 심자 대기 성공");
+        B1ndToast.showSuccess("프로젝트 심자 거절 성공");
         closeModal();
         return queryClient.invalidateQueries(
           [QUERY_KEYS.manageNightStudy.getAllowedProjectNightStudy, QUERY_KEYS.manageNightStudy.getPendingProjectNightStudy]

@@ -14,8 +14,8 @@ export const SEARCH_BAR_DATA: searchBarDataType[] = [
       {
         name: "상태",
         tags: [
-          {text:"대기중", isSelected: true, value: "PENDING"},
-          {text:"수락됨", isSelected: false, value: "ALLOWED"},
+          {text:"수락됨", isSelected: true, value: "ALLOWED"},
+          {text:"대기중", isSelected: false, value: "PENDING"},
         ]
       },
       {
@@ -45,8 +45,8 @@ export const SEARCH_BAR_DATA: searchBarDataType[] = [
       {
         name: "상태",
         tags: [
-          {text:"대기중", isSelected: true, value: "PENDING"},
-          {text:"수락됨", isSelected: false, value: "ALLOWED"}
+          {text:"수락됨", isSelected: true, value: "ALLOWED"},
+          {text:"대기중", isSelected: false, value: "PENDING"},
         ]
       },
       {

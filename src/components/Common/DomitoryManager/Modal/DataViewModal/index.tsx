@@ -50,7 +50,7 @@ const DataViewModal = ({data, close, isOpen}: PersonalModalProps) => {
         <S.PersonalDataContainer>
           <S.PersonalItemContainer $size="SMALL">
             <p>프로젝트 인원</p>
-            {data.participants?.map((item) => `${item.grade}${item.room}${item.number > 9 ? item.number : `0${item.number}`}${item.name}`)}
+            {data.members?.map((item) => `${item.grade}${item.room}${item.number > 9 ? item.number : `0${item.number}`}${item.name}`)}
           </S.PersonalItemContainer>
         </S.PersonalDataContainer>
       ) : (

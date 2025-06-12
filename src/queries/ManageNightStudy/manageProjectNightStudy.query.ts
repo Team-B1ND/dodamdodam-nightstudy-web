@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 import { QUERY_KEYS } from "queries/queryKey";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
 import manageProjcetNightStudyRepository from "repositories/ManageNightStudy/manageProjcetNightStudy.repository";
-import { ProjectNightStudyResponse, ProjectUsingRoomResonse } from "types/ManageNightStudy/manageProjectNightStudy.type";
+import { ProjectNightStudyResponse, ProjectStudentsResponse, ProjectUsingRoomResonse } from "types/ManageNightStudy/manageProjectNightStudy.type";
 
 export const useGetAllowedProjectQuery = (
   options?: UseQueryOptions<
@@ -66,7 +66,7 @@ export const useRejectProjectMutation = () => {
 };
 
 // 사용중인 실 가져오기
-export const useGetProjectUsingLab = (
+export const useGetProjectUsingLabQuery = (
   options?: UseQueryOptions<
     ProjectUsingRoomResonse,
     AxiosError,
@@ -83,3 +83,21 @@ export const useGetProjectUsingLab = (
       cacheTime: 1000 * 60 * 60,
     }
   );
+
+export const useGetProjectStudentsQuery = (
+  options?: UseQueryOptions<
+    ProjectStudentsResponse,
+    AxiosError,
+    ProjectStudentsResponse,
+    string
+  >
+) =>
+  useQuery(
+    QUERY_KEYS.manageNightStudy.getProjcetStudent,
+    () => manageProjcetNightStudyRepository.getProjectStudents(),
+    {
+      ...options,
+      staleTime: 1000 * 60 * 60,
+      cacheTime: 1000 * 60 * 60,
+    }
+  )

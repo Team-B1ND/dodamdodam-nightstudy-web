@@ -13,6 +13,8 @@ import styled from "styled-components";
 import DataViewModal from "../Modal/DataViewModal";
 import { NIGHT_STUDY_TIME } from "constants/NightStudy/nightStudy.constant";
 import RejectModal from "../Modal/RejectModal";
+import ExtractExcelData from "../ExtractExcelData";
+import dayjs from "dayjs";
 
 const PersonalNightStudyManager = () => {
   const {
@@ -137,13 +139,35 @@ const PersonalNightStudyManager = () => {
         handleInput={handleInput}
         handleTagSelect={handleTagSelect}
       />
-      <StatusController
-        type="PERSONAL"
-        isObjectSelected={selectedNightStudy.length > 0}
-        pageData={searchTagData.find(item => item.name === "상태")?.tags.find(item => item.isSelected)?.value!}
-        selectedIds={selectedNightStudy}
-        openRejectModal={openRejectModalId}
-      />
+      <ManageMenuContainer>
+        <StatusController
+          type="PERSONAL"
+          isObjectSelected={selectedNightStudy.length > 0}
+          pageData={searchTagData.find(item => item.name === "상태")?.tags.find(item => item.isSelected)?.value!}
+          selectedIds={selectedNightStudy}
+          openRejectModal={openRejectModalId}
+        />
+        {searchTagData.find(item => item.name === "상태")?.tags.find(item => item.isSelected)?.value === "ALLOWED"
+        && <ExtractExcelData
+          excelData={nightStudyData.map((data, idx)=> ({
+            번호: idx + 1,
+            이름: data.student.name,
+            학번:
+              data.student.number < 10
+                ? `${data.student.grade}${data.student.room}0${data.student.number}`
+                : `${data.student.grade}${data.student.room}${data.student.number}`,
+            심자2:
+              data.type === "NIGHT_STUDY_2" || data.type === "NIGHT_STUDY_3"
+                ? "□"
+                : "",
+            연장: data.type === "NIGHT_STUDY_3" ? "O" : "",
+            복귀: "□",
+            핸드폰여부: data.doNeedPhone ? "O" : "",
+          }))}
+          fileName={dayjs().format("YYYY-MM-DD") + " 심자 중인 학생"}
+          separateByGrade
+        />}
+      </ManageMenuContainer>
       <DataTable
         isDataLoading={isAllowNightStudyLoading || isPendingNightStudyLoading}
         key={`${nightStudyData?.length}-${nightStudyData?.map(item => item.id).join(',')}-${isSelectAll}-${selectedNightStudy.length}`}
@@ -178,6 +202,12 @@ const PersonalNightStudyContainer = styled.section`
   &::-webkit-scrollbar {
     display: none;
   }
+`
+
+const ManageMenuContainer = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
 `
 
 export default PersonalNightStudyManager

@@ -15,6 +15,17 @@ export interface ProjectStudentsResponse extends Response {
   data: ProjectStudentType[];
 }
 
+
+export interface ProjectNightStudyMembers {
+  id: number;
+  name: string;
+  grade: number;
+  room: number;
+  number: number;
+  profileImage: string;
+  role: "LEADER" | "MEMBER";
+}
+
 export interface ProjectNightStudy {
   id: number;
   type: "NIGHT_STUDY_PROJECT_1" | "NIGHT_STUDY_PROJECT_2";
@@ -24,8 +35,7 @@ export interface ProjectNightStudy {
   description: string;
   startAt: string;
   endAt: string;
-  leader: StudentType;
-  participants: StudentType[];
+  members: ProjectNightStudyMembers[];
 }
 
 export interface ProjectNightStudyResponse extends Response {

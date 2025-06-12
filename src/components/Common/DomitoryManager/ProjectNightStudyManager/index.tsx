@@ -11,6 +11,8 @@ import ProjectAllowModal from "./ProjectAllowModal";
 import DataViewModal from "../Modal/DataViewModal";
 import RejectModal from "../Modal/RejectModal";
 import styled from "styled-components";
+import ExtractExcelData from "../ExtractExcelData";
+import dayjs from "dayjs";
 
 const ProjectNightStudyManager = () => {
   const {
@@ -116,6 +118,22 @@ const ProjectNightStudyManager = () => {
         handleInput={handleInput}
         handleTagSelect={handleTagSelect}
       />
+      {searchTagData.find(item => item.name === "상태")?.tags.find(item => item.isSelected)?.value === "ALLOWED"
+        && <ExtractExcelData
+          excelData={(() => {
+            let i = 1;
+            return projectData.map((data) => data.members.map((member) => ({
+              번호 : i++,
+              이름 : member.name,
+              학번 : `${member.grade}${member.room}${member.number > 9 ? member.number : `0${member.number}`}`,
+              프로젝트명 : data.name,
+              장소 : data.room,
+              심자체크 : "",
+              복귀체크 : "",
+            }))).flat()
+          })()}
+          fileName={dayjs().format("YYYY-MM-DD") + " 프로젝트 심자 중인 학생"}
+        />}
       <DataTable
         isDataLoading={isAllowProjectLoading || isPendingProjectLoading}
         key={`${projectData?.length}-${projectData?.map(item => item.id).join(',')}`}
