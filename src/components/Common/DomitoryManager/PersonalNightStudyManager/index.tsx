@@ -86,6 +86,7 @@ const PersonalNightStudyManager = () => {
       ["종료일", [nightStudyData?.map(item => dateTransform.hyphen(item.endAt)), 120]],
       ["휴대폰", [nightStudyData?.map(item => item.doNeedPhone ? "O" : "X"), 64]],
       ["필요 이유", [nightStudyData?.map(item => item.reasonForPhone || "-"), 160]],
+      ["",[Array.from({length:nightStudyData.length}).map((_) => ""), 32]],
       ["상태 제어", [nightStudyData?.map(item => (
         item.status === "ALLOWED"
         ? <DodamFilledButton
@@ -153,16 +154,16 @@ const PersonalNightStudyManager = () => {
             번호: idx + 1,
             이름: data.student.name,
             학번:
-              data.student.number < 10
-                ? `${data.student.grade}${data.student.room}0${data.student.number}`
-                : `${data.student.grade}${data.student.room}${data.student.number}`,
+            data.student.number < 10
+            ? `${data.student.grade}${data.student.room}0${data.student.number}`
+            : `${data.student.grade}${data.student.room}${data.student.number}`,
             심자2:
-              data.type === "NIGHT_STUDY_2" || data.type === "NIGHT_STUDY_3"
-                ? "□"
-                : "",
+            data.type === "NIGHT_STUDY_2" || data.type === "NIGHT_STUDY_3"
+            ? "□"
+            : "",
             연장: data.type === "NIGHT_STUDY_3" ? "O" : "",
-            복귀: "□",
             핸드폰여부: data.doNeedPhone ? "O" : "",
+            복귀: "□",
           }))}
           fileName={dayjs().format("YYYY-MM-DD") + " 심자 중인 학생"}
           separateByGrade

@@ -55,6 +55,7 @@ const ProjectNightStudyManager = () => {
       ["장소", [projectData?.map(item => item.room || "미지정"), 120]],
       ["시작일", [projectData?.map(item => item.startAt), 144]],
       ["종료일", [projectData?.map(item => item.endAt), 144]],
+      ["", [Array.from({length:projectData.length}).map((_) => ""), 72]],
       ["상태 제어", [projectData?.map(item => (
         item.status === "ALLOWED"
         ? <DodamFilledButton

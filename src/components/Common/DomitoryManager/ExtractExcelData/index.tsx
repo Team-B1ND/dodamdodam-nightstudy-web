@@ -1,3 +1,4 @@
+import { DodamTypography } from "@b1nd/dds-web";
 import * as ExcelJS from "exceljs";
 import { RiFileExcel2Line } from "react-icons/ri";
 import styled from "styled-components";
@@ -31,7 +32,7 @@ const ExtractExcelData = ({
     const grouped: Record<string, ExcelRowData[]> = {};
 
     data.forEach((item) => {
-      const grade = extractGrade(item);
+      const grade = extractGrade(item) === "3" ? "2" : extractGrade(item);
       if (!grouped[grade]) {
         grouped[grade] = [];
       }
@@ -150,10 +151,9 @@ const ExtractExcelData = ({
         //각 학년별로 시트 생성
         grades.forEach((grade) => {
           const gradeData = groupedData[grade];
-          const worksheetName = `${grade}학년`;
+          const worksheetName = `${grade === "2" ? "2, 3" : "1"}학년`;
           createStyledWorksheet(workbook, gradeData, worksheetName);
         });
-        createStyledWorksheet(workbook, excelData, "전체");
       } else {
         createStyledWorksheet(workbook, excelData, sheetName);
       }
@@ -193,9 +193,9 @@ const ExcelButton = styled.button`
   border: none;
   border-radius: 5px;
   padding: 3px;
-  font-size: 14px;
+  ${DodamTypography.Caption1.Bold}
   color: #fff;
-  background-color: #27ae60;
+  background-color: ${({ theme }) => theme.statusPositive};
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -205,8 +205,7 @@ const ExcelButton = styled.button`
   transition: all 0.18s ease-in-out;
 
   &:hover {
-    box-shadow: 0 0 0 1px #fff, 0 0 0 3px #a5d6a7;
-    background-color: #196c3a;
+    filter: brightness(0.8);
   }
 
   &:active {
