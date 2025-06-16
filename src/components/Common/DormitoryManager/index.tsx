@@ -39,7 +39,8 @@ const ManagerWarp = styled.div`
   height: 100%;
 
   @media (max-width: 1069px) {
-  padding: 58px 32px;
+    padding: 58px 32px;
+    height: 100vh;
   }
 `
 const ManagerContainer = styled.div`
