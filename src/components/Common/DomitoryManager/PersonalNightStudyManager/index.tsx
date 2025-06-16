@@ -3,18 +3,18 @@ import SearchBar from "../SearchBar"
 import DataTable, { tableContentsData } from "../DataTable";
 import dateTransform from "utils/Transform/dateTransform";
 import { DodamCheckBox, DodamFilledButton, DodamModal } from "@b1nd/dds-web";
-import { ReactElement, useState, useMemo, useEffect } from "react";
+import { ReactElement, useState, useMemo } from "react";
 import { useGetAllowedNightStudyQuery, useGetPendingNightStudyQuery } from "queries/ManageNightStudy/manageNightstudy.query";
-import { NightStudy } from "types/NightStudy/nightstudy.type";
 import StatusController from "../StatusController";
-import useManageNightStudy from "hooks/NightStudy/useManageNightStudy";
-import useNightStudyModal from "hooks/NightStudy/useNightStudyModal";
+import useManageNightStudy from "hooks/NightStudy/ManageNightStudy/useManageNightStudy";
+import useNightStudyModal from "hooks/NightStudy/ManageNightStudy/useNightStudyModal";
 import styled from "styled-components";
 import DataViewModal from "../Modal/DataViewModal";
 import { NIGHT_STUDY_TIME } from "constants/NightStudy/nightStudy.constant";
 import RejectModal from "../Modal/RejectModal";
 import ExtractExcelData from "../ExtractExcelData";
 import dayjs from "dayjs";
+import useNightStudyFilter from "hooks/NightStudy/ManageNightStudy/Filters/useNightStudyFilter";
 
 const PersonalNightStudyManager = () => {
   const {
@@ -28,7 +28,9 @@ const PersonalNightStudyManager = () => {
 
   const {data: allowedNightStudyData, isLoading: isAllowNightStudyLoading} = useGetAllowedNightStudyQuery();
   const {data: pendingNightStudyData, isLoading: isPendingNightStudyLoading} = useGetPendingNightStudyQuery();
-  const [nightStudyData, setNightStudyData] = useState<NightStudy[]>([]);
+
+  // 필터링 및 검색
+  const {nightStudyData} = useNightStudyFilter(searchInputData, searchTagData, allowedNightStudyData, pendingNightStudyData)
 
   // 모달 사용
   const {modalInfo:dataModalInfo, openModalId:openDataModalId, closeModal:closeDataModal} = useNightStudyModal();
@@ -36,24 +38,8 @@ const PersonalNightStudyManager = () => {
 
   // 일괄 승인 및 일괄 거절
   const [selectedNightStudy, setSelectedNightStudy] = useState<number[]>([]);
-  const isSelectAll = nightStudyData.length !== 0 && nightStudyData?.every(item => selectedNightStudy.includes(item.id));
+  const isSelectAll = nightStudyData?.length !== 0 && nightStudyData?.every(item => selectedNightStudy.includes(item.id));
 
-  // 필터링 및 검색
-  useEffect(() => {
-    const gradeFilter = searchTagData.find(item => item.name === "학년")?.tags.find(item => item.isSelected)?.value;
-    const roomFilter = searchTagData.find(item => item.name === "학반")?.tags.find(item => item.isSelected)?.value;
-    const statusFilter = searchTagData.find(item => item.name === "상태")?.tags.find(item => item.isSelected)?.value;
-    
-    const sourceData = statusFilter === "ALLOWED" ? allowedNightStudyData?.data : pendingNightStudyData?.data;
-    
-    if (sourceData) {
-      const filteredData = sourceData
-        .filter(item => gradeFilter === "ALL" || item.student.grade === +gradeFilter!)
-        .filter(item => roomFilter === "ALL" || item.student.room === +roomFilter!)
-        .filter(item => item.student.name.includes(searchInputData))
-      setNightStudyData(filteredData);
-    }
-  }, [searchTagData, allowedNightStudyData, pendingNightStudyData, searchInputData]);
 
   // 테이블 데이터
   const tableContents = useMemo(() => {
@@ -86,7 +72,7 @@ const PersonalNightStudyManager = () => {
       ["종료일", [nightStudyData?.map(item => dateTransform.hyphen(item.endAt)), 120]],
       ["휴대폰", [nightStudyData?.map(item => item.doNeedPhone ? "O" : "X"), 64]],
       ["필요 이유", [nightStudyData?.map(item => item.reasonForPhone || "-"), 160]],
-      ["",[Array.from({length:nightStudyData.length}).map((_) => ""), 32]],
+      ["",[Array.from({length:nightStudyData?.length}).map((_) => ""), 32]],
       ["상태 제어", [nightStudyData?.map(item => (
         item.status === "ALLOWED"
         ? <DodamFilledButton
@@ -150,7 +136,7 @@ const PersonalNightStudyManager = () => {
         />
         {searchTagData.find(item => item.name === "상태")?.tags.find(item => item.isSelected)?.value === "ALLOWED"
         && <ExtractExcelData
-          excelData={nightStudyData.map((data, idx)=> ({
+          excelData={nightStudyData?.map((data, idx)=> ({
             번호: idx + 1,
             이름: data.student.name,
             학번:
@@ -173,7 +159,7 @@ const PersonalNightStudyManager = () => {
         isDataLoading={isAllowNightStudyLoading || isPendingNightStudyLoading}
         key={`${nightStudyData?.length}-${nightStudyData?.map(item => item.id).join(',')}-${isSelectAll}-${selectedNightStudy.length}`}
         dataLength={nightStudyData?.length}
-        itemIds={nightStudyData.map(item => item.id)}
+        itemIds={nightStudyData?.map(item => item.id)}
         tableContents={tableContents}
         onColumnClick={openDataModalId}
       />

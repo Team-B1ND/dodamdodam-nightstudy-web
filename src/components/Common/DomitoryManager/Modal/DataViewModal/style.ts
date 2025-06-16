@@ -45,3 +45,15 @@ export const PersonalItemContainer = styled.div<{ $size: "BIG" | "SMALL" }>`
   color: ${({ theme }) => theme.labelNormal};
   ${({$size}) => $size === "SMALL" ? DodamTypography.Body1.Bold : DodamTypography.Title3.Bold};
 `
+
+export const ProjectMemberContainer = styled.section`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  column-gap: 8px;
+
+  & p {
+    color: ${({ theme }) => theme.labelNormal};
+  ${DodamTypography.Body1.Bold};
+  }
+`

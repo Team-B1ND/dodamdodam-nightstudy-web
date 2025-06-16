@@ -2,17 +2,17 @@ import useSearchBar from "hooks/NightStudy/useSearchBar";
 import SearchBar from "../SearchBar"
 import DataTable, { tableContentsData } from "../DataTable";
 import { DodamFilledButton, DodamModal } from "@b1nd/dds-web";
-import useManageNightStudy from "hooks/NightStudy/useManageNightStudy";
+import useManageNightStudy from "hooks/NightStudy/ManageNightStudy/useManageNightStudy";
 import { useGetAllowedProjectQuery, useGetPendingProjectQuery } from "queries/ManageNightStudy/manageProjectNightStudy.query";
-import { useEffect, useMemo, useState } from "react";
-import { ProjectNightStudy } from "types/ManageNightStudy/manageProjectNightStudy.type";
-import useNightStudyModal from "hooks/NightStudy/useNightStudyModal";
+import { useMemo } from "react";
+import useNightStudyModal from "hooks/NightStudy/ManageNightStudy/useNightStudyModal";
 import ProjectAllowModal from "./ProjectAllowModal";
 import DataViewModal from "../Modal/DataViewModal";
 import RejectModal from "../Modal/RejectModal";
 import styled from "styled-components";
 import ExtractExcelData from "../ExtractExcelData";
 import dayjs from "dayjs";
+import useProjectFilter from "hooks/NightStudy/ManageNightStudy/Filters/useProjectFilter";
 
 const ProjectNightStudyManager = () => {
   const {
@@ -25,7 +25,7 @@ const ProjectNightStudyManager = () => {
 
   const {data: allowedProjectData, isLoading: isAllowProjectLoading} = useGetAllowedProjectQuery();
   const {data: pendingProjectData, isLoading: isPendingProjectLoading} = useGetPendingProjectQuery();
-  const [projectData, setProjectData] = useState<ProjectNightStudy[]>([]);
+  const { projectData } = useProjectFilter(searchInputData, searchTagData, allowedProjectData, pendingProjectData)
 
   // 각각 승인, 데이터, 거절 모달
   const {modalInfo:allowModalInfo, openModalId:openAllowModal, closeModal:closeAllowModal} = useNightStudyModal();
@@ -33,19 +33,6 @@ const ProjectNightStudyManager = () => {
   const {modalInfo:rejectModalInfo, openModalId:openRejectModal, closeModal:closeRejectModal} = useNightStudyModal();
 
   // 필터링 및 검색
-  useEffect(() => {
-    const timeFilter = searchTagData.find(item => item.name === "진행 시간")?.tags.find(item => item.isSelected)?.value;
-    const statusFilter = searchTagData.find(item => item.name === "상태")?.tags.find(item => item.isSelected)?.value;
-      
-    const sourceData = statusFilter === "ALLOWED" ? allowedProjectData?.data : pendingProjectData?.data;
-      
-    if (sourceData) {
-      const filteredData = sourceData
-        .filter(item => timeFilter === "ALL" || item.type === timeFilter)
-        .filter(item => item.name.includes(searchInputData))
-      setProjectData(filteredData);
-    }
-  }, [searchTagData, allowedProjectData, pendingProjectData, searchInputData]);
   
   const tableContents = useMemo(() => {
     return new Map<string, tableContentsData>([

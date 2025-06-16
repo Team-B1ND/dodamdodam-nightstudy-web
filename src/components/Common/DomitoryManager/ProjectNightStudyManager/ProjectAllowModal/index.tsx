@@ -4,7 +4,7 @@ import { ProjectNightStudy } from "types/ManageNightStudy/manageProjectNightStud
 import convertDateTime from "utils/Time/ConvertDateTime";
 import ProjectChoiceRoom from "./ProjectChoiceRoom";
 import { useState } from "react";
-import useManageNightStudy from "hooks/NightStudy/useManageNightStudy";
+import useManageNightStudy from "hooks/NightStudy/ManageNightStudy/useManageNightStudy";
 
 interface ProjectAllowModalProps {
   close: () => void;

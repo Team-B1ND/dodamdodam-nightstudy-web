@@ -1,5 +1,5 @@
 import { DodamFilledButton } from "@b1nd/dds-web"
-import useManageNightStudy from "hooks/NightStudy/useManageNightStudy";
+import useManageNightStudy from "hooks/NightStudy/ManageNightStudy/useManageNightStudy";
 import styled from "styled-components";
 
 interface StatusControllerProps {

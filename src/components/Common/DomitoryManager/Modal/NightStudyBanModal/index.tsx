@@ -2,7 +2,7 @@ import {Close, DodamCheckBox, DodamDatePicker, DodamFilledButton, DodamModal} fr
 import dayjs from "dayjs";
 import * as S from './style';
 import { NIGHTSTUDY_BAN_REASONS } from "constants/NightStudy/nightStudy.constant";
-import useBanStudent from "hooks/NightStudy/useBanStudent";
+import useBanStudent from "hooks/NightStudy/ManageNightStudy/useBanStudent";
 
 interface NightStudyBanModalProps {
   isOpen: boolean;

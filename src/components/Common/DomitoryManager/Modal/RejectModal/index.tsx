@@ -1,8 +1,8 @@
 import { DodamFilledButton, DodamModal, DodamTextField } from '@b1nd/dds-web';
 import * as S from './style';
 import { ChangeEvent, useState } from 'react';
-import useManageNightStudy from 'hooks/NightStudy/useManageNightStudy';
-import useBanStudent from 'hooks/NightStudy/useBanStudent';
+import useManageNightStudy from 'hooks/NightStudy/ManageNightStudy/useManageNightStudy';
+import useBanStudent from 'hooks/NightStudy/ManageNightStudy/useBanStudent';
 
 interface RejectModalProps {
   type: "REJECT_PROJECT" | "REJECT_NIGHT_STUDY";

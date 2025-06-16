@@ -2,13 +2,13 @@ import useSearchBar from "hooks/NightStudy/useSearchBar";
 import SearchBar from "../SearchBar"
 import styled from "styled-components";
 import DataTable, { tableContentsData } from "../DataTable";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useGetBanMemberQuery } from "queries/ManageNightStudy/manageNightstudy.query";
-import { StudentBanType } from "types/ManageNightStudy/manageNightStudy.type";
 import { DodamFilledButton } from "@b1nd/dds-web";
-import useBanStudent from "hooks/NightStudy/useBanStudent";
-import useNightStudyModal from "hooks/NightStudy/useNightStudyModal";
+import useBanStudent from "hooks/NightStudy/ManageNightStudy/useBanStudent";
+import useNightStudyModal from "hooks/NightStudy/ManageNightStudy/useNightStudyModal";
 import NightStudyBanModal from "../Modal/NightStudyBanModal";
+import useBanFilter from "hooks/NightStudy/ManageNightStudy/Filters/useBanFilter";
 
 const NightStudyBanManager = () => {
   const {
@@ -22,23 +22,8 @@ const NightStudyBanManager = () => {
   const {modalInfo, closeModal, openModalId} = useNightStudyModal();
 
   const {data:banMemberData, isLoading} = useGetBanMemberQuery();
-  const [banData, setBanData] = useState<StudentBanType[]>([]);
 
-  // 필터링 및 검색
-  useEffect(() => {
-    const gradeFilter = searchTagData.find(item => item.name === "학년")?.tags.find(item => item.isSelected)?.value;
-    const roomFilter = searchTagData.find(item => item.name === "학반")?.tags.find(item => item.isSelected)?.value;
-    const statusFilter = searchTagData.find(item => item.name === "상태")?.tags.find(item => item.isSelected)?.value;
-    
-    if (statusFilter) {
-      const filteredData = banMemberData?.data
-        .filter(item => gradeFilter === "ALL" || item.grade === +gradeFilter!)
-        .filter(item => roomFilter === "ALL" || item.room === +roomFilter!)
-        .filter(item => statusFilter === "ALL" || item.isBanned.toString() === statusFilter!)
-        .filter(item => item.name.includes(searchInputData))
-      setBanData(filteredData!);
-    }
-  }, [searchTagData, banMemberData, searchInputData]);
+  const {banData} = useBanFilter(searchInputData, searchTagData, banMemberData);
 
   const tableContents = useMemo(() => {
     return new Map<string, tableContentsData>([

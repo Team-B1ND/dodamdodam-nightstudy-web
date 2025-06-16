@@ -1,5 +1,4 @@
 import { nightStudyProjectRoom, nightStudyType } from "types/Apply/apply.type";
-import { StudentType } from "types/NightStudy/nightstudy.type";
 
 export interface ProjectStudentType {
   id: number;
