@@ -7,5 +7,18 @@ export const QUERY_KEYS = Object.freeze({
   },
   student: {
     getStudent: "night-study/getStudent"
+  },
+  manageNightStudy: {
+    getAllNightStudy: "night-study/all",
+    getAllowedNightStudy: "night-study/allowed",
+    getPendingNightStudy: "night-study/pending",
+    getBanMember: "night-study/ban",
+
+    getAllowedProjectNightStudy: "night-study/project/allowed",
+    getPendingProjectNightStudy: "night-study/project/pending",
+    getProjcetStudent: "night-study/projcet/student",
+    getProjcetUsingRoom: "night-study/projcet/rooms",
+
+    getIsDormitoryManager: "night-study/dormitory-manage-member"
   }
 });

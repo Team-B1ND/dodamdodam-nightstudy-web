@@ -1,16 +1,18 @@
 import { DodamShape, DodamTypography } from "@b1nd/dds-web";
 import styled from "styled-components";
 
-export const SelectContainer = styled.div<{ close: boolean }>`
+export const SelectContainer = styled.div`
   width: min-content;
-  height: 35px;
+  height: 40px;
 
   display: flex;
   align-items: center;
-  padding: 0px 8px;
+  padding: 0px 12px;
   position: relative;
   column-gap: 15px;
   cursor: pointer;
+  background-color: ${({ theme }) => theme.fillNormal};
+  ${DodamShape.Small}
   > p {
     ${DodamTypography.Body1.Medium}
     white-space: nowrap;
@@ -18,7 +20,7 @@ export const SelectContainer = styled.div<{ close: boolean }>`
   }
 `
 
-export const SelectIcon = styled.div<{ close: boolean }>`
+export const SelectIcon = styled.div<{ close: "true" | "false" }>`
   width: 14px;
   height: 14px;
   display: flex;
@@ -28,7 +30,7 @@ export const SelectIcon = styled.div<{ close: boolean }>`
   transition: all 0.3s ease;
 
   ${({ close }) =>
-    !close &&
+    close === "false" &&
       "transform: rotate(180deg)"
     }
 `
@@ -40,7 +42,7 @@ export const SelectItemWrap = styled.div`
   flex-direction: column;
 
   position: absolute;
-  top: 40px;
+  top: 44px;
   left: 0px;
 
   overflow: hidden;

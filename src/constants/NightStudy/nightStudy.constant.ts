@@ -6,3 +6,21 @@ export const PLACE_ITEMS : Place[] = [
   { id: 3, name: "LAB_14", title: "랩 14실", isAtv: false },
   { id: 4, name: "LAB_15", title: "랩 15실", isAtv: false },
 ];
+
+export const NIGHT_STUDY_TIME = {
+  "NIGHT_STUDY_1": "심자 1",
+  "NIGHT_STUDY_2": "심자 2",
+  "NIGHT_STUDY_3": "심자 3",
+  "NIGHT_STUDY_PROJECT_1": "심자 1",
+  "NIGHT_STUDY_PROJECT_2": "심자 2",
+  "NIGHT_STUDY_PROJECT_3": "심자 3",
+}
+
+export const NIGHTSTUDY_BAN_REASONS = [
+  "허가 없는 휴대폰 사용",
+  "심자 목적에 맞지 않는 행위",
+  "신청 후 불참",
+  "심자 무단 이탈",
+  "타인 방해 (소란 등)",
+  "기타",
+];

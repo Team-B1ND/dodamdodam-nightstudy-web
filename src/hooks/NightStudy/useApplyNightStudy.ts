@@ -41,8 +41,6 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
       }
   );
 
-
-
   const checkApplyNightStudy = (
     props: ApplyNightStudyParam | ApplyProjectNightStudyParam
   ): props is ApplyNightStudyParam => {
