@@ -42,7 +42,7 @@ export const RoomLabel = styled.span<{
   }};
 `;
 
-export const StatusText = styled.p<{ isAvailable: boolean }>`
+export const StatusText = styled.span<{ isAvailable: boolean }>`
   ${DodamTypography.Caption2.Bold}
   color: ${(props) =>
     props.isAvailable ? props.theme.primaryNormal : props.theme.labelDisabled};

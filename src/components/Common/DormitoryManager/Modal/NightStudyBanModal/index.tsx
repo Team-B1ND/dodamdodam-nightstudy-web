@@ -16,7 +16,7 @@ const NightStudyBanModal = ({isOpen, close, dataId}: NightStudyBanModalProps) =>
     <DodamModal isOpen={isOpen} background>
       <S.NightStudyBanContainer>
         <div onClick={close}>
-          <Close $svgStyle={{ cursor: 'pointer' }} />
+          <Close $svgStyle={{ cursor: 'pointer' }} color='labelNormal'/>
         </div>
         <p>심자정지</p>
         <S.DateInfoBox>

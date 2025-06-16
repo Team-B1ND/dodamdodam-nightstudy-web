@@ -7,7 +7,8 @@ export const WrapModal = styled.div`
   padding: 24px;
   background-color: ${({ theme }) => theme.backgroundNeutral};
   ${DodamShape.ExtraLarge}
-  p {
+  color: ${({ theme }) => theme.labelNormal};
+  & p {
     ${DodamTypography.Heading1.Bold}
   }
   div {
