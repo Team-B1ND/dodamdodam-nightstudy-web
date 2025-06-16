@@ -11,3 +11,7 @@ export interface Student {
 export interface StudentResponse extends Response {
   data: Student[];
 }
+
+export interface CheckDormitoryManagerResponse extends Response {
+  data: boolean
+}

@@ -9,7 +9,7 @@ const GoDormitoryManagePageButton = () => {
   const getDormitoryManageMemberCheckData = async () => {
     await studentRepository.checkDormitoryManager()
     .then((data) => (
-      setIsDormitoryManageMember(data)
+      setIsDormitoryManageMember(data.data)
     ))
   }
 
