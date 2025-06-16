@@ -43,7 +43,7 @@ export const PersonalItemContainer = styled.div<{ $size: "BIG" | "SMALL" }>`
   }
 
   color: ${({ theme }) => theme.labelNormal};
-  ${({$size}) => $size === "SMALL" ? DodamTypography.Body1.Bold : DodamTypography.Title3.Bold};
+  ${({$size}) => $size === "SMALL" ? DodamTypography.Body1.Medium : DodamTypography.Title3.Bold};
 `
 
 export const ProjectMemberContainer = styled.section`
@@ -54,6 +54,6 @@ export const ProjectMemberContainer = styled.section`
 
   & p {
     color: ${({ theme }) => theme.labelNormal};
-  ${DodamTypography.Body1.Bold};
+    ${DodamTypography.Body1.Medium};
   }
 `
