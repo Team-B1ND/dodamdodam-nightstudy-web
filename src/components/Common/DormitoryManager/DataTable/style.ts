@@ -18,6 +18,7 @@ export const DataTableNotContents = styled.div`
   justify-content: center;
   align-items: center;
   ${DodamTypography.Headline.Medium}
+  color: ${({ theme }) => theme.labelNormal};
 `
 
 export const DataTableBlock = styled.div<{ $size: number | "FILL" }>`
