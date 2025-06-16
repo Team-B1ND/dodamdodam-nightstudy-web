@@ -1,10 +1,11 @@
-import { DodamColor, DodamDivider, DodamTag } from "@b1nd/dds-web";
+import { DodamColor, DodamDivider, DodamTag, Trash } from "@b1nd/dds-web";
 import * as S from "./style";
 import { useTheme } from "styled-components";
 import dateTransform from "utils/Transform/dateTransform";
 import { useGetMyNightStudyQuery, useGetMyProjectNightStudyQuery } from "queries/NightStudy/nightstudy.query";
 import MyNightStudyNull from "components/Common/Null/MyNightStudyNull/index";
 import { NightStudy, ProjectNightStudy } from "types/NightStudy/nightstudy.type";
+import useDeleteMyNightStudy from "hooks/NightStudy/useDeleteNightStudy";
 
 interface Props {
   type: "Pending" | "Allow";
@@ -13,6 +14,7 @@ interface Props {
 
 const MyNightStudy = ({ type, isPersonalPage }: Props) => {
   const theme = useTheme();
+  const { handleClickDelete } = useDeleteMyNightStudy();
   const { data: MyNightStudyData } = useGetMyNightStudyQuery({
     suspense: true,
   });
@@ -52,6 +54,9 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
                     backgroundColor: item.status === "REJECTED" ? DodamColor.red50 : item.status === "PENDING" ? theme.lineNormal : DodamColor.blue50,
                   }}
                 />
+                <S.IconWrap onClick={() => handleClickDelete(item.id, isPersonalPage ? "PERSONAL" : "PROJECT")}>
+                  <Trash color="lineNormal" />
+                </S.IconWrap>
               </S.TitleWrap>
               <S.ProjectName>{checkNightStudy(item) || item.name}</S.ProjectName>
               <p>{checkNightStudy(item) ? item.content : item.description}</p>
