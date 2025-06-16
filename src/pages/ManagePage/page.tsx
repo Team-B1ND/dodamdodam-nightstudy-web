@@ -1,8 +1,8 @@
-import DomitoryManager from "components/Common/DomitoryManager"
+import DormitoryManager from "components/Common/DormitoryManager"
 
 const ManagePage = () => {
   return (
-    <DomitoryManager></DomitoryManager>
+    <DormitoryManager></DormitoryManager>
   )
 }
 

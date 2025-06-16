@@ -9,7 +9,7 @@ const Router = () => {
     <Routes>
       <Route path="/" element={<PageTemplate />}>
         <Route index element={<HomePage />} />
-        <Route path="/domitory-manage" element={<ManagePage />}/>
+        <Route path="/dormitory-manage" element={<ManagePage />}/>
       </Route>
       <Route path="*" element={<DodamNotFoundPage />} />
     </Routes>

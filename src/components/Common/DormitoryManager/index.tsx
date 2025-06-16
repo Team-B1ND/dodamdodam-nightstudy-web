@@ -5,7 +5,7 @@ import PersonalNightStudyManager from './PersonalNightStudyManager';
 import ProjectNightStudyManager from './ProjectNightStudyManager';
 import NightStudyBanManager from './NightStudyBanManager';
 
-const DomitoryManager = () => {
+const DormitoryManager = () => {
   const { handleClickPage, pageData } = useChangePage([
     { text: '일반 심자', isAtv: true },
     { text: '프로젝트 관리', isAtv: false },
@@ -52,4 +52,4 @@ const ManagerContainer = styled.div`
   height: 100%;
 `
 
-export default DomitoryManager
+export default DormitoryManager

@@ -5,7 +5,7 @@ import MyNightStudy from "components/Common/MyNightStudy";
 import MyNightStudyFallback from "components/Common/Fallback/MyNightStudyFallback";
 import IsBannedChecker from "components/Common/IsBannedChecker";
 import { useChangePage } from "hooks/NightStudy/useChangePage";
-import GoDomitoryManagePageButton from "components/Common/GoDomitoryManagePageButton";
+import GoDormitoryManagePageButton from "components/Common/GoDormitoryManagePageButton";
 
 const Sidebar = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
   const { handleClickPage, pageData } = useChangePage([
@@ -15,7 +15,7 @@ const Sidebar = ({ isPersonalPage }: { isPersonalPage: boolean }) => {
 
   return (
     <S.SideBarContainer>
-      <GoDomitoryManagePageButton/>
+      <GoDormitoryManagePageButton/>
       <DodamErrorBoundary text="정지 여부를 불러오는데 실패했습니다." showButton={true}>
         <IsBannedChecker/>
       </DodamErrorBoundary>
