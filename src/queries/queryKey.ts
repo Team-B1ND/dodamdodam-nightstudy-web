@@ -18,5 +18,7 @@ export const QUERY_KEYS = Object.freeze({
     getPendingProjectNightStudy: "night-study/project/pending",
     getProjcetStudent: "night-study/projcet/student",
     getProjcetUsingRoom: "night-study/projcet/rooms",
+
+    getIsDormitoryManager: "night-study/dormitory-manage-member"
   }
 });

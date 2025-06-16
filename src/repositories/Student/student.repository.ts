@@ -6,8 +6,8 @@ class StudentRepository {
     const { data } = await dodamAxios.get("night-study/students");
     return data;
   }
-  public async checkDomitoryManager(): Promise<boolean> {
-    const { data } = await dodamAxios.get("/member/check/domitory-manage-member");
+  public async checkDormitoryManager(): Promise<boolean> {
+    const { data } = await dodamAxios.get("/member/check/dormitory-manage-member");
     return data;
   }
 }
