@@ -25,7 +25,7 @@ const DataViewModal = ({data, close, isOpen}: PersonalModalProps) => {
             : "개인 심야 자습 정보"}
         </p>
         <button onClick={close}>
-          <Close size={24} />
+          <Close size={24} color='labelNormal'/>
         </button>
       </S.PersonalModalHeader>
       <S.PersonalDataContainer>

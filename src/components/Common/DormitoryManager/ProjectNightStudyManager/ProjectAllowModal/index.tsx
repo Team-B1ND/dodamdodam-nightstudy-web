@@ -21,7 +21,7 @@ const ProjectAllowModal = ({
   return (
     <S.WrapModal>
       <div onClick={close} style={{ marginBottom: "5px" }}>
-        <Close $svgStyle={{ cursor: "pointer" }} />
+        <Close $svgStyle={{ cursor: "pointer" }} color="labelNormal"/>
       </div>
       <p>랩실 지정</p>
 

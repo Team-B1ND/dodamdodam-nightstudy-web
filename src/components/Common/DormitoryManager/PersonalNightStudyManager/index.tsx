@@ -57,11 +57,12 @@ const PersonalNightStudyManager = () => {
           <DodamCheckBox
             key={item.id}
             isDisabled={selectedNightStudy.includes(item.id)}
-            onClick={() =>
+            onClick={(e) =>{
+              e.stopPropagation()
               setSelectedNightStudy((prev) => prev.includes(item.id)
               ? prev.filter(id => id !== item.id)
               : [...prev, item.id])
-            }
+            }}
           />
       )), 64]],
       ["이름", [nightStudyData?.map(item => item.student.name), 64]],
