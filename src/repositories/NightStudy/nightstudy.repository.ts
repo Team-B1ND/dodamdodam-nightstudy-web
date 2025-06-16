@@ -33,6 +33,16 @@ class NightStudyRepository {
     const { data } = await dodamAxios.get<ProjectRoomsResponse>("night-study/project/rooms");
     return data.data;
   }
+  
+  public async deleteNightStudy(id: number): Promise<Response> {
+    const { data } = await dodamAxios.delete(`/night-study/${id}`);
+    return data;
+  }
+
+  public async deleteProjectNightStudy(id: number): Promise<Response> {
+    const { data } = await dodamAxios.delete(`/night-study/project/${id}`);
+    return data;
+  }
 }
 
 const nightStudyRepository = new NightStudyRepository();
