@@ -11,8 +11,7 @@ interface Props {
   checkApplyNightStudy: (props: ApplyNightStudyParam | ApplyProjectNightStudyParam) => props is ApplyNightStudyParam
 }
 
-const ApplyPeriod = ({ applyNightStudyData, handleChangeDate, handleProjectType, isPersonalPage, checkApplyNightStudy }: Props) => {
-  
+const ApplyPeriod = ({ applyNightStudyData, handleChangeDate, handleProjectType, isPersonalPage, checkApplyNightStudy }: Props) => {  
   return (
     <S.Container>
       <S.Wrap>

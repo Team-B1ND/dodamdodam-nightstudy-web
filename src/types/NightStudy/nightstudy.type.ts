@@ -7,9 +7,9 @@ export interface NightStudy {
   content: string;
   status: "ALLOWED" | "PENDING" | "REJECTED";
   doNeedPhone: boolean;
-  reasonForPhone: string;
+  reasonForPhone: string | null;
   student: StudentType;
-  place: string;
+  rejectReason: string | null;
   startAt: string;
   endAt: string;
   createdAt: string;
