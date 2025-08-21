@@ -54,9 +54,11 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
                     backgroundColor: item.status === "REJECTED" ? DodamColor.red50 : item.status === "PENDING" ? theme.lineNormal : DodamColor.blue50,
                   }}
                 />
-                <S.IconWrap onClick={() => handleClickDelete(item.id, isPersonalPage ? "PERSONAL" : "PROJECT")}>
-                  <Trash color="lineNormal" />
-                </S.IconWrap>
+                {type === "Pending" && (
+                  <S.IconWrap onClick={() => handleClickDelete(item.id, isPersonalPage ? "PERSONAL" : "PROJECT")}>
+                    <Trash color="lineNormal" />
+                  </S.IconWrap>
+                )}
               </S.TitleWrap>
               <S.ProjectName>{checkNightStudy(item) || item.name}</S.ProjectName>
               <p>{checkNightStudy(item) ? item.content : item.description}</p>
