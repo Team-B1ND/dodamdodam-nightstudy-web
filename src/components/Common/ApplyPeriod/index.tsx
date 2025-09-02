@@ -1,72 +1,87 @@
-import * as S from "./style";
-import { DodamDatePicker, DodamDivider } from "@b1nd/dds-web";
-import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.param";
-import { Select } from "../Select";
+import * as S from './style'
+import { DodamDatePicker, DodamDivider } from '@b1nd/dds-web'
+import {
+  ApplyNightStudyParam,
+  ApplyProjectNightStudyParam,
+} from 'repositories/NightStudy/nightstudy.param'
+import { Select } from '../Select'
 
 interface Props {
-  applyNightStudyData: ApplyNightStudyParam | ApplyProjectNightStudyParam;
-  handleChangeDate: (e: Date, scope: "start" | "end") => void;
-  handleProjectType: (type : string) => void;
-  isPersonalPage: boolean;
-  checkApplyNightStudy: (props: ApplyNightStudyParam | ApplyProjectNightStudyParam) => props is ApplyNightStudyParam
+  applyNightStudyData: ApplyNightStudyParam | ApplyProjectNightStudyParam
+  handleChangeDate: (e: Date, scope: 'start' | 'end') => void
+  handleProjectType: (type: string) => void
+  isPersonalPage: boolean
+  checkApplyNightStudy: (
+    props: ApplyNightStudyParam | ApplyProjectNightStudyParam
+  ) => props is ApplyNightStudyParam
 }
 
-const ApplyPeriod = ({ applyNightStudyData, handleChangeDate, handleProjectType, isPersonalPage, checkApplyNightStudy }: Props) => {  
+const ApplyPeriod = ({
+  applyNightStudyData,
+  handleChangeDate,
+  handleProjectType,
+  isPersonalPage,
+  checkApplyNightStudy,
+}: Props) => {
   return (
     <S.Container>
       <S.Wrap>
         <S.Box>
-          <S.Title>신청 {!isPersonalPage ? "정보" : "기한"}</S.Title>
+          <S.Title>신청 {!isPersonalPage ? '정보' : '기한'}</S.Title>
           <S.DateInfoWrap>
-            {!isPersonalPage &&
-            <S.DateInfoBox>
-              <S.ProjcetDataInfoTextBox>
-                <p>진행 시각</p>
-                <span>{!isPersonalPage && "( 하나의 프로젝트는 심자 1, 2 중 하나만 신청 가능합니다. )"}</span>
-              </S.ProjcetDataInfoTextBox>
-              <Select items={["심자 1", "심자 2"]} value={
-                !checkApplyNightStudy(applyNightStudyData) &&
-                applyNightStudyData.type === "NIGHT_STUDY_PROJECT_1"
-                ? "심자 1"
-                : "심자 2"
-                }
-                onSelectedItemChange={handleProjectType}
-                zIndex={2}
-              />
-            </S.DateInfoBox>
-            }
+            {!isPersonalPage && (
+              <S.DateInfoBox>
+                <S.ProjcetDataInfoTextBox>
+                  <p>진행 시각</p>
+                  <span>
+                    ( 하나의 프로젝트는 심자 1, 2 중 하나만 신청 가능합니다. )
+                  </span>
+                </S.ProjcetDataInfoTextBox>
+                <Select
+                  items={['심자 1', '심자 2']}
+                  value={
+                    !checkApplyNightStudy(applyNightStudyData) &&
+                    applyNightStudyData.type === 'NIGHT_STUDY_PROJECT_1'
+                      ? '심자 1'
+                      : '심자 2'
+                  }
+                  onSelectedItemChange={handleProjectType}
+                  zIndex={2}
+                />
+              </S.DateInfoBox>
+            )}
             <S.DateInfoBox>
               <p>시작 날짜</p>
               <DodamDatePicker
-                itemKey="startDate"
-                title="시작 날짜"
-                color="primaryNormal"
-                type="entire"
-                dateType="MonthDay"
+                itemKey='startDate'
+                title='시작 날짜'
+                color='primaryNormal'
+                type='entire'
+                dateType='MonthDay'
                 value={applyNightStudyData.startAt}
-                customStyle={{ border: "none" }}
-                onChange={(e: Date) => handleChangeDate(e, "start")}
+                customStyle={{ border: 'none' }}
+                onChange={(e: Date) => handleChangeDate(e, 'start')}
               />
             </S.DateInfoBox>
             <S.DateInfoBox>
               <p>종료 날짜</p>
               <DodamDatePicker
-                itemKey="endDate"
-                title="종료 날짜"
-                color="primaryNormal"
-                type="entire"
-                dateType="MonthDay"
+                itemKey='endDate'
+                title='종료 날짜'
+                color='primaryNormal'
+                type='entire'
+                dateType='MonthDay'
                 value={applyNightStudyData.endAt}
-                customStyle={{ border: "none" }}
-                onChange={(e: Date) => handleChangeDate(e, "end")}
+                customStyle={{ border: 'none' }}
+                onChange={(e: Date) => handleChangeDate(e, 'end')}
               />
             </S.DateInfoBox>
           </S.DateInfoWrap>
         </S.Box>
       </S.Wrap>
-      <DodamDivider type="Small" />
+      <DodamDivider type='Small' />
     </S.Container>
-  );
-};
+  )
+}
 
-export default ApplyPeriod;
+export default ApplyPeriod
