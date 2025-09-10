@@ -20,6 +20,16 @@ export type personalNightStudyType = "NIGHT_STUDY_1" | "NIGHT_STUDY_2" | "NIGHT_
 
 export type nightStudyType = "NIGHT_STUDY_PROJECT_1" | "NIGHT_STUDY_PROJECT_2";
 
-export type nightStudyProjectRoom = "LAB_12" | "LAB_13" | "LAB_14" | "LAB_15" | null
+export type nightStudyProjectRoom = "LAB_1" | "LAB_2" | "LAB_8" | "LAB_13" | null
+export type nightStudyProjectRoomNotNull =
+  | "LAB_1"
+  | "LAB_2"
+  | "LAB_8"
+  | "LAB_13";
 
-export type nightStudyProjectRoomText = "랩 12실" | "랩 13실" | "랩 14실" | "랩 15실" | null
+export type nightStudyProjectRoomText = "랩 1실" | "랩 2실" | "랩 8실" | "랩 13실" | null
+export type nightStudyProjectRoomTextNotNull =
+  | "랩 1실"
+  | "랩 2실"
+  | "랩 8실"
+  | "랩 13실";
