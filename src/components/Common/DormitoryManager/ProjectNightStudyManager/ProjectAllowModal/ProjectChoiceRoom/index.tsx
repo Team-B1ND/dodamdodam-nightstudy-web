@@ -1,6 +1,6 @@
 import * as S from "./style";
 import { DodamCheckBox } from "@b1nd/dds-web";
-import { PROJECT_LAB_ROOMS, PROJECT_LAB_ROOM_MAP } from "./constant";
+import { PROJECT_LAB_ROOMS, PROJECT_LAB_KR_TO_EN } from "./constant";
 import { useAvailableProjectLabs } from "hooks/NightStudy/useAvailableProjectLabs";
 
 
@@ -36,7 +36,7 @@ const ProjectChoiceRoom = ({
   return (
     <S.RoomsContainer>
       {PROJECT_LAB_ROOMS.map((label) => {
-        const code = PROJECT_LAB_ROOM_MAP[label];
+        const code = PROJECT_LAB_KR_TO_EN[label];
         const isAvailable = isRoomAvailable(code);
         const dateRange = getRoomDateRange(code)!;
 
