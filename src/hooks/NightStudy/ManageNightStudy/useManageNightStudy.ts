@@ -35,16 +35,26 @@ const useManageNightStudy = () => {
     });
   };
 
-  const rejectNightStudy = (id: number, closeModal: () => void) => {
-    rejectNightStudyMutation.mutate(id, {
+const rejectNightStudy = (
+  params: { id: number; rejectReason: string },
+  closeModal: () => void
+) => {
+  rejectNightStudyMutation.mutate(
+    { id: params.id, rejectReason: params.rejectReason },
+    {
       onSuccess: () => {
         B1ndToast.showSuccess("거절 성공");
-        closeModal()
-        queryClient.invalidateQueries(QUERY_KEYS.manageNightStudy.getAllowedNightStudy)
-        queryClient.invalidateQueries(QUERY_KEYS.manageNightStudy.getPendingNightStudy)
+        closeModal();
+        queryClient.invalidateQueries(
+          QUERY_KEYS.manageNightStudy.getAllowedNightStudy
+        );
+        queryClient.invalidateQueries(
+          QUERY_KEYS.manageNightStudy.getPendingNightStudy
+        );
       },
-    });
-  };
+    }
+  );
+};
 
   const allowProject = (params:{id:number, room:string}, closeModal: () => void) => {
     allowProjectMutation.mutate(params, {
