@@ -19,9 +19,8 @@ const useManageNightStudy = () => {
     allowNightStudyMutation.mutate(id, {
       onSuccess: () => {
         B1ndToast.showSuccess("승인 성공");
-        return queryClient.invalidateQueries(
-          [QUERY_KEYS.manageNightStudy.getAllowedNightStudy, QUERY_KEYS.manageNightStudy.getPendingNightStudy]
-        );
+        queryClient.invalidateQueries(QUERY_KEYS.manageNightStudy.getAllowedNightStudy)
+        queryClient.invalidateQueries(QUERY_KEYS.manageNightStudy.getPendingNightStudy)
       },
     });
   };
@@ -30,9 +29,8 @@ const useManageNightStudy = () => {
     revertNightStudyMutation.mutate(id, {
       onSuccess: () => {
         B1ndToast.showSuccess("승인 취소 성공");
-        return queryClient.invalidateQueries(
-          [QUERY_KEYS.manageNightStudy.getAllowedNightStudy, QUERY_KEYS.manageNightStudy.getPendingNightStudy]
-        );
+        queryClient.invalidateQueries(QUERY_KEYS.manageNightStudy.getAllowedNightStudy)
+        queryClient.invalidateQueries(QUERY_KEYS.manageNightStudy.getPendingNightStudy)
       },
     });
   };
@@ -42,9 +40,8 @@ const useManageNightStudy = () => {
       onSuccess: () => {
         B1ndToast.showSuccess("거절 성공");
         closeModal()
-        return queryClient.invalidateQueries(
-          [QUERY_KEYS.manageNightStudy.getAllowedNightStudy, QUERY_KEYS.manageNightStudy.getPendingNightStudy]
-        );
+        queryClient.invalidateQueries(QUERY_KEYS.manageNightStudy.getAllowedNightStudy)
+        queryClient.invalidateQueries(QUERY_KEYS.manageNightStudy.getPendingNightStudy)
       },
     });
   };
