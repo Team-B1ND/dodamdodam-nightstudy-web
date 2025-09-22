@@ -27,10 +27,10 @@ class ManageNightStudyRepository {
   public async allowNightStudy(id: number): Promise<void> {
     await dodamAxios.patch(`/night-study/${id}/allow`);
   }
-  
+
   // id로 일반 심자 거절
-  public async rejectNightStudy(id: number): Promise<void> {
-    await dodamAxios.patch(`/night-study/${id}/reject`);
+  public async rejectNightStudy(id: number, rejectReason: string): Promise<void> {
+    await dodamAxios.patch(`/night-study/${id}/reject`, { rejectReason });
   }
 
   // id로 일반 심자 대기

@@ -2,9 +2,15 @@ import { DodamColor, DodamDivider, DodamTag, Trash } from "@b1nd/dds-web";
 import * as S from "./style";
 import { useTheme } from "styled-components";
 import dateTransform from "utils/Transform/dateTransform";
-import { useGetMyNightStudyQuery, useGetMyProjectNightStudyQuery } from "queries/NightStudy/nightstudy.query";
+import {
+  useGetMyNightStudyQuery,
+  useGetMyProjectNightStudyQuery,
+} from "queries/NightStudy/nightstudy.query";
 import MyNightStudyNull from "components/Common/Null/MyNightStudyNull/index";
-import { NightStudy, ProjectNightStudy } from "types/NightStudy/nightstudy.type";
+import {
+  NightStudy,
+  ProjectNightStudy,
+} from "types/NightStudy/nightstudy.type";
 import useDeleteMyNightStudy from "hooks/NightStudy/useDeleteNightStudy";
 
 interface Props {
@@ -20,7 +26,7 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
   });
   const { data: MyProjectNightStudyData } = useGetMyProjectNightStudyQuery({
     suspense: true,
-  })
+  });
 
   const checkNightStudy = (
     props: NightStudy | ProjectNightStudy
@@ -31,11 +37,17 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
   const myNightStudyData =
     type === "Pending"
       ? isPersonalPage
-        ? MyNightStudyData?.data.filter((item) => item.status === "PENDING" || item.status === "REJECTED")
-        : MyProjectNightStudyData?.data.filter((item) => item.status === "PENDING" || item.status === "REJECTED")
+        ? MyNightStudyData?.data.filter(
+            (item) => item.status === "PENDING" || item.status === "REJECTED"
+          )
+        : MyProjectNightStudyData?.data.filter(
+            (item) => item.status === "PENDING" || item.status === "REJECTED"
+          )
       : isPersonalPage
-        ? MyNightStudyData?.data.filter((item) => item.status === "ALLOWED")
-        : MyProjectNightStudyData?.data.filter((item) => item.status === "ALLOWED")
+      ? MyNightStudyData?.data.filter((item) => item.status === "ALLOWED")
+      : MyProjectNightStudyData?.data.filter(
+          (item) => item.status === "ALLOWED"
+        );
 
   return (
     <S.Container>
@@ -47,20 +59,40 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
             <S.InfoWrap>
               <S.TitleWrap>
                 <DodamTag
-                  text={item.status === "PENDING" ? "대기중" : item.status === "REJECTED" ? "거절됨" : "승인됨"}
+                  text={
+                    item.status === "PENDING"
+                      ? "대기중"
+                      : item.status === "REJECTED"
+                      ? "거절됨"
+                      : "승인됨"
+                  }
                   color="blue"
                   customStyle={{
                     height: "32px",
-                    backgroundColor: item.status === "REJECTED" ? DodamColor.red50 : item.status === "PENDING" ? theme.lineNormal : DodamColor.blue50,
+                    backgroundColor:
+                      item.status === "REJECTED"
+                        ? DodamColor.red50
+                        : item.status === "PENDING"
+                        ? theme.lineNormal
+                        : DodamColor.blue50,
                   }}
                 />
                 {type === "Pending" && (
-                  <S.IconWrap onClick={() => handleClickDelete(item.id, isPersonalPage ? "PERSONAL" : "PROJECT")}>
+                  <S.IconWrap
+                    onClick={() =>
+                      handleClickDelete(
+                        item.id,
+                        isPersonalPage ? "PERSONAL" : "PROJECT"
+                      )
+                    }
+                  >
                     <Trash color="lineNormal" />
                   </S.IconWrap>
                 )}
               </S.TitleWrap>
-              <S.ProjectName>{checkNightStudy(item) || item.name}</S.ProjectName>
+              <S.ProjectName>
+                {checkNightStudy(item) || item.name}
+              </S.ProjectName>
               <p>{checkNightStudy(item) ? item.content : item.description}</p>
               <DodamDivider type="Small" />
             </S.InfoWrap>
@@ -72,19 +104,44 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
                 종료<span>{dateTransform.monthDay(item.endAt)}</span>
               </S.Date>
             </S.DateWrap>
-            {checkNightStudy(item) ?
+            {checkNightStudy(item) ? (
               <S.DateWrap>
                 <S.Date>
-                  심자<span>{`${item.type.substring(item.type.length-1)}까지`}</span>
+                  심자
+                  <span>
+                    {item.type === "NIGHT_STUDY_1"
+                      ? `1까지`
+                      : `1~${item.type.substring(item.type.length - 1)}까지`}
+                  </span>
                 </S.Date>
               </S.DateWrap>
-            : (
+            ) : (
               <S.DateWrap>
                 <S.Date>
-                  심자<span>{checkNightStudy(item) || item.type === "NIGHT_STUDY_PROJECT_1" ? 1 : 2}</span>
+                  심자
+                  <span>
+                    {checkNightStudy(item) ||
+                    item.type === "NIGHT_STUDY_PROJECT_1"
+                      ? 1
+                      : 2}
+                  </span>
                 </S.Date>
                 <S.Date>
-                  사용 실<span>{checkNightStudy(item) ? "없음" : item.room ? `랩 ${item.room?.slice(-2)}실` : "지정 대기중"}</span>
+                  사용 실
+                  <span>
+                    {checkNightStudy(item)
+                      ? "없음"
+                      : item.room
+                      ? `랩 ${item.room?.slice(-2)}실`
+                      : "지정 대기중"}
+                  </span>
+                </S.Date>
+              </S.DateWrap>
+            )}
+            {checkNightStudy(item) && item.rejectReason && (
+              <S.DateWrap>
+                <S.Date>
+                  거절 사유<span>{item.rejectReason}</span>
                 </S.Date>
               </S.DateWrap>
             )}

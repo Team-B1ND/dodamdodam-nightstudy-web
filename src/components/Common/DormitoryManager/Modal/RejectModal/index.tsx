@@ -27,7 +27,7 @@ const RejectModal = ({type, close, dataId, isOpen}: RejectModalProps) => {
     if (type === "REJECT_PROJECT") {
       rejectProject({id: dataId, rejectReason:rejectReason}, close);
     } else if (type === "REJECT_NIGHT_STUDY") {
-      rejectNightStudy(dataId, close);
+      rejectNightStudy({ id: dataId, rejectReason: rejectReason }, close);
     } else {
       createBan({student: dataId, reason: rejectReason, ended:""})
     }

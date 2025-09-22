@@ -60,8 +60,9 @@ export const useRevertNightStudyMutation = () => {
 
 // 심자 거절
 export const useRejectNightStudyMutation = () => {
-  const mutation = useMutation((id: number) =>
-    manageNightStudyRepository.rejectNightStudy(id)
+  const mutation = useMutation(
+    ({ id, rejectReason }: { id: number; rejectReason: string }) =>
+      manageNightStudyRepository.rejectNightStudy(id, rejectReason)
   );
   return mutation;
 };
