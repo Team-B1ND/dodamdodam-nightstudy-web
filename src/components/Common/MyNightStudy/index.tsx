@@ -12,8 +12,6 @@ import {
   ProjectNightStudy,
 } from "types/NightStudy/nightstudy.type";
 import useDeleteMyNightStudy from "hooks/NightStudy/useDeleteNightStudy";
-import { nightStudyProjectRoomNotNull, nightStudyProjectRoomTextNotNull } from "types/Apply/apply.type";
-import { PROJECT_LAB_EN_TO_KR } from "components/Common/DormitoryManager/ProjectNightStudyManager/ProjectAllowModal/ProjectChoiceRoom/constant";
 
 interface Props {
   type: "Pending" | "Allow";
@@ -49,8 +47,8 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
         ? MyNightStudyData?.data.filter((item) => item.status === "ALLOWED")
         : MyProjectNightStudyData?.data.filter((item) => item.status === "ALLOWED")
   
-  const projectStudyFormatter = (value: nightStudyProjectRoomNotNull): nightStudyProjectRoomTextNotNull => {
-    return PROJECT_LAB_EN_TO_KR[value]
+  const projectStudyFormatter = (value: string) => {
+    return "랩 " + value.split('_')[1] + "실"
   }
 
   return (
@@ -136,7 +134,7 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
                     {checkNightStudy(item)
                       ? "없음"
                       : item.room
-                      ? `랩 ${item.room?.slice(-2)}실`
+                      ? projectStudyFormatter(item.room)
                       : "지정 대기중"}
                   </span>
                 </S.Date>
