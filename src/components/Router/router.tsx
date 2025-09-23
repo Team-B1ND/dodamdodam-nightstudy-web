@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "pages/Home/page";
 import PageTemplate from "components/Common/PageTemplate";
 import { DodamNotFoundPage } from "@b1nd/dds-web";
@@ -11,17 +11,25 @@ const ProtectedManagePage = () => {
     boolean | null
   >(null);
 
-  const getDormitoryManageMemberCheckData = async () => {
-    const data = await studentRepository.checkDormitoryManager();
-    setIsDormitoryManageMember(data.data);
-  };
-
   useEffect(() => {
-    getDormitoryManageMemberCheckData();
+    const checkPermission = async () => {
+      try {
+        const data = await studentRepository.checkDormitoryManager();
+        setIsDormitoryManageMember(data.data);
+      } catch (error) {
+        setIsDormitoryManageMember(false);
+      }
+    };
+
+    checkPermission();
   }, []);
 
-  if (isDormitoryManageMember === null || !isDormitoryManageMember) {
+  if (isDormitoryManageMember === null) {
     return null; 
+  }
+
+  if (!isDormitoryManageMember) {
+    return <Navigate to="/" replace />;
   }
 
   return <ManagePage />;
