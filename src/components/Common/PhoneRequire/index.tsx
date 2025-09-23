@@ -1,11 +1,11 @@
 import * as S from "./style";
 import { ChangeEvent } from "react";
-import { DodamCheckBox, DodamDivider } from "@b1nd/dds-web";
+import { DodamCheckBox } from "@b1nd/dds-web";
 import { ApplyNightStudyParam } from "repositories/NightStudy/nightstudy.param";
 
 interface Props {
   applyNightStudyData: ApplyNightStudyParam;
-  handleChangeNeedPhone: (type: "place" | "doNeedPhone") => void;
+  handleChangeNeedPhone: (type: "doNeedPhone") => void;
   handleChangeReasonForPhone: (
     e: ChangeEvent<HTMLTextAreaElement>,
     type: "content" | "reasonForPhone"
