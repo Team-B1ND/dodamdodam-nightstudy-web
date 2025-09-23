@@ -12,6 +12,8 @@ import {
   ProjectNightStudy,
 } from "types/NightStudy/nightstudy.type";
 import useDeleteMyNightStudy from "hooks/NightStudy/useDeleteNightStudy";
+import { nightStudyProjectRoomNotNull, nightStudyProjectRoomTextNotNull } from "types/Apply/apply.type";
+import { PROJECT_LAB_EN_TO_KR } from "components/Common/DormitoryManager/ProjectNightStudyManager/ProjectAllowModal/ProjectChoiceRoom/constant";
 
 interface Props {
   type: "Pending" | "Allow";
@@ -44,10 +46,12 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
             (item) => item.status === "PENDING" || item.status === "REJECTED"
           )
       : isPersonalPage
-      ? MyNightStudyData?.data.filter((item) => item.status === "ALLOWED")
-      : MyProjectNightStudyData?.data.filter(
-          (item) => item.status === "ALLOWED"
-        );
+        ? MyNightStudyData?.data.filter((item) => item.status === "ALLOWED")
+        : MyProjectNightStudyData?.data.filter((item) => item.status === "ALLOWED")
+  
+  const projectStudyFormatter = (value: nightStudyProjectRoomNotNull): nightStudyProjectRoomTextNotNull => {
+    return PROJECT_LAB_EN_TO_KR[value]
+  }
 
   return (
     <S.Container>

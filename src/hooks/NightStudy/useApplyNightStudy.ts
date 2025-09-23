@@ -1,15 +1,12 @@
 import { useState, ChangeEvent, KeyboardEvent, useEffect } from "react";
 import dateTransform from "utils/Transform/dateTransform";
-import { PLACE_ITEMS } from "constants/NightStudy/nightStudy.constant";
 import { ApplyNightStudyParam, ApplyProjectNightStudyParam } from "repositories/NightStudy/nightstudy.param";
-import { Place } from "types/Place/place.type";
 import { useQueryClient } from "react-query";
-import { useApplyNightStudyMutation, useApplyProjectNightStudyMutation, useGetProjectRoomsQuery } from "queries/NightStudy/nightstudy.query";
+import { useApplyNightStudyMutation, useApplyProjectNightStudyMutation } from "queries/NightStudy/nightstudy.query";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { AxiosError } from "axios";
 import errorHandler from "utils/Error/errorHandler";
 import { QUERY_KEYS } from "queries/queryKey";
-import { nightStudyProjectRoom } from "types/Apply/apply.type";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import dayjs from "dayjs";
 
@@ -19,9 +16,7 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
   const queryClient = useQueryClient();
   const applyNightStudyMutation = useApplyNightStudyMutation();
   const applyProjcetNightStudyMutation = useApplyProjectNightStudyMutation();
-  const { data: projectRooms, isLoading: projectRoomsLoading } = useGetProjectRoomsQuery();
   const [enabled, setEnabled] = useState(true);
-  const [placeData, setPlaceData] = useState<Place[]>(PLACE_ITEMS);
   const [applyNightStudyData, setApplyNightStudyData] =
     useState<ApplyNightStudyParam | ApplyProjectNightStudyParam>(
       isPersonalPage ? {
@@ -67,7 +62,6 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
       description: "",
       students: [],
     });
-    setPlaceData(PLACE_ITEMS)
   }
 
   // 프로젝트 인원 선택 함수
@@ -128,16 +122,8 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
   };
 
   // doNeedPhone, place 값 변경 함수
-  const handleChangeCheckBox = (
-    type: "place" | "doNeedPhone",
-    placeName?: nightStudyProjectRoom
-  ) => {
-    if (type === "place") {
-      setPlaceData((prev) =>
-        prev.map((place) => ({ ...place, isAtv: place.name === placeName }))
-      );
-      setApplyNightStudyData((prev) => ({ ...prev, room: placeName! }));
-    } else {
+  const handleChangeCheckBox = ( type: "doNeedPhone" ) => {
+    if (type === "doNeedPhone") {
       setApplyNightStudyData((prev) => (
         checkApplyNightStudy(prev)
         ? { ...prev, doNeedPhone: !prev.doNeedPhone }
@@ -218,52 +204,9 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
     }
   };
 
-  // 프로젝트 실 사용 가능 여부 확인 함수
-  const isRoomAvailable = (roomName: nightStudyProjectRoom): boolean => {
-    if (!projectRooms || projectRoomsLoading || !roomName) return true;
-    
-    const selectedStartDate = new Date(
-      checkApplyNightStudy(applyNightStudyData) 
-        ? applyNightStudyData.startAt 
-        : applyNightStudyData.startAt
-    );
-    const selectedEndDate = new Date(
-      checkApplyNightStudy(applyNightStudyData) 
-        ? applyNightStudyData.endAt 
-        : applyNightStudyData.endAt
-    );
-    
-    return !projectRooms.some(room => {
-      if (room.room !== roomName) return false;
-      
-      const roomStartDate = new Date(room.startAt);
-      const roomEndDate = new Date(room.endAt);
-      
-      return (
-        (selectedStartDate <= roomEndDate && selectedStartDate >= roomStartDate) ||
-        (selectedEndDate <= roomEndDate && selectedEndDate >= roomStartDate) ||
-        (selectedStartDate <= roomStartDate && selectedEndDate >= roomEndDate)
-      );
-    });
-  };
-
-  const getUsedRooms = () => {
-    if (!projectRooms) return [];
-    
-    return projectRooms.map(room => ({
-      room: room.room,
-      project: room.project,
-      type: room.type === "NIGHT_STUDY_PROJECT_1" ? "심자 1" : "심자 2",
-      period: `${room.startAt} ~ ${room.endAt}`
-    }));
-  };
-
   return {
     enabled,
-    placeData,
     applyNightStudyData,
-    projectRooms,
-    projectRoomsLoading,
     handleChangeDate,
     handlePersonalType,
     handleChangeCheckBox,
@@ -273,7 +216,5 @@ export const useApplyNightStudy = (isPersonalPage : boolean) => {
     checkApplyNightStudy,
     handleProjectType,
     handleProjectMember,
-    isRoomAvailable,
-    getUsedRooms,
   };
 };
