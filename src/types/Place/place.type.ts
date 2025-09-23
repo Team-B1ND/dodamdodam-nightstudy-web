@@ -1,11 +1,10 @@
-import { nightStudyProjectRoom, nightStudyProjectRoomText } from "types/Apply/apply.type";
 import { Response } from "../Util/response";
 
 export interface Place {
   id: number
-  name: nightStudyProjectRoom;
+  name: string;
   isAtv: boolean;
-  title: nightStudyProjectRoomText;
+  title: string;
 }
 
 export interface PlacesResponse extends Response {
