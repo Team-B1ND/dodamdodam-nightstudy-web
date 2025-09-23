@@ -2,9 +2,15 @@ import { DodamColor, DodamDivider, DodamTag, Trash } from "@b1nd/dds-web";
 import * as S from "./style";
 import { useTheme } from "styled-components";
 import dateTransform from "utils/Transform/dateTransform";
-import { useGetMyNightStudyQuery, useGetMyProjectNightStudyQuery } from "queries/NightStudy/nightstudy.query";
+import {
+  useGetMyNightStudyQuery,
+  useGetMyProjectNightStudyQuery,
+} from "queries/NightStudy/nightstudy.query";
 import MyNightStudyNull from "components/Common/Null/MyNightStudyNull/index";
-import { NightStudy, ProjectNightStudy } from "types/NightStudy/nightstudy.type";
+import {
+  NightStudy,
+  ProjectNightStudy,
+} from "types/NightStudy/nightstudy.type";
 import useDeleteMyNightStudy from "hooks/NightStudy/useDeleteNightStudy";
 import { nightStudyProjectRoomNotNull, nightStudyProjectRoomTextNotNull } from "types/Apply/apply.type";
 import { PROJECT_LAB_EN_TO_KR } from "components/Common/DormitoryManager/ProjectNightStudyManager/ProjectAllowModal/ProjectChoiceRoom/constant";
@@ -33,8 +39,12 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
   const myNightStudyData =
     type === "Pending"
       ? isPersonalPage
-        ? MyNightStudyData?.data.filter((item) => item.status === "PENDING" || item.status === "REJECTED")
-        : MyProjectNightStudyData?.data.filter((item) => item.status === "PENDING" || item.status === "REJECTED")
+        ? MyNightStudyData?.data.filter(
+            (item) => item.status === "PENDING" || item.status === "REJECTED"
+          )
+        : MyProjectNightStudyData?.data.filter(
+            (item) => item.status === "PENDING" || item.status === "REJECTED"
+          )
       : isPersonalPage
         ? MyNightStudyData?.data.filter((item) => item.status === "ALLOWED")
         : MyProjectNightStudyData?.data.filter((item) => item.status === "ALLOWED")
@@ -102,9 +112,11 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
               <S.DateWrap>
                 <S.Date>
                   심자
-                  <span>{`${item.type.substring(
-                    item.type.length - 1
-                  )}까지`}</span>
+                  <span>
+                    {item.type === "NIGHT_STUDY_1"
+                      ? `1까지`
+                      : `1~${item.type.substring(item.type.length - 1)}까지`}
+                  </span>
                 </S.Date>
               </S.DateWrap>
             ) : (
@@ -124,9 +136,16 @@ const MyNightStudy = ({ type, isPersonalPage }: Props) => {
                     {checkNightStudy(item)
                       ? "없음"
                       : item.room
-                      ? `랩 ${projectStudyFormatter(item.room)}실`
+                      ? `랩 ${item.room?.slice(-2)}실`
                       : "지정 대기중"}
                   </span>
+                </S.Date>
+              </S.DateWrap>
+            )}
+            {checkNightStudy(item) && item.rejectReason && (
+              <S.DateWrap>
+                <S.Date>
+                  거절 사유<span>{item.rejectReason}</span>
                 </S.Date>
               </S.DateWrap>
             )}
